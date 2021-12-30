@@ -1,0 +1,34 @@
+{
+  "name": "matejch/yii2-iot24-meter",
+  "description": "Ability check on meters and consumption of electricity",
+  "type": "yii2-extension",
+  "version": "1.0.0",
+  "keywords": ["yii2","extension","iot"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matej Chalachan",
+      "email": "matejCH.work@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2.0",
+    "yiisoft/yii2": "~2.0.42"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "matejch\\pageGuide\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "matejch\\pageGuide\\tests\\": "tests/"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "yii2-iot24-meter",
+  "version": "1.0.0",
+  "description": "Extension to view info about meters and energy consumption",
+  "main": "",
+  "scripts": {
+    "postcss:watch": "postcss src/web/css/assist.css -o src/web/css/assist.min.css --watch",
+    "postcss:compile": "postcss src/web/css/assist.css -o src/web/css/assist.min.css",
+    "babel:compile": "babel src/web/js/assist.js -o src/web/js/assist.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matej-ch/yii2-iot24-meter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matej-ch/yii2-iot24-meter/issues"
+  },
+  "homepage": "https://github.com/Matej-ch/yii2-iot24-meter#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-preset-minify": "^0.5.1",
+    "cssnano": "^5.0.10",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.2",
+    "postcss-import": "^14.0.2",
+    "postcss-preset-env": "^6.7.0"
+  }
+}
