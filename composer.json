@@ -23,12 +23,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "matejch\\pageGuide\\": "src/"
+      "matejch\\iot24meter\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "matejch\\pageGuide\\tests\\": "tests/"
+      "matejch\\iot24meter\\tests\\": "tests/"
     }
   }
 }
