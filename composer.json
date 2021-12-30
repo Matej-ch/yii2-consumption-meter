@@ -2,7 +2,7 @@
   "name": "matejch/yii2-iot24-meter",
   "description": "Ability check on meters and consumption of electricity",
   "type": "yii2-extension",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "keywords": ["yii2","extension","iot"],
   "license": "MIT",
   "authors": [
