@@ -13,7 +13,8 @@
   ],
   "require": {
     "php": ">=7.2.0",
-    "yiisoft/yii2": "~2.0.42"
+    "yiisoft/yii2": "~2.0.42",
+    "miloschuman/yii2-highcharts-widget": "^5.0"
   },
   "repositories": [
     {
