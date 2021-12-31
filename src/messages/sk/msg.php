@@ -16,5 +16,7 @@ return [
     'Not found' => 'Záznam sa nenašiel',
     'iot' => 'Merače',
     'update' => 'Upraviť',
-    'save' => 'Uložiť'
+    'save' => 'Uložiť',
+    'load' => 'Načítať dáta',
+    'choose' => 'Výber...'
 ];

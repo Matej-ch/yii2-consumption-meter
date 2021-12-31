@@ -16,5 +16,7 @@ return [
     'Not found' => 'Record not found',
     'iot' => 'Meters',
     'update' => 'Update',
-    'save' => 'Save'
+    'save' => 'Save',
+    'load' => 'Load data',
+    'choose' => 'Výber...'
 ];

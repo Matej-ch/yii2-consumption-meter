@@ -62,4 +62,12 @@ class Iot24 extends \yii\db\ActiveRecord
             'updated_by' => Yii::t('iot24meter/msg','updated_by'),
         ];
     }
+
+    public function getStatuses(): array
+    {
+        return [
+            '1' => 'zo zariadenia',
+            '2' => 'manuálne zadaná',
+        ];
+    }
 }
