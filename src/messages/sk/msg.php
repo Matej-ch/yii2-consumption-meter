@@ -13,4 +13,8 @@ return [
     'downloaded_at' => 'Stiahnuté',
     'created_by' => 'Vytvoril',
     'updated_by' => 'Upravil',
+    'Not found' => 'Záznam sa nenašiel',
+    'iot' => 'Merače',
+    'update' => 'Upraviť',
+    'save' => 'Uložiť'
 ];

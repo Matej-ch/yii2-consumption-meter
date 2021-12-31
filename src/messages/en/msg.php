@@ -13,4 +13,8 @@ return [
     'downloaded_at' => 'Downloaded at',
     'created_by' => 'Created by',
     'updated_by' => 'Updated by',
+    'Not found' => 'Record not found',
+    'iot' => 'Meters',
+    'update' => 'Update',
+    'save' => 'Save'
 ];
