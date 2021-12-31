@@ -60,8 +60,10 @@ Example of the required file , example iot.json
 
 ```PHP
 
+/** load data from endpoints in json file or module parameter endpoints */
 iot24/load
 
+/** sends notification to all emails in json file or module parameter subscribers */
 notification/send
 
 ```
@@ -70,10 +72,14 @@ notification/send
 
 ```PHP 
 
+/** shows all donwloaded data from table `iot24` */
+/** also shows graph of data from given channels */
 iot24/index
 
+/** allows update given data */
 iot24/update
 
+/** load data from endpoints in json file or module parameter endpoints */
 iot24/load
 
 ```
