@@ -34,6 +34,7 @@ Setup
 ```php 
 'iot' => [
     'class' => \matejch\iot24meter\Iot24::class,
+    'apiFile' => //path to json file with api endpoints and emails for notifications
 ]
 
 ```
