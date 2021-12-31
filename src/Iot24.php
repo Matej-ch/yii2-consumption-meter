@@ -17,6 +17,10 @@ class Iot24 extends Module
 
     public $apiFile = '';
 
+    public $endpoints = [];
+
+    public $subscribers = [];
+
     public function init()
     {
         parent::init();
