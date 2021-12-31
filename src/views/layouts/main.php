@@ -1,12 +1,14 @@
 <?php
 
+use matejch\iot24meter\assets\Iot24Asset;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$items = [];
+Iot24Asset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
