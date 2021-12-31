@@ -39,6 +39,23 @@ Setup
 
 ```
 
+Example of the required file , example iot.json
+
+```JSON
+
+{
+  "endpoints": [
+    "https:endpoint",
+    ...multiple endpoinst can be added
+  ],
+  "subscribers": [
+    "email@gmail.com",
+    ...multiple subscribers can be added
+  ]
+}
+
+```
+
 #### 3. Available commands for cron
 
 ```PHP
