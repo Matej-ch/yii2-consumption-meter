@@ -27,8 +27,6 @@ class Iot24 extends Module
 
         \Yii::setAlias('@matejch/iot24meter', __DIR__);
 
-        //Io24Asset::register(Yii::$app->view);
-
         if (Yii::$app instanceof Application) {
             $this->controllerNamespace = 'matejch\iot24meter\commands';
         }
