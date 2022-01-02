@@ -21,4 +21,11 @@ return [
     'choose' => 'Výber...',
     'save_success_msg' => 'Záznam zo sensoru {device} uložený',
     'fail_success_msg' => 'Záznam zo sensoru {device} sa nepodarilo uložiť',
+    'pick_interval' => 'Vyberte interval',
+    'pick_channel' => 'Vyberte kanál',
+    'pick_device' => 'Vyberte Senzor',
+    'last_24' => 'Posledných 24 hodín',
+    'this_week' => 'Tento týždeň',
+    'this_month' => 'Tento mesiac',
+    'this_year' => 'Tento rok',
 ];

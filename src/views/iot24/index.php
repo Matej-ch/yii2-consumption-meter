@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Json;
 
+/* @var $statistics array*/
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel \matejch\iot24meter\models\Iot24Search */
@@ -18,6 +19,8 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
     <p>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
     </p>
+
+    <?= $this->render('partials/_graph', ['statistics' => $statistics]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

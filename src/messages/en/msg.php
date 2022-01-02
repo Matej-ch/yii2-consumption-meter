@@ -21,4 +21,11 @@ return [
     'choose' => 'Výber...',
     'save_success_msg' => 'Sensor data from {device} saved',
     'fail_success_msg' => 'Sensor data from {device} failed to save',
+    'pick_interval' => 'Pick interval',
+    'pick_channel' => 'Pick channel',
+    'pick_device' => 'Pick device',
+    'last_24' => 'Last 24 hours',
+    'this_week' => 'This week',
+    'this_month' => 'This month',
+    'this_year' => 'This year',
 ];

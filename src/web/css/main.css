@@ -14,3 +14,11 @@
 .pb {
     padding-bottom: 1rem;
 }
+
+.w-full {
+    width: 100%;
+}
+
+.max300 {
+    max-width: 300px;
+}
