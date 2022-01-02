@@ -37,7 +37,7 @@ ActiveForm::begin([
     <?= Html::dropDownList('channel',Yii::$app->request->get('channel','all'),$channels,['class' => 'form-control']) ?>
 </label>
 
-<label  class="w-full max300">&nbsp;
+<div  class="w-full max300">&nbsp;
     <?= Html::submitButton('Zobraziť',['class'=>'btn btn-success', 'style' => 'display:block'])?>
-</label>
+</div>
 <?php ActiveForm::end() ?>
