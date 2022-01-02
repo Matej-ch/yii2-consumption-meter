@@ -35,7 +35,8 @@ class Iot24Controller extends \yii\web\Controller
 
         $rawData = \matejch\iot24meter\models\Iot24::getRawData(Yii::$app->request->get());
 
-        $statistics = (new ConsumptionStatistics($rawData))->parse();
+        $channel = $params['channel'] ?? 'all';
+        $statistics = (new ConsumptionStatistics($rawData))->parse($channel);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

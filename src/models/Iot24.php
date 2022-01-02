@@ -118,37 +118,31 @@ class Iot24 extends \yii\db\ActiveRecord
         return false;
     }
 
-    public static function getRawData($params)
+    public static function getRawData($params): array
     {
         $device = $params['device'] ?? Device::ELEKTROMETER;
-        $channel = $params['channel'] ?? 'all';
         $interval = $params['interval'] ?? 'last_24';
 
-        $query = self::find()->where(['device_type' => $device]);
+        $query = self::find()->select(['device_id','device_type','increments','values','created_at'])->where(['device_type' => $device]);
 
         if($interval === 'last_24') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
         }
 
         if($interval === 'this_week') {
-            $query->andWhere(['created_at' => '']);
+            $query->andWhere(new Expression("created_at > DATE_SUB(NOW(), INTERVAL 1 WEEK)"));
         }
 
         if($interval === 'this_month') {
-            $query->andWhere(['created_at' => '']);
+            $query->andWhere(new Expression("MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())"));
         }
 
         if($interval === 'this_year') {
-            $query->andWhere(['created_at' => '']);
+            $query->andWhere(new Expression("YEAR(created_at) = YEAR(CURRENT_DATE())"));
         }
 
-        $data = $query->all();
+        return $query->asArray()->all();
 
-        if($channel !== 'all') {
-
-        }
-
-        return [];
     }
 
     public static function getIntervalList(): array

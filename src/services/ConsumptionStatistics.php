@@ -11,8 +11,11 @@ class ConsumptionStatistics
         $this->data = $data;
     }
 
-    public function parse()
+    public function parse($channel)
     {
+        foreach ($this->data as $sensorValue) {
+
+        }
         return  $this->data;
     }
 }
