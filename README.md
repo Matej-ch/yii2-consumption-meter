@@ -87,4 +87,4 @@ iot24/load
 
 ```
 
-graphs
+#### 5. Graphs are using  _highcharts_

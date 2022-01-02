@@ -33,10 +33,10 @@ class Iot24Controller extends \yii\web\Controller
         $searchModel = new Iot24Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $rawData = \matejch\iot24meter\models\Iot24::getRawData(Yii::$app->request->get());
+        $get = Yii::$app->request->get();
+        $rawData = \matejch\iot24meter\models\Iot24::getRawData($get);
 
-        $channel = $params['channel'] ?? 'all';
-        $statistics = (new ConsumptionStatistics($rawData))->parse($channel);
+        $statistics = (new ConsumptionStatistics($rawData))->parse($get);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

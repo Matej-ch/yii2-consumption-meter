@@ -11,8 +11,11 @@ class ConsumptionStatistics
         $this->data = $data;
     }
 
-    public function parse($channel)
+    public function parse($params)
     {
+        $interval = $params['interval'] ?? 'last_24';
+        $channel = $params['channel'] ?? 'all';
+
         foreach ($this->data as $sensorValue) {
 
         }
