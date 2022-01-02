@@ -27,6 +27,11 @@ class Iot24Search extends Iot24
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'system_id' => SORT_DESC,
+                ],
+            ],
         ]);
 
         $this->load($params);
@@ -35,7 +40,6 @@ class Iot24Search extends Iot24
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'updated_by' => $this->updated_by,

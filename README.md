@@ -51,7 +51,8 @@ Example of the required file , example iot.json
   "subscribers": [
     "email@gmail.com",
     ...multiple subscribers can be added
-  ]
+  ],
+  'sender' => 'sender email here'
 }
 
 ```

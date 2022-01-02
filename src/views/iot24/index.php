@@ -27,7 +27,6 @@ $this->title = Yii::t('iot24meter/msg','iot');
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update}',
             ],
-            'id',
             'system_id',
             'device_id',
             'device_type' => [
@@ -51,7 +50,6 @@ $this->title = Yii::t('iot24meter/msg','iot');
             'created_at',
             'updated_at',
             'downloaded_at',
-            'created_by',
             'updated_by'
         ],
     ]) ?>
