@@ -2,6 +2,8 @@
 
 namespace matejch\iot24meter\services;
 
+use yii\helpers\ArrayHelper;
+
 class ConsumptionStatistics
 {
     private $data;
@@ -20,5 +22,14 @@ class ConsumptionStatistics
 
         }
         return  $this->data;
+    }
+
+    public function getDates(): array
+    {
+        //if(isset($this->values) && !empty($this->values)) {
+            //return ArrayHelper::getColumn($this->values,'created_at');
+        //}
+
+        return [];
     }
 }

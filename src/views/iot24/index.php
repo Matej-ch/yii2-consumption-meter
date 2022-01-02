@@ -1,11 +1,13 @@
 <?php
 
+use yii\grid\ActionColumn;
 use matejch\iot24meter\enums\Device;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Json;
 
-/* @var $statistics array*/
+/* @var $series array */
+/* @var $dates array */
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel \matejch\iot24meter\models\Iot24Search */
@@ -20,14 +22,14 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <?= $this->render('partials/_graph', ['statistics' => $statistics]) ?>
+    <?= $this->render('partials/_graph', ['series' => $series,'dates' => $dates]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => ActionColumn::class,
                 'template' => '{update}',
             ],
             'system_id',
