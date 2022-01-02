@@ -28,4 +28,5 @@ return [
     'this_week' => 'Tento týždeň',
     'this_month' => 'Tento mesiac',
     'this_year' => 'Tento rok',
+    'all' => 'Všetky'
 ];
