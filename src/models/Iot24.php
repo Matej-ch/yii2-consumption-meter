@@ -127,7 +127,7 @@ class Iot24 extends \yii\db\ActiveRecord
         $query = self::find()->where(['device_type' => $device]);
 
         if($interval === 'last_24') {
-            $query->andWhere(['created_at' => new Expression('now() - INTERVAL 1 DAY')]);
+            $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
         }
 
         if($interval === 'this_week') {

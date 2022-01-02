@@ -24,7 +24,7 @@ ActiveForm::begin([
 
 <label for="input-interval" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_interval') ?>
-    <?= Html::dropDownList('from',Yii::$app->request->get('interval','this_month'),Iot24::getIntervalList(),['class' => 'form-control']) ?>
+    <?= Html::dropDownList('interval',Yii::$app->request->get('interval','this_month'),Iot24::getIntervalList(),['class' => 'form-control']) ?>
 </label>
 
 <label for="input-channel" class="w-full max300">
