@@ -18,5 +18,7 @@ return [
     'update' => 'Update',
     'save' => 'Save',
     'load' => 'Load data',
-    'choose' => 'Výber...'
+    'choose' => 'Výber...',
+    'save_success_msg' => 'Sensor data from {device} saved',
+    'fail_success_msg' => 'Sensor data from {device} failed to save',
 ];

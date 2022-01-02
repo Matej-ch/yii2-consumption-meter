@@ -9,7 +9,7 @@ class Device
     public static function getList(): array
     {
         return [
-            self::ELEKTROMETER
+            self::ELEKTROMETER => 'elektrometer'
         ];
     }
 

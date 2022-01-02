@@ -38,7 +38,7 @@ class Iot24 extends \yii\db\ActiveRecord
             [['increments', 'values'], 'string'],
             [['device_id'], 'string', 'max' => 512],
             [['device_type'], 'string', 'max' => 256],
-            [['device_type'], 'in', 'range' => Device::getList()],
+            [['device_type'], 'in', 'range' => array_keys(Device::getList())],
             [['device_type'], 'default', 'value' => Device::ELEKTROMETER],
             [['created_at', 'updated_at'], 'string', 'max' => 20],
             [['status'], 'string', 'max' => 10],
