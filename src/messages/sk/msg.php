@@ -18,5 +18,7 @@ return [
     'update' => 'Upraviť',
     'save' => 'Uložiť',
     'load' => 'Načítať dáta',
-    'choose' => 'Výber...'
+    'choose' => 'Výber...',
+    'save_success_msg' => 'Záznam zo sensoru {device} uložený',
+    'fail_success_msg' => 'Záznam zo sensoru {device} sa nepodarilo uložiť',
 ];

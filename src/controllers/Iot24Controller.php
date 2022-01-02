@@ -4,9 +4,11 @@ namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\Iot24;
 use matejch\iot24meter\models\Iot24Search;
+use matejch\iot24meter\services\SensorDataLoader;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class Iot24Controller extends \yii\web\Controller
 {
@@ -41,8 +43,32 @@ class Iot24Controller extends \yii\web\Controller
         return $this->redirect(['index']);
     }
 
-    public function actionLoad()
+    public function actionLoad(): Response
     {
+        $module = Iot24::getInstance();
+
+        if(empty($module->endpoints)) {
+            Yii::$app->session->setFlash('warning','No endpoints set');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        $message = '';
+        foreach ($module->endpoints as $endpoint) {
+            $service = new SensorDataLoader($endpoint);
+
+            foreach ($service->get() as $item) {
+                $model = new \matejch\iot24meter\models\Iot24();
+                $result = $model->upsert($item);
+
+                if($result) {
+                    $message = Yii::t('iot24meter/msg','save_success_msg',['device' => $model->device_id]) ."<br>";
+                } else {
+                    $message = Yii::t('iot24meter/msg','save_success_msg',['device' => $item['device_id']]) ."<br>";
+                }
+            }
+        }
+
+        Yii::$app->session->setFlash('info',$message);
         return $this->redirect(Yii::$app->request->referrer);
     }
 
