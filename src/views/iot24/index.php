@@ -37,8 +37,23 @@ $this->title = Yii::t('iot24meter/msg','iot');
                 },
                 'filter' => Html::activeDropDownList($searchModel,'device_type', Device::getList(), ['class' => 'form-control','prompt' => Yii::t('iot24meter/msg','choose')]),
             ],
-            'increments',
-            'values',
+            'increments' => [
+                'attribute' => 'increments',
+                'format' => 'raw',
+                'value' => static function($model) {
+                    $increments = Json::decode($model->increments);
+                    $values = Json::decode($model->values);
+
+                    $html = '<div class="flex-container">';
+                    foreach ($increments as $key => $increment) {
+                        $letter = str_replace('kanal','',$key);
+                        $html .= "<div>" . $values["value$letter"] . "<span class='font-bold'>(+$increment)</span></div>";
+                    }
+                    $html .= '</div>';
+
+                    return $html;
+                },
+            ],
             'status' => [
                 'attribute' => 'status',
                 'format' => 'raw',

@@ -50,8 +50,9 @@ class Iot24Search extends Iot24
         $query
             ->andFilterWhere(['like', 'device_id', $this->device_id])
             ->andFilterWhere(['like', 'device_type', $this->device_type])
-            ->andFilterWhere(['like', 'increments', $this->increments])
-            ->andFilterWhere(['like', 'values', $this->values])
+            ->andFilterWhere(['OR',
+                ['like', 'increments', $this->increments],
+                ['like', 'values', $this->values]])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'created_at', $this->created_at])
             ->andFilterWhere(['like', 'updated_at', $this->updated_at])

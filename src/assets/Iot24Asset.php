@@ -10,6 +10,7 @@ class Iot24Asset extends AssetBundle
     public $sourcePath = '@matejch/iot24meter/web';
 
     public $css = [
+        'css/main.min.css',
     ];
 
     public $js = [

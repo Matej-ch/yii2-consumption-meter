@@ -4,9 +4,9 @@
   "description": "Extension to view info about meters and energy consumption",
   "main": "",
   "scripts": {
-    "postcss:watch": "postcss src/web/css/assist.css -o src/web/css/assist.min.css --watch",
-    "postcss:compile": "postcss src/web/css/assist.css -o src/web/css/assist.min.css",
-    "babel:compile": "babel src/web/js/assist.js -o src/web/js/assist.min.js"
+    "postcss:watch": "postcss src/web/css/main.css -o src/web/css/main.min.css --watch",
+    "postcss:compile": "postcss src/web/css/main.css -o src/web/css/main.min.css",
+    "babel:compile": "babel src/web/js/main.js -o src/web/js/main.min.js"
   },
   "repository": {
     "type": "git",

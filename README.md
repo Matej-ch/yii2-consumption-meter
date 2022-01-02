@@ -34,7 +34,7 @@ Setup
 ```php 
 'iot' => [
     'class' => \matejch\iot24meter\Iot24::class,
-    'apiFile' => __DIR__ . '\..\iot.json'//path to json file with api endpoints and emails for notifications
+    'apiFile' => __DIR__ . '/../iot.json'//path to json file with api endpoints and emails for notifications
 ]
 
 ```
@@ -84,7 +84,5 @@ iot24/update
 iot24/load
 
 ```
-
-loading from api
 
 graphs
