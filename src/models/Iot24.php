@@ -96,7 +96,7 @@ class Iot24 extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upsert($data): bool
+    public function upsert($data,$device): bool
     {
         if (self::find()->where(['system_id' => $data['id'], 'device_id' => $data['device_id']])->exists()) {
             return true;
@@ -109,6 +109,7 @@ class Iot24 extends \yii\db\ActiveRecord
         $this->status = $data['status'];
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
+        $this->device_type = $device;
 
         if ($this->save()) {
             return true;

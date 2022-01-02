@@ -59,12 +59,12 @@ class Iot24Controller extends \yii\web\Controller
         }
 
         $message = '';
-        foreach ($module->endpoints as $endpoint) {
+        foreach ($module->endpoints as $endpoint => $device) {
             $service = new SensorDataLoader($endpoint);
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
-                $result = $model->upsert($item);
+                $result = $model->upsert($item,$device);
 
                 if($result) {
                     $message = Yii::t('iot24meter/msg','save_success_msg',['device' => $model->device_id]) ."<br>";

@@ -10,12 +10,14 @@ use yii\widgets\ActiveForm;
 ActiveForm::begin([
     'action' => ['iot24/index'],
     'method' => 'get',
-    'id' => 'filter-consumption','options' =>['class' => 'flex-container'] ]) ?>
+    'id' => 'filter-consumption','options' =>['class' => 'flex-container','style' => 'justify-content:start'] ]) ?>
 
 <label for="input-device" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_device') ?>
     <?= Html::dropDownList('from',Yii::$app->request->get('device',Device::ELEKTROMETER),
-        Device::getList(),
+        array_combine(
+            array_keys(Device::getList()),
+            array_map(static function($v){ return str_replace('_',' ',ucfirst($v)); }, Device::getList())),
         ['class' => 'form-control']) ?>
 </label>
 

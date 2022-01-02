@@ -44,10 +44,10 @@ Example of the required file , example iot.json
 ```JSON
 
 {
-  "endpoints": [
-    "https:endpoint",
+  "endpoints": {
+    "https:endpoint": "device type from enum file (see below for available values)",
     ...multiple endpoinst can be added
-  ],
+  },
   "subscribers": [
     "email@gmail.com",
     ...multiple subscribers can be added
@@ -56,6 +56,8 @@ Example of the required file , example iot.json
 }
 
 ```
+
+Available values for device types are _elektrometer_, _elektrometer_chodba_, _potrubie_
 
 #### 3. Available commands for cron
 
