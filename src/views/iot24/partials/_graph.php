@@ -33,10 +33,8 @@ ActiveForm::begin([
 
 <label for="input-channel" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_channel') ?>
-    <?= Html::dropDownList('from',Yii::$app->request->get('channel','all'),[
-        'all' => Yii::t('iot24meter/msg', 'all'),
-        array_combine(array_values(range('A', 'Z')),range('A', 'Z'))
-    ],['class' => 'form-control']) ?>
+    <?php $channels = array_merge(['all' => Yii::t('iot24meter/msg', 'all')],array_combine(range('A', 'Z'),range('A', 'Z'))) ?>
+    <?= Html::dropDownList('from',Yii::$app->request->get('channel','all'),$channels,['class' => 'form-control']) ?>
 </label>
 
 <label  class="w-full max300">&nbsp;
