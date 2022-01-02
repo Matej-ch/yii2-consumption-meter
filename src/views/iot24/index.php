@@ -9,14 +9,14 @@ use yii\helpers\Json;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel \matejch\iot24meter\models\Iot24Search */
 
-$this->title = Yii::t('iot24meter/msg','iot');
+$this->title = Yii::t('iot24meter/msg', 'iot');
 ?>
 <div class="iot-index mt-20 w-full px-4">
 
     <h1 class="mt-1 mb-2 text-xl"><?= $this->title ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('iot24meter/msg','load'),['load'],['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= GridView::widget([
@@ -32,22 +32,22 @@ $this->title = Yii::t('iot24meter/msg','iot');
             'device_type' => [
                 'attribute' => 'device_type',
                 'format' => 'raw',
-                'value' => static function($model) {
-                    return  Device::getList()[$model->device_type] ?? '';
+                'value' => static function ($model) {
+                    return Device::getList()[$model->device_type] ?? '';
                 },
-                'filter' => Html::activeDropDownList($searchModel,'device_type', Device::getList(), ['class' => 'form-control','prompt' => Yii::t('iot24meter/msg','choose')]),
+                'filter' => Html::activeDropDownList($searchModel, 'device_type', Device::getList(), ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
             ],
             'increments' => [
                 'attribute' => 'increments',
                 'format' => 'raw',
-                'value' => static function($model) {
+                'value' => static function ($model) {
                     $increments = Json::decode($model->increments);
                     $values = Json::decode($model->values);
 
                     $html = '<div class="flex-container">';
                     foreach ($increments as $key => $increment) {
-                        $letter = str_replace('kanal','',$key);
-                        $html .= "<div>" . $values["value$letter"] . "<span class='font-bold'>(+$increment)</span></div>";
+                        $letter = str_replace('kanal', '', $key);
+                        $html .= "<div>" . ucfirst($key) . ": " . $values["value$letter"] . "<span class='font-bold'>(+$increment)</span></div>";
                     }
                     $html .= '</div>';
 
@@ -57,10 +57,10 @@ $this->title = Yii::t('iot24meter/msg','iot');
             'status' => [
                 'attribute' => 'status',
                 'format' => 'raw',
-                'value' => static function($model) {
-                    return  $model->getStatuses()[$model->status] ?? '';
+                'value' => static function ($model) {
+                    return $model->getStatuses()[$model->status] ?? '';
                 },
-                'filter' => Html::activeDropDownList($searchModel,'status', $searchModel->getStatuses(), ['class' => 'form-control','prompt' => Yii::t('iot24meter/msg','choose')]),
+                'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->getStatuses(), ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
             ],
             'created_at',
             'updated_at',
