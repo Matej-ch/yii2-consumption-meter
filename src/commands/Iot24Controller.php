@@ -34,9 +34,9 @@ class Iot24Controller extends \yii\console\Controller
                 $result = $model->upsert($item,$device);
 
                 if($result) {
-                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg',['device' => $model->device_id])."\n", BaseConsole::FG_GREEN);
+                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg')."\n", BaseConsole::FG_GREEN);
                 } else {
-                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg',['device' => $item['device_id']])."\n", BaseConsole::FG_RED);
+                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg')."\n", BaseConsole::FG_RED);
                 }
             }
         }

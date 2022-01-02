@@ -67,9 +67,9 @@ class Iot24Controller extends \yii\web\Controller
                 $result = $model->upsert($item,$device);
 
                 if($result) {
-                    $message = Yii::t('iot24meter/msg','save_success_msg',['device' => $model->device_id]) ."<br>";
+                    $message = Yii::t('iot24meter/msg','save_success_msg') ."<br>";
                 } else {
-                    $message = Yii::t('iot24meter/msg','save_success_msg',['device' => $item['device_id']]) ."<br>";
+                    $message = Yii::t('iot24meter/msg','save_success_msg') ."<br>";
                 }
             }
         }

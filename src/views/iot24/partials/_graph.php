@@ -14,7 +14,7 @@ ActiveForm::begin([
 
 <label for="input-device" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_device') ?>
-    <?= Html::dropDownList('from',Yii::$app->request->get('device',Device::ELEKTROMETER),
+    <?= Html::dropDownList('device',Yii::$app->request->get('device',Device::ELEKTROMETER),
         array_combine(
             array_keys(Device::getList()),
             array_map(static function($v){ return str_replace('_',' ',ucfirst($v)); }, Device::getList())),
@@ -34,7 +34,7 @@ ActiveForm::begin([
 <label for="input-channel" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_channel') ?>
     <?php $channels = array_merge(['all' => Yii::t('iot24meter/msg', 'all')],array_combine(range('A', 'Z'),range('A', 'Z'))) ?>
-    <?= Html::dropDownList('from',Yii::$app->request->get('channel','all'),$channels,['class' => 'form-control']) ?>
+    <?= Html::dropDownList('channel',Yii::$app->request->get('channel','all'),$channels,['class' => 'form-control']) ?>
 </label>
 
 <label  class="w-full max300">&nbsp;
