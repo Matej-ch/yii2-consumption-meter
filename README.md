@@ -52,7 +52,7 @@ Example of the required file , example iot.json
     "email@gmail.com",
     ...multiple subscribers can be added
   ],
-  'sender' => 'sender email here'
+  "sender": "sender email here"
 }
 
 ```
