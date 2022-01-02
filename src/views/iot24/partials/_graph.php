@@ -1,6 +1,7 @@
 <?php
 
 use matejch\iot24meter\enums\Device;
+use matejch\iot24meter\models\Iot24;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -23,12 +24,7 @@ ActiveForm::begin([
 
 <label for="input-interval" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_interval') ?>
-    <?= Html::dropDownList('from',Yii::$app->request->get('from','this_month'),[
-        'last_24' => Yii::t('iot24meter/msg', 'last_24'),
-        'last_week' => Yii::t('iot24meter/msg', 'this_week'),
-        'this_month' => Yii::t('iot24meter/msg', 'this_month'),
-        'this_year' => Yii::t('iot24meter/msg', 'this_year'),
-    ],['class' => 'form-control']) ?>
+    <?= Html::dropDownList('from',Yii::$app->request->get('interval','this_month'),Iot24::getIntervalList(),['class' => 'form-control']) ?>
 </label>
 
 <label for="input-channel" class="w-full max300">

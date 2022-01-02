@@ -118,8 +118,46 @@ class Iot24 extends \yii\db\ActiveRecord
         return false;
     }
 
-    public static function getRawData()
+    public static function getRawData($params)
     {
+        $device = $params['device'] ?? Device::ELEKTROMETER;
+        $channel = $params['channel'] ?? 'all';
+        $interval = $params['interval'] ?? 'last_24';
+
+        $query = self::find()->where(['device_type' => $device]);
+
+        if($interval === 'last_24') {
+            $query->andWhere(['created_at' => new Expression('now() - INTERVAL 1 DAY')]);
+        }
+
+        if($interval === 'this_week') {
+            $query->andWhere(['created_at' => '']);
+        }
+
+        if($interval === 'this_month') {
+            $query->andWhere(['created_at' => '']);
+        }
+
+        if($interval === 'this_year') {
+            $query->andWhere(['created_at' => '']);
+        }
+
+        $data = $query->all();
+
+        if($channel !== 'all') {
+
+        }
+
         return [];
+    }
+
+    public static function getIntervalList(): array
+    {
+        return [
+            'last_24' => Yii::t('iot24meter/msg', 'last_24'),
+            'this_week' => Yii::t('iot24meter/msg', 'this_week'),
+            'this_month' => Yii::t('iot24meter/msg', 'this_month'),
+            'this_year' => Yii::t('iot24meter/msg', 'this_year')
+        ];
     }
 }
