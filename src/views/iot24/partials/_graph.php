@@ -2,6 +2,7 @@
 
 use matejch\iot24meter\enums\Device;
 use matejch\iot24meter\models\Iot24;
+use miloschuman\highcharts\Highcharts;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -37,3 +38,39 @@ ActiveForm::begin([
     <?= Html::submitButton('Zobraziť',['class'=>'btn btn-success', 'style' => 'display:block'])?>
 </div>
 <?php ActiveForm::end() ?>
+
+<div class="pt-4 mt-2">
+    <?= Highcharts::widget([
+        'scripts' => [
+            'modules/exporting',
+            'themes/grid-light',
+        ],
+        'options' => [
+            'chart' => [
+                'type' => 'line',
+                'zoomType' => 'x',
+            ],
+            'title' => [
+                'text' => "",
+            ],
+            'xAxis' => [
+                'categories' => []
+            ],
+            'yAxis' => [
+                'title' => [
+                    'text' => 'Cena'
+                ]
+            ],
+            'plotOptions' => [
+                'line' => [
+                    'dataLabels' => [
+                        'enabled' => true
+                    ],
+                    'enableMouseTracking' => false
+                ]
+            ],
+
+            'series' => []
+        ]
+    ]) ?>
+</div>
