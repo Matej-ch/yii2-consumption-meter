@@ -62,8 +62,15 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
                 },
                 'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->getStatuses(), ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
             ],
-            'created_at',
-            'updated_at',
+            'created_at' => [
+                'attribute' => 'created_at',
+                'format' => 'raw',
+                'value' => static function ($model) {
+                    $created = "<div><span class='font-bold'>".$model->getAttributeLabel('created_at').":</span> $model->created_at</div>";
+                    $updated = "<div><span class='font-bold'>".$model->getAttributeLabel('updated_at').":</span> $model->updated_at</div>";
+                    return $created . $updated;
+                }
+            ],
             'updated_by'
         ],
     ]) ?>
