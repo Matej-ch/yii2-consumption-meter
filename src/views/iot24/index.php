@@ -44,7 +44,7 @@ $this->title = Yii::t('iot24meter/msg','iot');
                 'attribute' => 'status',
                 'format' => 'raw',
                 'value' => static function($model) {
-                    return  $model->getStatuses()[$model->value] ?? '';
+                    return  $model->getStatuses()[$model->status] ?? '';
                 },
                 'filter' => Html::activeDropDownList($searchModel,'status', $searchModel->getStatuses(), ['class' => 'form-control','prompt' => Yii::t('iot24meter/msg','choose')]),
             ],
