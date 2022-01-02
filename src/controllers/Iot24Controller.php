@@ -4,6 +4,7 @@ namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\Iot24;
 use matejch\iot24meter\models\Iot24Search;
+use matejch\iot24meter\services\ConsumptionStatistics;
 use matejch\iot24meter\services\SensorDataLoader;
 use Yii;
 use yii\filters\AccessControl;
@@ -32,9 +33,14 @@ class Iot24Controller extends \yii\web\Controller
         $searchModel = new Iot24Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $rawData = \matejch\iot24meter\models\Iot24::getRawData();
+
+        $statistics = (new ConsumptionStatistics($rawData))->parse();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'statistics' => $statistics
         ]);
     }
 
@@ -72,9 +78,9 @@ class Iot24Controller extends \yii\web\Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    protected function findModel($id): ?Iot24
+    protected function findModel($id): ?\matejch\iot24meter\models\Iot24
     {
-        if (($model = Iot24::findOne($id)) !== null) {
+        if (($model = \matejch\iot24meter\models\Iot24::findOne($id)) !== null) {
             return $model;
         }
 

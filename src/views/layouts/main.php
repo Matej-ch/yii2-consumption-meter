@@ -1,6 +1,7 @@
 <?php
 
 use matejch\iot24meter\assets\Iot24Asset;
+use matejch\iot24meter\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
@@ -28,6 +29,8 @@ Iot24Asset::register($this);
             <div class="flex flex-col">
                 <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs'] ?? []]) ?>
             </div>
+
+            <?= Alert::widget() ?>
 
             <?= $content ?>
         </div>

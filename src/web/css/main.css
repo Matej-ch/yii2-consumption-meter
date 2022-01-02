@@ -10,3 +10,7 @@
 .font-bold {
     font-weight: bold;
 }
+
+.pb {
+    padding-bottom: 1rem;
+}

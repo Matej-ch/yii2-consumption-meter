@@ -116,4 +116,9 @@ class Iot24 extends \yii\db\ActiveRecord
 
         return false;
     }
+
+    public static function getRawData()
+    {
+        return [];
+    }
 }

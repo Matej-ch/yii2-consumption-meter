@@ -47,7 +47,7 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
                     $html = '<div class="flex-container">';
                     foreach ($increments as $key => $increment) {
                         $letter = str_replace('kanal', '', $key);
-                        $html .= "<div><span class='font-bold'>" . ucfirst($key) . ":</span> " . $values["value$letter"] . "<span class='font-bold'>(+$increment) [watt]</span></div>";
+                        $html .= "<div class='pb'><span class='font-bold'>" . ucfirst($key) . ":</span> " . $values["value$letter"] . "<span class='font-bold'>(+$increment) [watt]</span></div>";
                     }
                     $html .= '</div>';
 
