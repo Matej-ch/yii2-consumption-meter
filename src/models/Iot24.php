@@ -141,7 +141,7 @@ class Iot24 extends \yii\db\ActiveRecord
             $query->andWhere(new Expression("YEAR(created_at) = YEAR(CURRENT_DATE())"));
         }
 
-        return $query->asArray()->all();
+        return $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
 
     }
 
