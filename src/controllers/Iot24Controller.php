@@ -37,12 +37,11 @@ class Iot24Controller extends \yii\web\Controller
         $rawData = \matejch\iot24meter\models\Iot24::getRawData($get);
 
         $statisticsService = new ConsumptionStatistics($rawData);
-        $series = $statisticsService->parse($get);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'series' => $series,
+            'series' =>  $statisticsService->parse($get),
             'dates' => $statisticsService->getDates()
         ]);
     }

@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\services;
 
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 class ConsumptionStatistics
 {
@@ -18,18 +19,33 @@ class ConsumptionStatistics
         $interval = $params['interval'] ?? 'last_24';
         $channel = $params['channel'] ?? 'all';
 
+        $result = $incrementsValues = [];
         foreach ($this->data as $sensorValue) {
+            $increments = Json::decode($sensorValue['increments']);
 
+            $incrementsValues[] = $increments;
+            foreach ($increments as $name => $increment) {
+                $result[$name]  = [
+                    'name' => $name,
+                    'data' => []
+                ];
+            }
         }
-        return  $this->data;
+
+        foreach ($result as $key => &$channel) {
+            $channel['data'] = ArrayHelper::getColumn($incrementsValues,$key);
+        }
+
+        return array_values($result);
     }
 
     public function getDates(): array
     {
-        //if(isset($this->values) && !empty($this->values)) {
-            //return ArrayHelper::getColumn($this->values,'created_at');
-        //}
+        $dates = [];
+        if(isset($this->data) && !empty($this->data)) {
+            return ArrayHelper::getColumn($this->data,'created_at');
+        }
 
-        return [];
+        return $dates;
     }
 }
