@@ -16,8 +16,11 @@ class ConsumptionStatistics
 
     public function parse($params)
     {
-        $interval = $params['interval'] ?? 'last_24';
-        $channel = $params['channel'] ?? 'all';
+        $requestInterval = $params['interval'] ?? 'last_24';
+        $requestChannel = $params['channel'] ?? 'all';
+        if($requestChannel !== 'all') {
+            $requestChannel = "kanal$requestChannel";
+        }
 
         $result = $incrementsValues = [];
         foreach ($this->data as $sensorValue) {
@@ -25,6 +28,11 @@ class ConsumptionStatistics
 
             $incrementsValues[] = $increments;
             foreach ($increments as $name => $increment) {
+
+                if($requestChannel !== 'all' && $name !== $requestChannel) {
+                    continue;
+                }
+
                 $result[$name]  = [
                     'name' => $name,
                     'data' => []

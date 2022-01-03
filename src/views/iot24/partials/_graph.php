@@ -58,7 +58,7 @@ ActiveForm::begin([
             ],
             'yAxis' => [
                 'title' => [
-                    'text' => 'Cena'
+                    'text' => 'Prírastok'
                 ]
             ],
             'plotOptions' => [
