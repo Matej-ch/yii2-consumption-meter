@@ -54,7 +54,7 @@ ActiveForm::begin([
                 'text' => "",
             ],
             'xAxis' => [
-                'categories' => []
+                'categories' => $dates
             ],
             'yAxis' => [
                 'title' => [
@@ -70,7 +70,7 @@ ActiveForm::begin([
                 ]
             ],
 
-            'series' => []
+            'series' => $series
         ]
     ]) ?>
 </div>
