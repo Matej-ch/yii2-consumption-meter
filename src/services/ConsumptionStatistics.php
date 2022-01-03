@@ -25,6 +25,7 @@ class ConsumptionStatistics
         $result = $incrementsValues = [];
         foreach ($this->data as $sensorValue) {
             $increments = Json::decode($sensorValue['increments']);
+            $increments = array_map(static function($val) { return (float)$val;},$increments);
 
             $incrementsValues[] = $increments;
             foreach ($increments as $name => $increment) {
