@@ -18,7 +18,6 @@ class SensorDataLoader
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL, $this->url);
         $data = curl_exec($ch);
@@ -31,12 +30,11 @@ class SensorDataLoader
     {
         $data = $this->load();
 
-        if(empty($data)) {
+        if(empty($data) || empty($data['data'])) {
             return [];
         }
 
-        foreach ($data as $item) {
-
+        foreach ($data['data'] as $item) {
             $increments = [];
             $values = [];
             foreach ($item as $key => $itemData) {
