@@ -2,9 +2,13 @@
 
 use matejch\iot24meter\enums\Device;
 use matejch\iot24meter\models\Iot24;
+use matejch\iot24meter\widgets\Consumption;
 use miloschuman\highcharts\Highcharts;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+/* @var $series array */
+/* @var $dates array */
 ?>
 
 <?php
@@ -38,6 +42,8 @@ ActiveForm::begin([
     <?= Html::submitButton('Zobraziť',['class'=>'btn btn-success', 'style' => 'display:block'])?>
 </div>
 <?php ActiveForm::end() ?>
+
+<?= Consumption::widget([ 'series' => $series ]) ?>
 
 <div class="pt-4 mt-2">
     <?= Highcharts::widget([

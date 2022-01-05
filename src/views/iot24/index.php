@@ -1,6 +1,5 @@
 <?php
 
-use matejch\iot24meter\widgets\Consumption;
 use yii\grid\ActionColumn;
 use matejch\iot24meter\enums\Device;
 use yii\helpers\Html;
@@ -22,8 +21,6 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
     <p>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
     </p>
-
-    <?= Consumption::widget([ 'series' => $series ]) ?>
 
     <?= $this->render('partials/_graph', ['series' => $series,'dates' => $dates]) ?>
 

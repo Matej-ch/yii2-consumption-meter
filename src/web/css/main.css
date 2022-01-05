@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: baseline;
 }
 
 .font-bold {
@@ -26,9 +27,9 @@
     padding-right: 1.5rem;
 }
 
-.py-1 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.my-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .w-full {
