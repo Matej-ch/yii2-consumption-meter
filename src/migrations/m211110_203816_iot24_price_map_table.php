@@ -28,6 +28,8 @@ class m211110_203816_iot24_price_map_table extends Migration
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
 
         ],$tableOptions);
+
+        $this->createIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map}}', 'device_id');
     }
 
     /**
@@ -35,6 +37,8 @@ class m211110_203816_iot24_price_map_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map}}');
+
         $this->dropTable('{{%iot24_price_map}}');
     }
 }
