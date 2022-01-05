@@ -125,6 +125,10 @@ class Iot24 extends \yii\db\ActiveRecord
 
         $query = self::find()->select(['device_id','device_type','increments','values','created_at'])->where(['device_type' => $device]);
 
+        if($interval === 'last_one') {
+            $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 HOUR"));
+        }
+
         if($interval === 'last_24') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
         }
@@ -148,6 +152,7 @@ class Iot24 extends \yii\db\ActiveRecord
     public static function getIntervalList(): array
     {
         return [
+            'last_hour' => Yii::t('iot24meter/msg', 'last_hour'),
             'last_24' => Yii::t('iot24meter/msg', 'last_24'),
             'this_week' => Yii::t('iot24meter/msg', 'this_week'),
             'this_month' => Yii::t('iot24meter/msg', 'this_month'),

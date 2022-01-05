@@ -16,7 +16,6 @@ class ConsumptionStatistics
 
     public function parse($params)
     {
-        $requestInterval = $params['interval'] ?? 'last_24';
         $requestChannel = $params['channel'] ?? 'all';
         if($requestChannel !== 'all') {
             $requestChannel = "kanal$requestChannel";

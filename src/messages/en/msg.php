@@ -28,5 +28,6 @@ return [
     'this_week' => 'This week',
     'this_month' => 'This month',
     'this_year' => 'This year',
-    'all' => 'All'
+    'all' => 'All',
+    'last_hour' => 'Last hour',
 ];
