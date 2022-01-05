@@ -125,7 +125,7 @@ class Iot24 extends \yii\db\ActiveRecord
 
         $query = self::find()->select(['device_id','device_type','increments','values','created_at'])->where(['device_type' => $device]);
 
-        if($interval === 'last_one') {
+        if($interval === 'last_hour') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 HOUR"));
         }
 
