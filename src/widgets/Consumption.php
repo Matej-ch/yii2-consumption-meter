@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\widgets;
 
 use yii\base\Widget;
+use yii\helpers\Html;
 
 class Consumption extends Widget
 {
@@ -16,13 +17,23 @@ class Consumption extends Widget
         $this->prepareValues();
     }
 
-    public function run()
+    public function run(): string
     {
-        return '';
+        if(empty($this->values)) {
+            return '';
+        }
+
+        $html = Html::tag('span','Spotreba za vybrané obdobie: ',['class' => 'font-bold']);
+        foreach ($this->values as $channel => $value) {
+            $html .= Html::tag('div',"$channel: $value kW",['class' => 'px-2 py-1 border-r']);
+        }
+        return Html::tag('div',$html,['class' => 'flex']);
     }
 
-    public function prepareValues()
+    public function prepareValues(): void
     {
-
+        foreach ($this->series as $series) {
+            $this->values[$series['name']] = round((array_sum($series['data']) / 1000),3);
+        }
     }
 }
