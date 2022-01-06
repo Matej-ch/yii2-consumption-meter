@@ -31,7 +31,7 @@ class Iot24 extends \yii\db\ActiveRecord
         return 'iot24';
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['created_by', 'updated_by', 'system_id'], 'integer'],
@@ -49,7 +49,7 @@ class Iot24 extends \yii\db\ActiveRecord
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => Yii::t('iot24meter/msg', 'id'),

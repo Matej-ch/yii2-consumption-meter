@@ -11,10 +11,9 @@ use yii\helpers\BaseConsole;
 class NotificationController extends Controller
 {
 
-
-
     /**
-     * Send notification to emails in config
+     * Send notification to emails in config json file
+     * Emails are under key subscribers
      *
      */
     public function actionSend(): int

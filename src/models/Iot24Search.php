@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 
 class Iot24Search extends Iot24
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             [['created_by','updated_by','system_id','id'], 'integer'],

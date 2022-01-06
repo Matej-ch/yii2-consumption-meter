@@ -14,6 +14,7 @@ class Iot24Asset extends AssetBundle
     ];
 
     public $js = [
+        'js/main.min.js',
     ];
 
     public $depends = [

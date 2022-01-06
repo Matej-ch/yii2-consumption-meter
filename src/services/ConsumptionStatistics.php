@@ -14,7 +14,7 @@ class ConsumptionStatistics
         $this->data = $data;
     }
 
-    public function parse($params)
+    public function parse($params): array
     {
         $requestChannel = $params['channel'] ?? 'all';
         if($requestChannel !== 'all') {

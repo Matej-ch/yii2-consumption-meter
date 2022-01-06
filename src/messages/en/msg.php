@@ -30,4 +30,5 @@ return [
     'this_year' => 'This year',
     'all' => 'All',
     'last_hour' => 'Last hour',
+    'create_price_map' => 'Cenová mapa'
 ];
