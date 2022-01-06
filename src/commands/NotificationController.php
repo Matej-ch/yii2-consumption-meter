@@ -10,6 +10,9 @@ use yii\helpers\BaseConsole;
 
 class NotificationController extends Controller
 {
+
+
+
     /**
      * Send notification to emails in config
      *
@@ -25,9 +28,14 @@ class NotificationController extends Controller
 
         $date = date("d.m.Y");
 
+        $params['device'] = '';
+        $params['interval'] = 'last_24';
+        $rawData = \matejch\iot24meter\models\Iot24::getRawData($params);
+
+        Yii::$app->mailer->htmlLayout = "";
         $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify')
             ->setFrom($module->sender)
-            ->setTo($module->subscribers)
+            ->setTo(array_keys($module->subscribers))
             ->setSubject("Meranie odberu $date - Notifikacia");
 
         $message->send();
