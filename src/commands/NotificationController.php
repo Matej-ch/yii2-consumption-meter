@@ -25,7 +25,7 @@ class NotificationController extends Controller
 
         $date = date("d.m.Y");
 
-        $message = Yii::$app->mailer->compose('notify')
+        $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify')
             ->setFrom($module->sender)
             ->setTo($module->subscribers)
             ->setSubject("Meranie odberu $date - Notifikacia");
