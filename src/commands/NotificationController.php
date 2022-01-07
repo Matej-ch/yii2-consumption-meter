@@ -9,6 +9,7 @@ use yii\console\ExitCode;
 use yii\helpers\ArrayHelper;
 use yii\helpers\BaseConsole;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 class NotificationController extends Controller
 {
@@ -36,7 +37,7 @@ class NotificationController extends Controller
 
         $devices = array_merge([],...$devices);
 
-        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type','increments','values','created_at'])->where(['device_type' => $devices]);
+        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type','increments','created_at'])->where(['device_type' => $devices]);
         $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
 
         $measurements = $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
@@ -47,17 +48,50 @@ class NotificationController extends Controller
 
         $measurements = ArrayHelper::index($measurements,null,'device_type');
 
-        foreach ($module->subscribers as $subscriber) {
+        /** check all subscribers */
+        foreach ($module->subscribers as $email => $devices) {
+
+            /** check all devices for subscriber */
+            foreach ($devices as $deviceKey => $device) {
+                $incrementsCounts = [];
+                if(!isset($measurements)) { continue; }
+
+                /** get measurements fro device type */
+                foreach ($measurements[$deviceKey] as $measurement) {
+                    $increments = Json::decode($measurement['increments']);
+
+                    if(empty($device)) {
+                        foreach ($increments as $channel => $increment) {
+
+                            if(!isset($incrementsCounts[$channel])) {
+                                $incrementsCounts[$channel] = 0;
+                            }
+
+                            $incrementsCounts[$channel] += $increment;
+                        }
+                    } else {
+                        foreach ($increments as $channel => $increment) {
+                            if(!in_array($channel,$device)) { continue; }
+
+                            if(!isset($incrementsCounts[$channel])) {
+                                $incrementsCounts[$channel] = 0;
+                            }
+
+                            $incrementsCounts[$channel] += $increment;
+                        }
+                    }
+                }
+            }
+
+            Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
+            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify',[])
+                ->setFrom($module->sender)
+                ->setTo($email)
+                ->setSubject("Meranie odberu $date - Notifikacia");
+
+            $message->send();
 
         }
-
-        Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
-        $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify')
-            ->setFrom($module->sender)
-            ->setTo(array_keys($module->subscribers))
-            ->setSubject("Meranie odberu $date - Notifikacia");
-
-        $message->send();
 
         return ExitCode::OK;
     }
