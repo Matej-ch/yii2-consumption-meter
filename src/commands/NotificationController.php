@@ -51,9 +51,9 @@ class NotificationController extends Controller
         /** check all subscribers */
         foreach ($module->subscribers as $email => $devices) {
 
+            $incrementsCounts = [];
             /** check all devices for subscriber */
             foreach ($devices as $deviceKey => $device) {
-                $incrementsCounts = [];
                 if(!isset($measurements)) { continue; }
 
                 /** get measurements fro device type */
@@ -71,7 +71,7 @@ class NotificationController extends Controller
                         }
                     } else {
                         foreach ($increments as $channel => $increment) {
-                            if(!in_array($channel,$device)) { continue; }
+                            if(!in_array($channel, $device, true)) { continue; }
 
                             if(!isset($incrementsCounts[$channel])) {
                                 $incrementsCounts[$channel] = 0;
@@ -84,7 +84,7 @@ class NotificationController extends Controller
             }
 
             Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
-            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify',[])
+            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify',['channelValues' => $incrementsCounts,'date' => $date])
                 ->setFrom($module->sender)
                 ->setTo($email)
                 ->setSubject("Meranie odberu $date - Notifikacia");
