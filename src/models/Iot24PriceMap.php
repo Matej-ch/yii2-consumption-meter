@@ -12,6 +12,17 @@ class Iot24PriceMap extends ActiveRecord
         return 'iot24_price_map';
     }
 
+    /**
+     * Creates array of all intervals for all days in year
+     *
+     * Indexed first by year,
+     * Next level keys are months
+     * Third level are days in month
+     * Third level contains name of the day full date and interval
+     * @param $year
+     * @return array
+     * @throws \Exception
+     */
     public static function createCalendar($year): array
     {
         $dates= [];
@@ -38,7 +49,12 @@ class Iot24PriceMap extends ActiveRecord
 
     public function rules(): array
     {
-        return [];
+        return [
+            [['created_at', 'updated_at'], 'string'],
+            [['device_id'], 'string', 'max' => 512],
+            [['channel','from','to'], 'string', 'max' => 256],
+            [['price'], 'number'],
+        ];
     }
 
     public function attributeLabels(): array

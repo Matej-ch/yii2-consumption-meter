@@ -30,5 +30,16 @@ return [
     'this_year' => 'This year',
     'all' => 'All',
     'last_hour' => 'Last hour',
-    'create_price_map' => 'Cenová mapa'
+    'create_price_map' => 'Price map',
+    'channel' => 'Channel',
+    'from' => 'From',
+    'to' => 'To',
+    'price' => 'Price',
+    'Saturday' => 'Saturday',
+    'Sunday' => 'Sunday',
+    'Monday' => 'Monday',
+    'Tuesday' => 'Tuesday',
+    'Wednesday' => 'Wednesday',
+    'Thursday' => 'Thursday',
+    'Friday' => 'Friday'
 ];

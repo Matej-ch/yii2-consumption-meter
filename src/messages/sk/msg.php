@@ -35,4 +35,11 @@ return [
     'from' => 'OD',
     'to' => 'DO',
     'price' => 'Cena',
+    'Saturday' => 'Sobota',
+    'Sunday' => 'Nedeľa',
+    'Monday' => 'Pondelok',
+    'Tuesday' => 'Utorok',
+    'Wednesday' => 'Streda',
+    'Thursday' => 'Štvrtok',
+    'Friday' => 'Piatok'
 ];
