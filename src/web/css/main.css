@@ -25,6 +25,15 @@
     flex-wrap: wrap;
 }
 
+.day {
+    display: flex;
+    flex-direction: column;
+}
+
+.day:nth-child(2n) {
+    background-color: lightgrey;
+}
+
 .font-bold {
     font-weight: bold;
 }

@@ -21,12 +21,15 @@
 
             <div class="days-wrapper">
                 <?php foreach ($days as $day) { ?>
-                    <div><?= Yii::t('iot24meter/msg', $day['name']) ?> <?= date('d.m.Y', strtotime($day['full_date'])) ?></div>
-                    <div class="intervals-wrapper">
-                        <?php foreach ($day['intervals'] as $interval) { ?>
-                            <span><?= $interval ?></span>
-                        <?php } ?>
+                    <div class="day">
+                        <div><?= Yii::t('iot24meter/msg', $day['name']) ?> <?= date('d.m.Y', strtotime($day['full_date'])) ?></div>
+                        <div class="intervals-wrapper">
+                            <?php foreach ($day['intervals'] as $interval) { ?>
+                                <span><?= $interval ?></span>
+                            <?php } ?>
+                        </div>
                     </div>
+
                 <?php } ?>
             </div>
         </div>
