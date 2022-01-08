@@ -18,7 +18,7 @@
                 <div><?= Yii::t('iot24meter/msg', $day['name']) ?></div>
                 <div><?= $day['full_date'] ?></div>
                 <div>
-                    <? foreach ($day['intervals'] as $interval) { ?>
+                    <?php foreach ($day['intervals'] as $interval) { ?>
                         <span><?= $interval ?></span>
                     <?php } ?>
                 </div>
