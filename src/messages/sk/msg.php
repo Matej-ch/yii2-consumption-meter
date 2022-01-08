@@ -43,5 +43,17 @@ return [
     'Thursday' => 'Štvrtok',
     'Friday' => 'Piatok',
     'year' => 'Rok',
-    'month' => 'mesiac'
+    'month' => 'Mesiac',
+    'January' => 'Január',
+    'February' => 'Február',
+    'March' => 'Marec',
+    'April' => 'Apríl',
+    'May' => 'Máj',
+    'June' => 'Jún',
+    'July' => 'Júl',
+    'August' => 'August',
+    'September' => 'September',
+    'October' => 'Október',
+    'November' => 'November',
+    'December' => 'December',
 ];
