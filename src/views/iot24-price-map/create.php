@@ -16,20 +16,19 @@
             ?>
             <div class="text-2xl">
                 <?= Yii::t('iot24meter/msg', 'month') ?>
-                <span class="font-bold"> <?= $monthName ?></span>
+                <span class="font-bold"> <?= Yii::t('iot24meter/msg', $monthName) ?></span>
             </div>
 
-            <?php foreach ($days as $day) { ?>
-                <div class="day-wrapper">
+            <div class="days-wrapper">
+                <?php foreach ($days as $day) { ?>
                     <div><?= Yii::t('iot24meter/msg', $day['name']) ?> <?= date('d.m.Y', strtotime($day['full_date'])) ?></div>
                     <div class="intervals-wrapper">
                         <?php foreach ($day['intervals'] as $interval) { ?>
                             <span><?= $interval ?></span>
                         <?php } ?>
                     </div>
-                </div>
-            <?php } ?>
-
+                <?php } ?>
+            </div>
         </div>
 
     <?php } ?>
