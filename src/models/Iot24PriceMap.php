@@ -19,6 +19,7 @@ class Iot24PriceMap extends ActiveRecord
      * Next level keys are months
      * Third level are days in month
      * Third level contains name of the day full date and interval
+     *
      * @param $year
      * @return array
      * @throws \Exception

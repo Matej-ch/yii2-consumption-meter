@@ -41,5 +41,7 @@ return [
     'Tuesday' => 'Tuesday',
     'Wednesday' => 'Wednesday',
     'Thursday' => 'Thursday',
-    'Friday' => 'Friday'
+    'Friday' => 'Friday',
+    'year' => 'Year',
+    'month' => 'Month'
 ];

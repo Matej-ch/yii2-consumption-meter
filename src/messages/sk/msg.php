@@ -41,5 +41,7 @@ return [
     'Tuesday' => 'Utorok',
     'Wednesday' => 'Streda',
     'Thursday' => 'Štvrtok',
-    'Friday' => 'Piatok'
+    'Friday' => 'Piatok',
+    'year' => 'Rok',
+    'month' => 'mesiac'
 ];
