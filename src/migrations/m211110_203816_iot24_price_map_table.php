@@ -23,7 +23,7 @@ class m211110_203816_iot24_price_map_table extends Migration
             'channel' => $this->string(256),
             'from' => $this->string(256),
             'to' => $this->string(256),
-            'price' => $this->integer(),
+            'price' => $this->decimal(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
 

@@ -30,5 +30,9 @@ return [
     'this_year' => 'Tento rok',
     'all' => 'Všetky',
     'last_hour' => 'Posledná hodina',
-    'create_price_map' => 'Cenová mapa'
+    'create_price_map' => 'Cenová mapa',
+    'channel' => 'Kanál',
+    'from' => 'OD',
+    'to' => 'DO',
+    'price' => 'Cena',
 ];

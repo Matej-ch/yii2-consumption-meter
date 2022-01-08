@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 class Iot24PriceMap extends ActiveRecord
@@ -11,6 +12,30 @@ class Iot24PriceMap extends ActiveRecord
         return 'iot24_price_map';
     }
 
+    public static function createCalendar($year): array
+    {
+        $dates= [];
+        $months = range(1,12);
+
+        foreach ($months as $month) {
+            for($d = 1; $d<=31; $d++) {
+                $time= mktime(12, 0, 0, $month, $d, $year);
+                if ((int)date('m', $time) === $month) {
+                    $dates[$year][$month][$d]['name'] = date('l', $time);
+                    $dates[$year][$month][$d]['full_date'] = date('Y-m-d', $time);
+
+                    $startTime = new \DateTime(date('Y-m-d 00:00:00', $time));
+                    $endTime = new \DateTime(date('Y-m-d 24:00:00', $time));
+                    while ($startTime < $endTime) {
+                        $dates[$year][$month][$d]['intervals'][] = $startTime->modify('+15 minutes')->format('H:i:s');
+                    }
+                }
+            }
+        }
+
+        return $dates;
+    }
+
     public function rules(): array
     {
         return [];
@@ -18,6 +43,15 @@ class Iot24PriceMap extends ActiveRecord
 
     public function attributeLabels(): array
     {
-        return [];
+        return [
+            'id' => Yii::t('iot24meter/msg', 'id'),
+            'device_id' => Yii::t('iot24meter/msg', 'device_id'),
+            'channel' => Yii::t('iot24meter/msg', 'channel'),
+            'from' => Yii::t('iot24meter/msg', 'from'),
+            'to' => Yii::t('iot24meter/msg', 'to'),
+            'price' => Yii::t('iot24meter/msg', 'price'),
+            'created_at' => Yii::t('iot24meter/msg', 'created_at'),
+            'updated_at' => Yii::t('iot24meter/msg', 'updated_at'),
+        ];
     }
 }
