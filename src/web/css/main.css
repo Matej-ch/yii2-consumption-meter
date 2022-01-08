@@ -14,6 +14,16 @@
     align-items: baseline;
 }
 
+.intervals-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.day-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .font-bold {
     font-weight: bold;
 }

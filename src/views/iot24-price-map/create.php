@@ -9,7 +9,7 @@
     </div>
 
     <?php foreach ($months as $month => $days) { ?>
-        <div class="<?= ($month % 2 === 0) ? 'bg-gray' : '' ?>">
+        <div class="<?= ($month % 2 === 0) ? 'bg-gray' : '' ?> px-2">
             <?php
             $dateObj = DateTime::createFromFormat('!m', $month);
             $monthName = $dateObj->format('F');
@@ -20,14 +20,14 @@
             </div>
 
             <?php foreach ($days as $day) { ?>
-                <div><?= Yii::t('iot24meter/msg', $day['name']) ?></div>
-                <div><?= $day['full_date'] ?></div>
-                <div>
-                    <?php foreach ($day['intervals'] as $interval) { ?>
-                        <span><?= $interval ?></span>
-                    <?php } ?>
+                <div class="day-wrapper">
+                    <div><?= Yii::t('iot24meter/msg', $day['name']) ?> <?= date('d.m.Y', strtotime($day['full_date'])) ?></div>
+                    <div class="intervals-wrapper">
+                        <?php foreach ($day['intervals'] as $interval) { ?>
+                            <span><?= $interval ?></span>
+                        <?php } ?>
+                    </div>
                 </div>
-
             <?php } ?>
 
         </div>
