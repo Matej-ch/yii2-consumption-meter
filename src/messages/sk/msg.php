@@ -56,4 +56,5 @@ return [
     'October' => 'Október',
     'November' => 'November',
     'December' => 'December',
+    'pick_year' => 'Vyberte rok'
 ];
