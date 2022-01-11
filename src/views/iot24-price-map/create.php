@@ -45,7 +45,7 @@ use yii\widgets\ActiveForm;
 
                 <div class="days-wrapper">
                     <?php foreach ($days as $day) { ?>
-                        <div class="day js-day">
+                        <div class="day js-day" style="width: 100%;max-width: 90px;">
                             <div class="">
                                 <div class="font-bold text-xl"><?= Yii::t('iot24meter/msg', $day['name']) ?></div>
                                 <div><?= date('d.m.Y', strtotime($day['full_date'])) ?></div>
@@ -54,7 +54,7 @@ use yii\widgets\ActiveForm;
                                 <?php foreach ($day['intervals'] as $i => $interval) { ?>
 
                                     <?php if ($i === 0) { ?>
-                                        <div style="height: 20px; border: 1px solid darkslategray">
+                                        <div style="height: 35px; border: 1px solid darkslategray">
                                             &nbsp;
                                             <input type="hidden"
                                                    value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
@@ -63,13 +63,12 @@ use yii\widgets\ActiveForm;
                                         <?php continue; ?>
                                     <?php } ?>
 
-                                    <?php if ($i % 2 === 0) { ?>
-                                        <div style="height: 30px; border: 1px solid darkslategray">
-                                            &nbsp;
-                                            <input type="hidden" value="<?= $day['intervals'][$i - 1] ?>">
-                                            <input type="hidden" value="<?= $interval ?>">
-                                        </div>
-                                    <?php } ?>
+                                    <div style="height: 35px; border: 1px solid darkslategray">
+                                        &nbsp;
+                                        <input type="hidden" value="<?= $day['intervals'][$i - 1] ?>">
+                                        <input type="hidden" value="<?= $interval ?>">
+                                    </div>
+
                                 <?php } ?>
                             </div>
                         </div>
