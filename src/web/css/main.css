@@ -28,9 +28,9 @@
 .day {
     display: flex;
     flex-direction: column;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
     width: 100%;
-    max-width: 90px;
+    max-width: 85px;
 }
 
 .day:nth-child(2n) {
