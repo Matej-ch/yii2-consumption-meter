@@ -11,12 +11,14 @@ use yii\widgets\ActiveForm;
     <?php
 
     ActiveForm::begin([
+        'action' => ['iot24-price-map/create'],
         'method' => 'get',
+        'id' => 'search-by-year',
         'options' => ['class' => 'flex-container px-2', 'style' => 'justify-content:start']]) ?>
 
     <label for="input-year" class="w-full max300">
         <?= Yii::t('iot24meter/msg', 'pick_year') ?>
-        <?= Html::input('number', 'year', Yii::$app->request->get('year', date('Y')), ['step' => 1, 'min' => 2020]) ?>
+        <?= Html::input('number', 'year', Yii::$app->request->get('year', date('Y')), ['step' => 1, 'min' => 2020, 'id' => "input-year", 'class' => 'form-control']) ?>
     </label>
 
     <div class="w-full max300">&nbsp;

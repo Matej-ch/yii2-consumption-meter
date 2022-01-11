@@ -25,8 +25,9 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionCreate(): string
     {
-        $calendar = Iot24PriceMap::createCalendar(Yii::$app->request->get('year',date('Y')));
+        $year = Yii::$app->request->get('year', date('Y'));
+        $calendar = Iot24PriceMap::createCalendar($year);
 
-        return $this->render('create',['calendar' => $calendar]);
+        return $this->render('create', ['calendar' => $calendar]);
     }
 }
