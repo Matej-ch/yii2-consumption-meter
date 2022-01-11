@@ -28,6 +28,7 @@
 .day {
     display: flex;
     flex-direction: column;
+    padding-bottom: 1rem;
 }
 
 .day:nth-child(2n) {
@@ -42,6 +43,10 @@
     padding-bottom: 1rem;
 }
 
+.pb-2 {
+    padding-bottom: 2rem;
+}
+
 .px-2 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -52,6 +57,9 @@
     padding-bottom: 1.5rem;
 }
 
+.text-xl {
+    font-size: 1.5rem;
+}
 
 .text-2xl {
     font-size: 2rem;
