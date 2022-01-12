@@ -1,8 +1,15 @@
 <?php
-/* @var $calendar array */
+
+
+/* @var $pages array */
+
+/* @var $months array */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
+
+$year = Yii::$app->request->get('year');
 
 ?>
 
@@ -26,83 +33,88 @@ use yii\widgets\ActiveForm;
     </div>
     <?php ActiveForm::end() ?>
 
-    <?php foreach ($calendar as $year => $months) { ?>
+    <?php
+    echo LinkPager::widget([
+        'pagination' => $pages,
+    ]);
 
-        <div class="py-2 px-2 font-bold text-3xl">
-            <?= $year ?>
-        </div>
+    ?>
 
-        <?php foreach ($months as $month => $days) { ?>
-            <div class="<?= ($month % 2 === 0) ? 'bg-gray' : '' ?> px-2 js-month pb-2">
-                <?php
-                $dateObj = DateTime::createFromFormat('!m', $month);
-                $monthName = $dateObj->format('F');
-                ?>
-                <div class="text-2xl flex font-bold">
-                    <?= Yii::t('iot24meter/msg', $monthName) ?>
-                </div>
+    <div class="py-2 px-2 font-bold text-3xl">
+        <?= $year ?>
+    </div>
 
-                <div class="days-wrapper">
-                    <?php $dayCount = 0; ?>
-                    <?php foreach ($days as $dayNumber => $day) { ?>
-                        <div class="day js-day">
-                            <div class="day-name">
-                                <div class="font-bold text-xl">
-                                    <?= Yii::t('iot24meter/msg', $day['name']) ?>
-                                </div>
-                                <div class="day_circle js-select-full-day">
-                                    <?= date('d', strtotime($day['full_date'])) ?>
-                                </div>
-                            </div>
-
-                            <div class="intervals-wrapper">
-                                <?php foreach ($day['intervals'] as $i => $interval) { ?>
-
-                                    <?php if ($i === 0) { ?>
-                                        <div class="interval js-interval">
-                                            <input type="hidden"
-                                                   value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
-                                            <input type="hidden" value="<?= $interval ?>">
-                                        </div>
-                                        <?php continue; ?>
-                                    <?php } ?>
-
-                                    <?php $fullDayNum = $dayNumber; ?>
-                                    <?php $fullMonthNum = $month; ?>
-
-                                    <?php if ($fullDayNum < 10) {
-                                        $fullDayNum = "0$fullDayNum";
-                                    } ?>
-                                    <?php if ($fullMonthNum < 10) {
-                                        $fullMonthNum = "0$fullMonthNum";
-                                    } ?>
-
-                                    <div class="interval">
-                                        <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
-                                        <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
-                                               value="<?= "$year-$fullMonthNum-$fullDayNum {$day['intervals'][$i - 1]}" ?>">
-
-                                        <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][to]"
-                                               value="<?= "$year-$fullMonthNum-$fullDayNum $interval" ?>">
-                                    </div>
-
-                                <?php } ?>
-                            </div>
-                        </div>
-                        <?php if ($dayCount === 6) { ?>
-                            <div class="w-full"></div>
-                            <?php $dayCount = 0; ?>
-                        <?php } ?>
-                        <?php $dayCount++; ?>
-                    <?php } ?>
-
-
-                </div>
+    <?php foreach ($months as $month => $days) { ?>
+        <div class="<?= ($month % 2 === 0) ? 'bg-gray' : '' ?> px-2 js-month pb-2">
+            <?php
+            $dateObj = DateTime::createFromFormat('!m', $month);
+            $monthName = $dateObj->format('F');
+            ?>
+            <div class="text-2xl flex font-bold">
+                <?= Yii::t('iot24meter/msg', $monthName) ?>
             </div>
 
-        <?php } ?>
+            <div class="days-wrapper">
+                <?php $dayCount = 0; ?>
+                <?php foreach ($days as $dayNumber => $day) { ?>
+                    <div class="day js-day">
+                        <div class="day-name">
+                            <div class="font-bold text-xl">
+                                <?= Yii::t('iot24meter/msg', $day['name']) ?>
+                            </div>
+                            <div class="day_circle js-select-full-day">
+                                <?= date('d', strtotime($day['full_date'])) ?>
+                            </div>
+                        </div>
+
+                        <div class="intervals-wrapper">
+                            <?php foreach ($day['intervals'] as $i => $interval) { ?>
+
+                                <?php if ($i === 0) { ?>
+                                    <div class="interval js-interval">
+                                        <input type="hidden"
+                                               value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
+                                        <input type="hidden" value="<?= $interval ?>">
+                                    </div>
+                                    <?php continue; ?>
+                                <?php } ?>
+
+                                <?php $fullDayNum = $dayNumber; ?>
+                                <?php $fullMonthNum = $month; ?>
+
+                                <?php if ($fullDayNum < 10) {
+                                    $fullDayNum = "0$fullDayNum";
+                                } ?>
+                                <?php if ($fullMonthNum < 10) {
+                                    $fullMonthNum = "0$fullMonthNum";
+                                } ?>
+
+                                <div class="interval">
+                                    <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
+                                    <input type="hidden"
+                                           name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
+                                           value="<?= "$year-$fullMonthNum-$fullDayNum {$day['intervals'][$i - 1]}" ?>">
+
+                                    <input type="hidden"
+                                           name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][to]"
+                                           value="<?= "$year-$fullMonthNum-$fullDayNum $interval" ?>">
+                                </div>
+
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php if ($dayCount === 6) { ?>
+                        <div class="w-full"></div>
+                        <?php $dayCount = 0; ?>
+                    <?php } else {
+                        $dayCount++;
+                    } ?>
+                <?php } ?>
+
+
+            </div>
+        </div>
 
     <?php } ?>
+
 </div>
