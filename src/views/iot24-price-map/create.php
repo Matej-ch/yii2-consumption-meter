@@ -36,6 +36,7 @@ $year = Yii::$app->request->get('year');
     <?php
     echo LinkPager::widget([
         'pagination' => $pages,
+        'maxButtonCount' => 12,
     ]);
 
     ?>
