@@ -13,7 +13,7 @@ class Iot24PriceMap extends ActiveRecord
     }
 
     /**
-     * Creates array of all intervals for all days in year
+     * Create array of all intervals for all days in year
      *
      * Indexed first by year,
      * Next level keys are months
@@ -26,12 +26,12 @@ class Iot24PriceMap extends ActiveRecord
      */
     public static function createCalendar($year): array
     {
-        $dates= [];
-        $months = range(1,12);
+        $dates = [];
+        $months = range(1, 12);
 
         foreach ($months as $month) {
-            for($d = 1; $d<=31; $d++) {
-                $time= mktime(12, 0, 0, $month, $d, $year);
+            for ($d = 1; $d <= 31; $d++) {
+                $time = mktime(12, 0, 0, $month, $d, $year);
                 if ((int)date('m', $time) === $month) {
                     $dates[$year][$month][$d]['name'] = date('l', $time);
                     $dates[$year][$month][$d]['full_date'] = date('Y-m-d', $time);
@@ -53,7 +53,7 @@ class Iot24PriceMap extends ActiveRecord
         return [
             [['created_at', 'updated_at'], 'string'],
             [['device_id'], 'string', 'max' => 512],
-            [['channel','from','to'], 'string', 'max' => 256],
+            [['channel', 'from', 'to'], 'string', 'max' => 256],
             [['price'], 'number'],
         ];
     }

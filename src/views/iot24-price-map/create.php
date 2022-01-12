@@ -43,6 +43,7 @@ use yii\widgets\ActiveForm;
                 </div>
 
                 <div class="days-wrapper">
+                    <? $dayCount = 0; ?>
                     <?php foreach ($days as $day) { ?>
                         <div class="day js-day">
                             <div class="day-name">
@@ -53,11 +54,12 @@ use yii\widgets\ActiveForm;
                                     <?= date('d', strtotime($day['full_date'])) ?>
                                 </div>
                             </div>
+
                             <div class="intervals-wrapper">
                                 <?php foreach ($day['intervals'] as $i => $interval) { ?>
 
                                     <?php if ($i === 0) { ?>
-                                        <div class="interval">
+                                        <div class="interval js-interval">
                                             <input type="hidden"
                                                    value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
                                             <input type="hidden" value="<?= $interval ?>">
@@ -66,15 +68,27 @@ use yii\widgets\ActiveForm;
                                     <?php } ?>
 
                                     <div class="interval">
-                                        <input type="hidden" value="<?= $day['intervals'][$i - 1] ?>">
-                                        <input type="hidden" value="<?= $interval ?>">
+                                        <input type="number" step="0.001" name="Iot24PriceMap[price]">
+                                        <input type="hidden"
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $day ?>][<?= $i ?>][from]"
+                                               value="<?= "$year-$month-$day {$day['intervals'][$i - 1]}" ?>">
+
+                                        <input type="hidden"
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $day ?>][<?= $i ?>][to]"
+                                               value="<?= "$year-$month-$day $interval" ?>">
                                     </div>
 
                                 <?php } ?>
                             </div>
                         </div>
-
+                        <?php if ($dayCount === 6) { ?>
+                            <div class="w-full"></div>
+                            <?php $dayCount = 0; ?>
+                        <?php } ?>
+                        <?php $dayCount++; ?>
                     <?php } ?>
+
+
                 </div>
             </div>
 
