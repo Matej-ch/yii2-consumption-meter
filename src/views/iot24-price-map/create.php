@@ -43,8 +43,8 @@ use yii\widgets\ActiveForm;
                 </div>
 
                 <div class="days-wrapper">
-                    <? $dayCount = 0; ?>
-                    <?php foreach ($days as $day) { ?>
+                    <?php $dayCount = 0; ?>
+                    <?php foreach ($days as $dayNumber => $day) { ?>
                         <div class="day js-day">
                             <div class="day-name">
                                 <div class="font-bold text-xl">
@@ -70,12 +70,12 @@ use yii\widgets\ActiveForm;
                                     <div class="interval">
                                         <input type="number" step="0.001" name="Iot24PriceMap[price]">
                                         <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $day ?>][<?= $i ?>][from]"
-                                               value="<?= "$year-$month-$day {$day['intervals'][$i - 1]}" ?>">
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $dayNumber ?>][<?= $i ?>][from]"
+                                               value="<?= "$year-$month-$dayNumber {$day['intervals'][$i - 1]}" ?>">
 
                                         <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $day ?>][<?= $i ?>][to]"
-                                               value="<?= "$year-$month-$day $interval" ?>">
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $dayNumber ?>][<?= $i ?>][to]"
+                                               value="<?= "$year-$month-$dayNumber $interval" ?>">
                                     </div>
 
                                 <?php } ?>
