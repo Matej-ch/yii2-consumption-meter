@@ -37,7 +37,7 @@ class Iot24PriceMapController extends \yii\web\Controller
             ]
         ]);
 
-        $pages = new Pagination(['totalCount' => count($calendar[$year])]);
+        $pages = new Pagination(['totalCount' => count($calendar[$year]), 'defaultPageSize' => 1]);
 
         return $this->render('create', ['months' => $provider->getModels(), 'pages' => $pages]);
     }
