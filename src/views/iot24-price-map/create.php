@@ -67,15 +67,25 @@ use yii\widgets\ActiveForm;
                                         <?php continue; ?>
                                     <?php } ?>
 
+                                    <?php $fullDayNum = $dayNumber; ?>
+                                    <?php $fullMonthNum = $month; ?>
+
+                                    <?php if ($fullDayNum < 10) {
+                                        $fullDayNum = "0$fullDayNum";
+                                    } ?>
+                                    <?php if ($fullMonthNum < 10) {
+                                        $fullMonthNum = "0$fullMonthNum";
+                                    } ?>
+
                                     <div class="interval">
-                                        <input type="number" step="0.001" name="Iot24PriceMap[price]">
+                                        <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
                                         <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $dayNumber ?>][<?= $i ?>][from]"
-                                               value="<?= "$year-$month-$dayNumber {$day['intervals'][$i - 1]}" ?>">
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
+                                               value="<?= "$year-$fullMonthNum-$fullDayNum {$day['intervals'][$i - 1]}" ?>">
 
                                         <input type="hidden"
-                                               name="Iot24PriceMap[<?= $year ?>][<?= $month ?>][<?= $dayNumber ?>][<?= $i ?>][to]"
-                                               value="<?= "$year-$month-$dayNumber $interval" ?>">
+                                               name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][to]"
+                                               value="<?= "$year-$fullMonthNum-$fullDayNum $interval" ?>">
                                     </div>
 
                                 <?php } ?>
