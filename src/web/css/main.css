@@ -36,11 +36,6 @@
 .day_circle {
     position: relative;
     font-size: 25px;
-    letter-spacing: -2.5px;
-    text-indent: -2.5px;
-    font-variant: tabular-nums;
-    -moz-font-feature-settings: "tnum" 1;
-    font-feature-settings: "tnum" 1;
     -moz-border-radius: 100%;
     border-radius: 100%;
     color: white;
@@ -48,11 +43,13 @@
     height: 46px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -8px;
+    margin-bottom: 3px;
     width: 46px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #1a73e8;
+    cursor: pointer;
 }
 
 .day:nth-child(2n) {
