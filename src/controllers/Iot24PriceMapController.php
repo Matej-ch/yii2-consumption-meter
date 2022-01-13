@@ -31,14 +31,14 @@ class Iot24PriceMapController extends \yii\web\Controller
             $year = Yii::$app->cache->get('year');
         } else {
             $year = Yii::$app->request->get('year', date('Y'));
-            Yii::$app->cache->set('year',$year, 1800);
+            Yii::$app->cache->set('year', $year, 1800);
         }
 
         if (Yii::$app->cache->exists('calendar') && (string)Yii::$app->request->get('year') === (string)Yii::$app->cache->get('year')) {
             $calendar = Yii::$app->cache->get('calendar');
         } else {
             $calendar = Iot24PriceMap::createCalendar($year);
-            Yii::$app->cache->set('calendar',$year, 1800);
+            Yii::$app->cache->set('calendar', $calendar, 1800);
         }
 
         $provider = new ArrayDataProvider([
