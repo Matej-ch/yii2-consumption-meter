@@ -27,7 +27,7 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionCreate(): string
     {
-        if (Yii::$app->cache->exists('year')) {
+        if (Yii::$app->cache->exists('year') && (string)Yii::$app->request->get('year') === (string)Yii::$app->cache->get('year')) {
             $year = Yii::$app->cache->get('year');
         } else {
             $year = Yii::$app->request->get('year', date('Y'));
