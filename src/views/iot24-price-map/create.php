@@ -33,16 +33,22 @@ $year = Yii::$app->request->get('year');
     </div>
     <?php ActiveForm::end() ?>
 
-    <?php
-    echo LinkPager::widget([
-        'pagination' => $pages,
-        'maxButtonCount' => 12,
-    ]);
+    <div class="py-2 px-2">
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'maxButtonCount' => 12,
+        ])
+        ?>
+    </div>
 
-    ?>
 
     <div class="py-2 px-2 font-bold text-3xl">
         <?= $year ?>
+    </div>
+
+    <div>
+        <input type="text" placeholder="Lokálne filtrovanie podľa čísla alebo mena dňa"
+               class="js-search w-full py-2 px-2">
     </div>
 
     <?php foreach ($months as $month => $days) { ?>
@@ -117,5 +123,13 @@ $year = Yii::$app->request->get('year');
         </div>
 
     <?php } ?>
+
+    <div class="py-2 px-2">
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'maxButtonCount' => 12,
+        ])
+        ?>
+    </div>
 
 </div>
