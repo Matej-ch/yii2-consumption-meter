@@ -32,7 +32,7 @@ class Iot24PriceMapController extends \yii\web\Controller
 
         $calendar = Yii::$app->cache->getOrSet("iot24_calendar", function () use ($year) {
             return Iot24PriceMap::createCalendar($year);
-        }, 3600, new ExpressionDependency(['expression' => $year]));
+        }, 3600, new ExpressionDependency(['expression' => "year=$year"]));
 
         $provider = new ArrayDataProvider([
             'allModels' => $calendar[$year],
