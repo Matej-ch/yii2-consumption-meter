@@ -46,7 +46,7 @@ $year = Yii::$app->request->get('year');
         <?= $year ?>
     </div>
 
-    <div>
+    <div class="px-2">
         <input type="text" placeholder="Lokálne filtrovanie podľa čísla alebo mena dňa"
                class="js-search w-full py-2 px-2">
     </div>
@@ -75,6 +75,7 @@ $year = Yii::$app->request->get('year');
                         </div>
 
                         <div class="intervals-wrapper">
+
                             <?php foreach ($day['intervals'] as $i => $interval) { ?>
 
                                 <?php if ($i === 0) { ?>
@@ -96,7 +97,7 @@ $year = Yii::$app->request->get('year');
                                     $fullMonthNum = "0$fullMonthNum";
                                 } ?>
 
-                                <div class="interval">
+                                <div class="interval js-interval">
                                     <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
                                     <input type="hidden"
                                            name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
