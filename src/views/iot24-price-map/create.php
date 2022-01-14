@@ -48,7 +48,7 @@ $year = Yii::$app->request->get('year');
 
     <div class="px-2">
         <input type="text" placeholder="Lokálne filtrovanie podľa čísla alebo mena dňa"
-               class="js-search w-full py-2 px-2">
+               class="js-search w-full py px">
     </div>
 
     <?php foreach ($months as $month => $days) { ?>
@@ -63,6 +63,30 @@ $year = Yii::$app->request->get('year');
 
             <div class="days-wrapper">
                 <?php $dayCount = 0; ?>
+
+                <div class="" style="max-width: 56px;width: 100%;margin-bottom: 1rem">
+                    <div class="day-name">
+                        <div class="font-bold text-xl">&nbsp;</div>
+                        <div class="day_circle js-select-full-day" style="background-color: white">&nbsp;</div>
+                    </div>
+
+                    <div class="">
+                        <?php
+                        $startTime = new \DateTime(date('Y-m-d 00:00:00'));
+                        $endTime = new \DateTime(date('Y-m-d 24:00:00'));
+                        while ($startTime < $endTime) { ?>
+
+                            <div
+                                style="height:35px;display: flex;flex-direction: column;justify-content: flex-end;position: relative">
+                                <span style="position: absolute; bottom: -10px">
+                                    <?= $startTime->modify('+15 minutes')->format('H:i:s') ?>
+                                </span>
+                            </div>
+
+                        <?php } ?>
+                    </div>
+                </div>
+
                 <?php foreach ($days as $dayNumber => $day) { ?>
                     <div class="day js-day">
                         <div class="day-name">
@@ -80,6 +104,7 @@ $year = Yii::$app->request->get('year');
 
                                 <?php if ($i === 0) { ?>
                                     <div class="interval js-interval">
+                                        <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
                                         <input type="hidden"
                                                value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
                                         <input type="hidden" value="<?= $interval ?>">
@@ -113,6 +138,28 @@ $year = Yii::$app->request->get('year');
                     </div>
                     <?php if ($dayCount === 6) { ?>
                         <div class="w-full"></div>
+                        <div class="" style="max-width: 56px;width: 100%;margin-bottom: 1rem">
+                            <div class="day-name">
+                                <div class="font-bold text-xl">&nbsp;</div>
+                                <div class="day_circle js-select-full-day" style="background-color: white">&nbsp;</div>
+                            </div>
+
+                            <div class="">
+                                <?php
+                                $startTime = new \DateTime(date('Y-m-d 00:00:00'));
+                                $endTime = new \DateTime(date('Y-m-d 24:00:00'));
+                                while ($startTime < $endTime) { ?>
+
+                                    <div
+                                        style="height:35px;display: flex;flex-direction: column;justify-content: flex-end;position: relative">
+                                        <span style="position: absolute; bottom: -10px">
+                                            <?= $startTime->modify('+15 minutes')->format('H:i:s') ?>
+                                        </span>
+                                    </div>
+
+                                <?php } ?>
+                            </div>
+                        </div>
                         <?php $dayCount = 0; ?>
                     <?php } else {
                         $dayCount++;
