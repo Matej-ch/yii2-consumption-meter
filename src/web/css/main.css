@@ -130,3 +130,26 @@
 .border-r {
     border-right: 1px solid darkgray;
 }
+
+.bg-white {
+    background-color: white;
+}
+
+.intervals-column {
+    max-width: 56px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.interval-text {
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.interval-text span {
+    position: absolute;
+    bottom: -10px;
+}

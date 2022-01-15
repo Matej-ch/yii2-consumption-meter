@@ -64,28 +64,7 @@ $year = Yii::$app->request->get('year');
             <div class="days-wrapper">
                 <?php $dayCount = 0; ?>
 
-                <div class="" style="max-width: 56px;width: 100%;margin-bottom: 1rem">
-                    <div class="day-name">
-                        <div class="font-bold text-xl">&nbsp;</div>
-                        <div class="day_circle js-select-full-day" style="background-color: white">&nbsp;</div>
-                    </div>
-
-                    <div class="">
-                        <?php
-                        $startTime = new \DateTime(date('Y-m-d 00:00:00'));
-                        $endTime = new \DateTime(date('Y-m-d 24:00:00'));
-                        while ($startTime < $endTime) { ?>
-
-                            <div
-                                style="height:35px;display: flex;flex-direction: column;justify-content: flex-end;position: relative">
-                                <span style="position: absolute; bottom: -10px">
-                                    <?= $startTime->modify('+15 minutes')->format('H:i:s') ?>
-                                </span>
-                            </div>
-
-                        <?php } ?>
-                    </div>
-                </div>
+                <?= $this->render('partials/_intervals') ?>
 
                 <?php foreach ($days as $dayNumber => $day) { ?>
                     <div class="day js-day">
@@ -138,28 +117,7 @@ $year = Yii::$app->request->get('year');
                     </div>
                     <?php if ($dayCount === 6) { ?>
                         <div class="w-full"></div>
-                        <div class="" style="max-width: 56px;width: 100%;margin-bottom: 1rem">
-                            <div class="day-name">
-                                <div class="font-bold text-xl">&nbsp;</div>
-                                <div class="day_circle js-select-full-day" style="background-color: white">&nbsp;</div>
-                            </div>
-
-                            <div class="">
-                                <?php
-                                $startTime = new \DateTime(date('Y-m-d 00:00:00'));
-                                $endTime = new \DateTime(date('Y-m-d 24:00:00'));
-                                while ($startTime < $endTime) { ?>
-
-                                    <div
-                                        style="height:35px;display: flex;flex-direction: column;justify-content: flex-end;position: relative">
-                                        <span style="position: absolute; bottom: -10px">
-                                            <?= $startTime->modify('+15 minutes')->format('H:i:s') ?>
-                                        </span>
-                                    </div>
-
-                                <?php } ?>
-                            </div>
-                        </div>
+                        <?= $this->render('partials/_intervals') ?>
                         <?php $dayCount = 0; ?>
                     <?php } else {
                         $dayCount++;
