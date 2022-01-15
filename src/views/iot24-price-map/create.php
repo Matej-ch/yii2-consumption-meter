@@ -26,8 +26,7 @@ $this->title = Yii::t('iot24meter/msg', 'year');
             <input type="hidden" value="<?= $key ?>"
                    name="Iot24PriceMap[device_id]">
         </span>
-        <input type="number" step="0.001" name="Iot24PriceMap[price]"
-               class="w-full js-price-input">
+        <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full js-price-input">
     </div>
 
 <?php } ?>
@@ -111,8 +110,6 @@ $this->title = Yii::t('iot24meter/msg', 'year');
 
                                         <?= $this->blocks['devices'] ?>
 
-                                        <input type="number" step="0.001" name="Iot24PriceMap[price]"
-                                               class="w-full js-price-input">
                                         <input type="hidden"
                                                value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
                                         <input type="hidden" value="<?= $interval ?>">
