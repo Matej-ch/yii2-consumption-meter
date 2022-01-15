@@ -44,6 +44,11 @@ $year = Yii::$app->request->get('year');
 
     <div class="py-2 px-2 font-bold text-3xl">
         <?= $year ?>
+
+        <input type="checkbox" id="year-checkbox" name="year-checkbox"
+               checked>
+        <label for="year-checkbox">Označiť všetky</label>
+
     </div>
 
     <div class="px-2">
@@ -83,7 +88,8 @@ $year = Yii::$app->request->get('year');
 
                                 <?php if ($i === 0) { ?>
                                     <div class="interval js-interval">
-                                        <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
+                                        <input type="number" step="0.001" name="Iot24PriceMap[price]"
+                                               class="w-full js-price-input">
                                         <input type="hidden"
                                                value="<?= $day['intervals'][count($day['intervals']) - 1] ?>">
                                         <input type="hidden" value="<?= $interval ?>">
@@ -102,7 +108,8 @@ $year = Yii::$app->request->get('year');
                                 } ?>
 
                                 <div class="interval js-interval">
-                                    <input type="number" step="0.001" name="Iot24PriceMap[price]" class="w-full">
+                                    <input type="number" step="0.001" name="Iot24PriceMap[price]"
+                                           class="w-full js-price-input">
                                     <input type="hidden"
                                            name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
                                            value="<?= "$year-$fullMonthNum-$fullDayNum {$day['intervals'][$i - 1]}" ?>">
