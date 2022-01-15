@@ -159,3 +159,10 @@
 .js-price-input {
     max-width: 100px;
 }
+
+.device {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end
+}

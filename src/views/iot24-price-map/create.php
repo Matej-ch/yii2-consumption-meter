@@ -19,9 +19,8 @@ $this->title = Yii::t('iot24meter/msg', 'year');
 
 <?php $this->beginBlock('devices'); ?>
 <?php foreach (Device::getList() as $key => $device) { ?>
-    <div
-        style="display: flex;flex-direction: row; align-items: center; justify-content: flex-end">
-        <span class="font-bold">
+    <div class="device">
+        <span class="font-bold pr">
             <?= $device ?>
             <input type="hidden" value="<?= $key ?>"
                    name="Iot24PriceMap[device_id]">
