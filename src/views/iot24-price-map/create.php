@@ -2,6 +2,7 @@
 
 
 /* @var $pages array */
+/* @var $this yii\web\View */
 
 /* @var $months array */
 
@@ -15,6 +16,22 @@ $year = Yii::$app->request->get('year');
 $this->title = Yii::t('iot24meter/msg', 'year');
 
 ?>
+
+<?php $this->beginBlock('devices'); ?>
+<?php foreach (Device::getList() as $key => $device) { ?>
+    <div
+        style="display: flex;flex-direction: row; align-items: center; justify-content: flex-end">
+        <span class="font-bold">
+            <?= $device ?>
+            <input type="hidden" value="<?= $key ?>"
+                   name="Iot24PriceMap[device_id]">
+        </span>
+        <input type="number" step="0.001" name="Iot24PriceMap[price]"
+               class="w-full js-price-input">
+    </div>
+
+<?php } ?>
+<?php $this->endBlock(); ?>
 
 <div class="js-year w-full">
 
@@ -91,6 +108,9 @@ $this->title = Yii::t('iot24meter/msg', 'year');
 
                                 <?php if ($i === 0) { ?>
                                     <div class="interval js-interval">
+
+                                        <?= $this->blocks['devices'] ?>
+
                                         <input type="number" step="0.001" name="Iot24PriceMap[price]"
                                                class="w-full js-price-input">
                                         <input type="hidden"
@@ -112,18 +132,7 @@ $this->title = Yii::t('iot24meter/msg', 'year');
 
                                 <div class="interval js-interval">
 
-                                    <?php foreach (Device::getList() as $key => $device) { ?>
-                                        <div style="display: flex;flex-direction: row; align-items: center">
-                                            <span class="font-bold">
-                                                <?= $device ?>
-                                                <input type="hidden" value="<?= $key ?>"
-                                                       name="Iot24PriceMap[device_id]">
-                                            </span>
-                                            <input type="number" step="0.001" name="Iot24PriceMap[price]"
-                                                   class="w-full js-price-input">
-                                        </div>
-
-                                    <?php } ?>
+                                    <?= $this->blocks['devices'] ?>
 
                                     <input type="hidden"
                                            name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
