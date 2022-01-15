@@ -5,11 +5,14 @@
 
 /* @var $months array */
 
+use matejch\iot24meter\enums\Device;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
 $year = Yii::$app->request->get('year');
+
+$this->title = Yii::t('iot24meter/msg', 'year');
 
 ?>
 
@@ -108,8 +111,20 @@ $year = Yii::$app->request->get('year');
                                 } ?>
 
                                 <div class="interval js-interval">
-                                    <input type="number" step="0.001" name="Iot24PriceMap[price]"
-                                           class="w-full js-price-input">
+
+                                    <?php foreach (Device::getList() as $key => $device) { ?>
+                                        <div style="display: flex;flex-direction: row; align-items: center">
+                                            <span class="font-bold">
+                                                <?= $device ?>
+                                                <input type="hidden" value="<?= $key ?>"
+                                                       name="Iot24PriceMap[device_id]">
+                                            </span>
+                                            <input type="number" step="0.001" name="Iot24PriceMap[price]"
+                                                   class="w-full js-price-input">
+                                        </div>
+
+                                    <?php } ?>
+
                                     <input type="hidden"
                                            name="Iot24PriceMap[<?= $year ?>][<?= $fullMonthNum ?>][<?= $fullDayNum ?>][<?= $i ?>][from]"
                                            value="<?= "$year-$fullMonthNum-$fullDayNum {$day['intervals'][$i - 1]}" ?>">
