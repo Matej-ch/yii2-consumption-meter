@@ -11,43 +11,7 @@ class Iot24PriceMap extends ActiveRecord
     {
         return 'iot24_price_map';
     }
-
-    /**
-     * Create array of all intervals for all days in year
-     *
-     * Indexed first by year,
-     * Next level keys are months
-     * Third level are days in month
-     * Third level contains name of the day full date and interval
-     *
-     * @param $year
-     * @return array
-     * @throws \Exception
-     */
-    public static function createCalendar($year): array
-    {
-        $dates = [];
-        $months = range(1, 12);
-
-        foreach ($months as $month) {
-            for ($d = 1; $d <= 31; $d++) {
-                $time = mktime(12, 0, 0, $month, $d, $year);
-                if ((int)date('m', $time) === $month) {
-                    $dates[$year][$month][$d]['name'] = date('l', $time);
-                    $dates[$year][$month][$d]['full_date'] = date('Y-m-d', $time);
-
-                    $startTime = new \DateTime(date('Y-m-d 00:00:00', $time));
-                    $endTime = new \DateTime(date('Y-m-d 24:00:00', $time));
-                    while ($startTime < $endTime) {
-                        $dates[$year][$month][$d]['intervals'][] = $startTime->modify('+15 minutes')->format('H:i:s');
-                    }
-                }
-            }
-        }
-
-        return $dates;
-    }
-
+    
     public function rules(): array
     {
         return [
