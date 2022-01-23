@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 class CalendarAsset extends AssetBundle
 {
@@ -15,7 +16,11 @@ class CalendarAsset extends AssetBundle
 
     public $js = [
         'js/tui-calendar.min.js',
-        'js/calendar.min.js',
+        'js/calendar.js',
+    ];
+
+    public $jsOptions = [
+        'position' => View::POS_END,
     ];
 
     public $depends = [];
