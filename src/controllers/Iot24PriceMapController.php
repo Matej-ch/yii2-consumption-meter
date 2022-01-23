@@ -29,7 +29,7 @@ class Iot24PriceMapController extends \yii\web\Controller
     {
         $year = Yii::$app->request->get('year', date('Y'));
 
-        if (Yii::$app->cache->exists('calendar')) {
+        /*if (Yii::$app->cache->exists('calendar')) {
             $calendar = Yii::$app->cache->get('calendar');
 
             if (!isset($calendar[$year])) {
@@ -48,10 +48,10 @@ class Iot24PriceMapController extends \yii\web\Controller
             'pagination' => [
                 'pageSize' => 1,
             ]
-        ]);
+        ]);*/
 
-        $pages = new Pagination(['totalCount' => count($calendar[$year]), 'defaultPageSize' => 1]);
+        //$pages = new Pagination(['totalCount' => count($calendar[$year]), 'defaultPageSize' => 1]);
 
-        return $this->render('create', ['months' => $provider->getModels(), 'pages' => $pages]);
+        return $this->render('create', [/*'months' => $provider->getModels(), 'pages' => $pages*/]);
     }
 }
