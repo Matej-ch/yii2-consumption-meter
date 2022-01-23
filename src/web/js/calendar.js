@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    var calendar = new Calendar('#calendar', {
+    var calendar = new tui.Calendar('#calendar', {
         usageStatistics: false
     });
 });
