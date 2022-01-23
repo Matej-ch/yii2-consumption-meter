@@ -12,8 +12,8 @@ class CalendarAsset extends AssetBundle
     public $css = [
         'css/main.min.css',
         'css/tui-date-picker.css',
-        'css/tui-date-picker.css',
         'css/tui-time-picker.css',
+        'css/tui-calendar.css',
     ];
 
     public $js = [
