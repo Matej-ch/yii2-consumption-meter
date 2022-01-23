@@ -1,7 +1,9 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
-    let calendar = new Calendar('#calendar', {
+
+    var Calendar = new tui.Calendar('#calendar', {
         usageStatistics: false
     });
+
 });
 

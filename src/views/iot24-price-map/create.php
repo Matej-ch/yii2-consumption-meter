@@ -63,7 +63,7 @@ $this->title = Yii::t('iot24meter/msg', 'year');
 
 
     <div class="py-2 px-2 font-bold text-3xl">
-        <div id="calendar"></div>
+        <div id="calendar" style="height: 800px;"></div>
     </div>
 
 
