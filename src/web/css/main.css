@@ -180,24 +180,21 @@
     touch-action: manipulation;
     cursor: pointer;
     user-select: none;
-    background-image: none;
     overflow: visible;
     color: #333;
     background-color: #fff;
     border-radius: 25px;
-    border-color: #ddd;
+    border: solid 1px #ddd;
 }
 
 .btn-today:hover {
     border: solid 1px #bbb;
-    background-color: #656666;
-    color: #333;
+    color: white;
     text-decoration: none;
 }
 
 .move-day {
     padding: 8px;
-    line-height: 30px;
     font-size: 12px;
     display: inline-block;
     margin-bottom: 0;
@@ -208,15 +205,22 @@
     touch-action: manipulation;
     cursor: pointer;
     user-select: none;
-    background-image: none;
     overflow: visible;
     color: #333;
     background-color: #fff;
     border-radius: 25px;
-    border-color: #ddd;
+    border: solid 1px #ddd;
+    line-height: 9px;
+}
+
+.move-day:hover {
+    border: solid 1px #bbb;
+    color: white;
+    text-decoration: none;
 }
 
 .calendar-icon {
     font-weight: bold;
     font-size: 12px;
+    color: #333;
 }

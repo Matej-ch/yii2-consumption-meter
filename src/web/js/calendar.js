@@ -6,6 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
         //taskView: true,
     });
 
+    function init() {
+        //calendar.setCalendars(CalendarList);
+
+        setRenderRangeText();
+        //setSchedules();
+        setEventListener();
+    }
+
     function onClickNavi(e) {
         const action = getDataAction(e.target);
 
@@ -47,6 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         renderRange.innerHTML = html.join('');
     }
+
+    function setEventListener() {
+        //$('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
+        document.getElementById('menu-navi').addEventListener('click', onClickNavi)
+        window.addEventListener('resize', resizeThrottled);
+    }
+
+    var resizeThrottled = tui.util.throttle(function () {
+        calendar.render();
+    }, 50);
 
     /*calendar.createSchedules([
         {
