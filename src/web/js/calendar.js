@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
         calendar.render();
     }, 50);
 
+    init();
+
     /*calendar.createSchedules([
         {
             id: '1',
