@@ -17,10 +17,10 @@ CalendarAsset::register($this);
         <div id="menu">
             <span id="menu-navi">
                 <button type="button" class="btn-today move-today" data-action="move-today">Dnes</button>
-                <button type="button" class="btn-today move-day" data-action="move-prev">
+                <button type="button" class="move-day" data-action="move-prev">
                     <i class="calendar-icon" data-action="move-prev"> < </i>
                 </button>
-                <button type="button" class="btn-today move-day" data-action="move-next">
+                <button type="button" class="move-day" data-action="move-next">
                     <i class="calendar-icon" data-action="move-next"> > </i>
                 </button>
             </span>
