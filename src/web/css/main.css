@@ -166,3 +166,38 @@
     align-items: center;
     justify-content: flex-end
 }
+
+.btn-today {
+    padding: 0 16px;
+    line-height: 30px;
+    border-radius: 25px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    overflow: visible;
+}
+
+.btn-today:hover {
+    border: solid 1px #bbb;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+}
+
+.move-day {
+    padding: 8px;
+    font-size: 0;
+}
+
+.calendar-icon {
+    font-weight: bold;
+    font-size: 12px;
+}

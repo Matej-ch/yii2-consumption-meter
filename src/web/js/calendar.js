@@ -6,6 +6,48 @@ document.addEventListener("DOMContentLoaded", function () {
         //taskView: true,
     });
 
+    function onClickNavi(e) {
+        const action = getDataAction(e.target);
+
+        switch (action) {
+            case 'move-prev':
+                calendar.prev();
+                break;
+            case 'move-next':
+                calendar.next();
+                break;
+            case 'move-today':
+                calendar.today();
+                break;
+            default:
+                return;
+        }
+
+        setRenderRangeText();
+    }
+
+    function getDataAction(target) {
+        return target.dataset ? target.dataset.action : target.getAttribute('data-action');
+    }
+
+    function setRenderRangeText() {
+        var renderRange = document.getElementById('renderRange');
+        var options = calendar.getOptions();
+        var viewName = calendar.getViewName();
+        var html = [];
+        if (viewName === 'day') {
+            html.push(moment(calendar.getDate().getTime()).format('YYYY.MM.DD'));
+        } else if (viewName === 'month' &&
+            (!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {
+            html.push(moment(calendar.getDate().getTime()).format('YYYY.MM'));
+        } else {
+            html.push(moment(calendar.getDateRangeStart().getTime()).format('YYYY.MM.DD'));
+            html.push(' ~ ');
+            html.push(moment(calendar.getDateRangeEnd().getTime()).format(' MM.DD'));
+        }
+        renderRange.innerHTML = html.join('');
+    }
+
     /*calendar.createSchedules([
         {
             id: '1',

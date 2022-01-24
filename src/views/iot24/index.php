@@ -20,10 +20,10 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
 
     <p>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/create','year' => date('Y')], ['class' => 'btn btn-default']) ?>
+        <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/create'], ['class' => 'btn btn-default']) ?>
     </p>
 
-    <?= $this->render('partials/_graph', ['series' => $series,'dates' => $dates]) ?>
+    <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -72,8 +72,8 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
                 'attribute' => 'created_at',
                 'format' => 'raw',
                 'value' => static function ($model) {
-                    $created = "<div><span class='font-bold'>".$model->getAttributeLabel('created_at').":</span> $model->created_at</div>";
-                    $updated = "<div><span class='font-bold'>".$model->getAttributeLabel('updated_at').":</span> $model->updated_at</div>";
+                    $created = "<div><span class='font-bold'>" . $model->getAttributeLabel('created_at') . ":</span> $model->created_at</div>";
+                    $updated = "<div><span class='font-bold'>" . $model->getAttributeLabel('updated_at') . ":</span> $model->updated_at</div>";
                     return $created . $updated;
                 }
             ],
