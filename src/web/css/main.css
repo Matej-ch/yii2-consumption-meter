@@ -189,7 +189,7 @@
 
 .btn-today:hover {
     border: solid 1px #bbb;
-    color: white;
+    color: #45484a;
     text-decoration: none;
 }
 
@@ -215,7 +215,12 @@
 
 .move-day:hover {
     border: solid 1px #bbb;
-    color: white;
+    color: #45484a;
+    text-decoration: none;
+}
+
+.calendar-icon:hover {
+    color: #45484a;
     text-decoration: none;
 }
 
