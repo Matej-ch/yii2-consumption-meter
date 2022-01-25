@@ -4,6 +4,7 @@ namespace matejch\iot24meter\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\Response;
 
 class Iot24PriceMapController extends \yii\web\Controller
 {
@@ -27,12 +28,12 @@ class Iot24PriceMapController extends \yii\web\Controller
         return $this->render('create', []);
     }
 
-    public function export()
+    public function actionExport(): Response
     {
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function import()
+    public function actionImport(): Response
     {
         return $this->redirect(Yii::$app->request->referrer);
     }
