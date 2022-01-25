@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\controllers;
 
+use Yii;
 use yii\filters\AccessControl;
 
 class Iot24PriceMapController extends \yii\web\Controller
@@ -13,7 +14,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create', 'export', 'import'],
                         'allow' => true, 'roles' => ['@'],
                     ],
                 ],
@@ -24,5 +25,15 @@ class Iot24PriceMapController extends \yii\web\Controller
     public function actionCreate(): string
     {
         return $this->render('create', []);
+    }
+
+    public function export()
+    {
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function import()
+    {
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

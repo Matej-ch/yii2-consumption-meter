@@ -30,31 +30,32 @@ class SensorDataLoader
     {
         $data = $this->load();
 
-        if(empty($data) || empty($data['data'])) {
-            return [];
+        if (empty($data) || empty($data['data'])) {
+            return;
         }
 
         foreach ($data['data'] as $item) {
             $increments = [];
             $values = [];
             foreach ($item as $key => $itemData) {
-                if($this->startsWith($key,'kanal')) {
+                if ($this->startsWith($key, 'kanal')) {
                     $increments[$key] = $itemData;
                 }
 
-                if($this->startsWith($key,'value')) {
+                if ($this->startsWith($key, 'value')) {
                     $values[$key] = $itemData;
                 }
             }
             $item['increments'] = Json::encode($increments);
             $item['values'] = Json::encode($values);
+            $item['aliases'] = Json::encode($data['aliases']);
 
             yield $item;
         }
     }
 
-    private function startsWith ( $haystack, $needle ): bool
+    private function startsWith($haystack, $needle): bool
     {
-        return strpos( $haystack , $needle ) === 0;
+        return strpos($haystack, $needle) === 0;
     }
 }

@@ -20,7 +20,7 @@ return [
     'load' => 'Načítať dáta',
     'choose' => 'Výber...',
     'save_success_msg' => 'Záznamy zo sensorov uložený',
-    'fail_success_msg' => 'Záznam zo sensorov sa nepodarilo uložiť',
+    'save_fail_msg' => 'Záznam zo sensorov sa nepodarilo uložiť',
     'pick_interval' => 'Záznamy interval',
     'pick_channel' => 'Vyberte kanál',
     'pick_device' => 'Vyberte Senzor',
@@ -56,5 +56,6 @@ return [
     'October' => 'Október',
     'November' => 'November',
     'December' => 'December',
-    'pick_year' => 'Vyberte rok'
+    'pick_year' => 'Vyberte rok',
+    'aliases' => 'Aliasi'
 ];

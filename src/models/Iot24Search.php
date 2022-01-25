@@ -11,8 +11,8 @@ class Iot24Search extends Iot24
     public function rules(): array
     {
         return [
-            [['created_by','updated_by','system_id','id'], 'integer'],
-            [['increments','values','device_id','device_type','created_at','updated_at','status'], 'string'],
+            [['created_by', 'updated_by', 'system_id', 'id'], 'integer'],
+            [['increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at', 'status', 'aliases'], 'string'],
         ];
     }
 

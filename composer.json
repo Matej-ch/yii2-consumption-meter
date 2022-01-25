@@ -2,7 +2,11 @@
   "name": "matejch/yii2-iot24-meter",
   "description": "Ability check on meters and consumption of electricity",
   "type": "yii2-extension",
-  "keywords": ["yii2","extension","iot"],
+  "keywords": [
+    "yii2",
+    "extension",
+    "iot"
+  ],
   "license": "MIT",
   "authors": [
     {
@@ -15,6 +19,7 @@
     "php": ">=7.2.0",
     "yiisoft/yii2": "~2.0.42",
     "miloschuman/yii2-highcharts-widget": "^5.0",
+    "phpoffice/phpspreadsheet": "^1.16",
     "ext-curl": "*"
   },
   "repositories": [

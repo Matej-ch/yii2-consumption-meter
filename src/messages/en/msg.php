@@ -20,7 +20,7 @@ return [
     'load' => 'Load data',
     'choose' => 'Výber...',
     'save_success_msg' => 'Sensor data saved',
-    'fail_success_msg' => 'Sensor data failed to save',
+    'save_fail_msg' => 'Sensor data failed to save',
     'pick_interval' => 'Pick interval',
     'pick_channel' => 'Pick channel',
     'pick_device' => 'Pick device',
@@ -56,5 +56,6 @@ return [
     'October' => 'October',
     'November' => 'November',
     'December' => 'December',
-    'pick_year' => 'Pick year'
+    'pick_year' => 'Pick year',
+    'aliases' => 'Alias'
 ];

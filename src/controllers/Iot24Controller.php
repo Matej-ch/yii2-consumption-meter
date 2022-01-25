@@ -20,7 +20,7 @@ class Iot24Controller extends \yii\web\Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index','load','update'],
+                        'actions' => ['index', 'load', 'update'],
                         'allow' => true, 'roles' => ['@'],
                     ],
                 ],
@@ -41,7 +41,7 @@ class Iot24Controller extends \yii\web\Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'series' =>  $statisticsService->parse($get),
+            'series' => $statisticsService->parse($get),
             'dates' => $statisticsService->getDates()
         ]);
     }
@@ -55,8 +55,8 @@ class Iot24Controller extends \yii\web\Controller
     {
         $module = Iot24::getInstance();
 
-        if(empty($module->endpoints)) {
-            Yii::$app->session->setFlash('warning','No endpoints set');
+        if (empty($module->endpoints)) {
+            Yii::$app->session->setFlash('warning', 'No endpoints set');
             return $this->redirect(Yii::$app->request->referrer);
         }
 
@@ -66,26 +66,29 @@ class Iot24Controller extends \yii\web\Controller
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
-                $result = $model->upsert($item,$device);
+                $result = $model->upsert($item, $device);
 
-                if($result) {
-                    $message = Yii::t('iot24meter/msg','save_success_msg') ."<br>";
+                if ($result) {
+                    $message = Yii::t('iot24meter/msg', 'save_success_msg') . "<br>";
                 } else {
-                    $message = Yii::t('iot24meter/msg','save_success_msg') ."<br>";
+                    $message = Yii::t('iot24meter/msg', 'save_fail_msg') . "<br>";
                 }
             }
         }
 
-        Yii::$app->session->setFlash('info',$message);
+        Yii::$app->session->setFlash('info', $message);
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    /**
+     * @throws NotFoundHttpException
+     */
     protected function findModel($id): ?\matejch\iot24meter\models\Iot24
     {
         if (($model = \matejch\iot24meter\models\Iot24::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('iot24meter/msg','Not found'));
+        throw new NotFoundHttpException(Yii::t('iot24meter/msg', 'Not found'));
     }
 }

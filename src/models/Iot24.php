@@ -35,7 +35,7 @@ class Iot24 extends \yii\db\ActiveRecord
     {
         return [
             [['created_by', 'updated_by', 'system_id'], 'integer'],
-            [['increments', 'values'], 'string'],
+            [['increments', 'values', 'aliases'], 'string'],
             [['device_id'], 'string', 'max' => 512],
             [['device_type'], 'string', 'max' => 256],
             [['device_type'], 'in', 'range' => array_keys(Device::getList())],
@@ -43,8 +43,8 @@ class Iot24 extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'string', 'max' => 20],
             [['status'], 'string', 'max' => 10],
             [['status'], 'default', 'value' => '1'],
-            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at'], 'trim'],
-            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at'],
+            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at', 'aliases'], 'trim'],
+            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at', 'aliases'],
                 'filter', 'filter' => 'strip_tags', 'skipOnArray' => true],
         ];
     }
@@ -64,6 +64,7 @@ class Iot24 extends \yii\db\ActiveRecord
             'downloaded_at' => Yii::t('iot24meter/msg', 'downloaded_at'),
             'created_by' => Yii::t('iot24meter/msg', 'created_by'),
             'updated_by' => Yii::t('iot24meter/msg', 'updated_by'),
+            'aliases' => Yii::t('iot24meter/msg', 'aliases'),
         ];
     }
 
@@ -96,7 +97,7 @@ class Iot24 extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upsert($data,$device): bool
+    public function upsert($data, $device): bool
     {
         if (self::find()->where(['system_id' => $data['id'], 'device_id' => $data['device_id']])->exists()) {
             return true;
@@ -123,25 +124,25 @@ class Iot24 extends \yii\db\ActiveRecord
         $device = $params['device'] ?? Device::ELEKTROMETER;
         $interval = $params['interval'] ?? 'last_24';
 
-        $query = self::find()->select(['device_id','device_type','increments','values','created_at'])->where(['device_type' => $device]);
+        $query = self::find()->select(['device_id', 'device_type', 'increments', 'values', 'created_at'])->where(['device_type' => $device]);
 
-        if($interval === 'last_hour') {
+        if ($interval === 'last_hour') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 HOUR"));
         }
 
-        if($interval === 'last_24') {
+        if ($interval === 'last_24') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
         }
 
-        if($interval === 'this_week') {
+        if ($interval === 'this_week') {
             $query->andWhere(new Expression("created_at > DATE_SUB(NOW(), INTERVAL 1 WEEK)"));
         }
 
-        if($interval === 'this_month') {
+        if ($interval === 'this_month') {
             $query->andWhere(new Expression("MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())"));
         }
 
-        if($interval === 'this_year') {
+        if ($interval === 'this_year') {
             $query->andWhere(new Expression("YEAR(created_at) = YEAR(CURRENT_DATE())"));
         }
 
