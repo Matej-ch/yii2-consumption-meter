@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use matejch\iot24meter\assets\CalendarAsset;
+use yii\helpers\Html;
 
 $this->title = 'Kalendár';
 
@@ -12,7 +13,12 @@ CalendarAsset::register($this);
 
 <div class="js-year w-full">
 
-    <div class="py-2 px-2 font-bold text-3xl">
+    <p>
+        <?= Html::a('Export', ['iot24-price-map/export'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Import', ['iot24-price-map/import'], ['class' => 'btn btn-primary']) ?>
+    </p>
+
+    <div class="py-2 px-2">
 
         <div id="lnb">
             <div class="lnb-new-schedule">

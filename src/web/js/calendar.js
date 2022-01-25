@@ -14,6 +14,94 @@ document.addEventListener("DOMContentLoaded", function () {
         setEventListener();
     }
 
+    function onClickMenu(e) {
+        var target = $(e.target).closest('a[role="menuitem"]')[0];
+        var action = getDataAction(target);
+        var options = calendar.getOptions();
+        var viewName = '';
+
+        console.log(target);
+        console.log(action);
+        switch (action) {
+            case 'toggle-daily':
+                viewName = 'day';
+                break;
+            case 'toggle-weekly':
+                viewName = 'week';
+                break;
+            case 'toggle-monthly':
+                options.month.visibleWeeksCount = 0;
+                viewName = 'month';
+                break;
+            case 'toggle-weeks2':
+                options.month.visibleWeeksCount = 2;
+                viewName = 'month';
+                break;
+            case 'toggle-weeks3':
+                options.month.visibleWeeksCount = 3;
+                viewName = 'month';
+                break;
+            case 'toggle-narrow-weekend':
+                options.month.narrowWeekend = !options.month.narrowWeekend;
+                options.week.narrowWeekend = !options.week.narrowWeekend;
+                viewName = calendar.getViewName();
+
+                target.querySelector('input').checked = options.month.narrowWeekend;
+                break;
+            case 'toggle-start-day-1':
+                options.month.startDayOfWeek = options.month.startDayOfWeek ? 0 : 1;
+                options.week.startDayOfWeek = options.week.startDayOfWeek ? 0 : 1;
+                viewName = calendar.getViewName();
+
+                target.querySelector('input').checked = options.month.startDayOfWeek;
+                break;
+            case 'toggle-workweek':
+                options.month.workweek = !options.month.workweek;
+                options.week.workweek = !options.week.workweek;
+                viewName = calendar.getViewName();
+
+                target.querySelector('input').checked = !options.month.workweek;
+                break;
+            default:
+                break;
+        }
+
+        calendar.setOptions(options, true);
+        calendar.changeView(viewName, true);
+
+        setDropdownCalendarType();
+        setRenderRangeText();
+        //setSchedules();
+    }
+
+    function setDropdownCalendarType() {
+        var calendarTypeName = document.getElementById('calendarTypeName');
+        var calendarTypeIcon = document.getElementById('calendarTypeIcon');
+        var options = calendar.getOptions();
+        var type = calendar.getViewName();
+        var iconClassName;
+
+        if (type === 'day') {
+            type = 'Daily';
+            iconClassName = 'calendar-icon ic_view_day';
+        } else if (type === 'week') {
+            type = 'Weekly';
+            iconClassName = 'calendar-icon ic_view_week';
+        } else if (options.month.visibleWeeksCount === 2) {
+            type = '2 weeks';
+            iconClassName = 'calendar-icon ic_view_week';
+        } else if (options.month.visibleWeeksCount === 3) {
+            type = '3 weeks';
+            iconClassName = 'calendar-icon ic_view_week';
+        } else {
+            type = 'Monthly';
+            iconClassName = 'calendar-icon ic_view_month';
+        }
+
+        calendarTypeName.innerHTML = type;
+        calendarTypeIcon.className = iconClassName;
+    }
+
     function onClickNavi(e) {
         const action = getDataAction(e.target);
 

@@ -30,5 +30,7 @@ class CalendarAsset extends AssetBundle
         'position' => View::POS_END,
     ];
 
-    public $depends = [];
+    public $depends = [
+        'yii\bootstrap\BootstrapAsset',
+    ];
 }
