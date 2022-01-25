@@ -6,6 +6,7 @@
   "scripts": {
     "postcss:watch": "postcss src/web/css/main.css -o src/web/css/main.min.css --watch",
     "postcss:compile": "postcss src/web/css/main.css -o src/web/css/main.min.css",
+    "postcss:compile:calendar": "postcss src/web/css/calendar.css -o src/web/css/calendar.min.css",
     "babel:compile": "babel src/web/js/main.js -o src/web/js/main.min.js",
     "babel:compile:calendar": "babel src/web/js/calendar.js -o src/web/js/calendar.min.js"
   },
