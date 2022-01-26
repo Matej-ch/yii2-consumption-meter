@@ -55,9 +55,13 @@ class Iot24PriceMapController extends \yii\web\Controller
         }
 
 
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($spreadsheet);
-        $writer->save("calendar.xls");
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer->save("calendar.xlsx");
 
+        //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        //header('Content-Disposition: attachment; filename="'. urlencode("calendar.xlsx").'"');
+        //$writer->save('php://output');
+        //exit();
         return $this->redirect(Yii::$app->request->referrer);
     }
 
