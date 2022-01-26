@@ -17,6 +17,7 @@ use yii\db\Expression;
  * @property string|null $device_type
  * @property string|null $increments
  * @property string|null $values
+ * @property string|null $aliases
  * @property string|null $status
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -110,6 +111,7 @@ class Iot24 extends \yii\db\ActiveRecord
         $this->status = $data['status'];
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
+        $this->aliases = $data['aliases'];
         $this->device_type = $device;
 
         if ($this->save()) {
