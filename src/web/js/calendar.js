@@ -63,12 +63,19 @@ document.addEventListener("DOMContentLoaded", function () {
             var startDate = moment(renderStart.getTime())
             var endDate = moment(renderEnd.getTime());
             var diffDate = endDate.diff(startDate, 'days');
+            let category;
+            if (Math.floor(Math.random() * 10) > 5) {
+                schedule.isAllday = true;
+                category = 1;
+            } else {
+                schedule.isAllday = false;
+                category = 0;
+            }
 
-            schedule.isAllday = chance.bool({likelihood: 30});
             if (schedule.isAllday) {
                 schedule.category = 'allday';
-            } else if (chance.bool({likelihood: 30})) {
-                schedule.category = SCHEDULE_CATEGORY[chance.integer({min: 0, max: 1})];
+            } else if (Math.floor(Math.random() * 10) > 8) {
+                schedule.category = SCHEDULE_CATEGORY[category];
                 if (schedule.category === SCHEDULE_CATEGORY[1]) {
                     schedule.dueDateClass = 'morning';
                 }
@@ -76,26 +83,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 schedule.category = 'time';
             }
 
-            startDate.add(chance.integer({min: 0, max: diffDate}), 'days');
-            startDate.hours(chance.integer({min: 0, max: 23}))
-            startDate.minutes(chance.bool() ? 0 : 30);
+            startDate.add(Math.floor(Math.random() * diffDate), 'days');
+            startDate.hours(Math.floor(Math.random() * 23))
+            startDate.minutes(category === 0 ? 0 : 30);
             schedule.start = startDate.toDate();
 
             endDate = moment(startDate);
             if (schedule.isAllday) {
-                endDate.add(chance.integer({min: 0, max: 3}), 'days');
+                endDate.add(1, 'days');
             }
 
             schedule.end = endDate
-                .add(chance.integer({min: 1, max: 4}), 'hour')
+                .add(1, 'hour')
                 .toDate();
 
-            if (!schedule.isAllday && chance.bool({likelihood: 20})) {
-                schedule.goingDuration = chance.integer({min: 30, max: 120});
-                schedule.comingDuration = chance.integer({min: 30, max: 120});
-                ;
+            if (!schedule.isAllday && Math.floor(Math.random() * 10) > 8) {
+                schedule.goingDuration = Math.floor(Math.random() * 90) + 30;
+                schedule.comingDuration = Math.floor(Math.random() * 90) + 30;
 
-                if (chance.bool({likelihood: 50})) {
+                if (Math.floor(Math.random() * 10) >= 9) {
                     schedule.end = schedule.start;
                 }
             }
