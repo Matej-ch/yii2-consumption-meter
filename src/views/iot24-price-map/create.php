@@ -13,16 +13,17 @@ CalendarAsset::register($this);
 
 <div class="js-year w-full">
 
-    <p>
+    <p class="py-2 px-2">
         <?= Html::a('Export', ['iot24-price-map/export'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Import', ['iot24-price-map/import'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <div class="py-2 px-2">
+    <div class="py-2 px-2" style="display: flex; flex-direction: row">
 
         <div id="lnb">
             <div class="lnb-new-schedule">
-                <button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn"
+                <button id="btn-new-schedule" type="button"
+                        class="btn-cal btn-default btn-block lnb-new-schedule-btn"
                         data-toggle="modal">
                     Nový záznam
                 </button>
@@ -41,10 +42,11 @@ CalendarAsset::register($this);
                 </div>
             </div>
         </div>
-        <div id="right">
+        <div id="right" style="flex: 1">
             <div id="menu">
                 <span class="dropdown">
-                    <button id="dropdownMenu-calendarType" class="btn btn-default btn-sm dropdown-toggle" type="button"
+                    <button id="dropdownMenu-calendarType" class="btn-cal btn-default btn-sm dropdown-toggle"
+                            type="button"
                             data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true">
                         <i id="calendarTypeIcon" class="calendar-icon ic_view_month" style="margin-right: 4px;"></i>
@@ -102,12 +104,13 @@ CalendarAsset::register($this);
                     </ul>
                 </span>
                 <span id="menu-navi">
-                    <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Dnes
+                    <button type="button" class="btn-cal btn-default btn-sm move-today"
+                            data-action="move-today">Dnes
                     </button>
-                    <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+                    <button type="button" class="btn-cal btn-default btn-sm move-day" data-action="move-prev">
                         <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
                     </button>
-                    <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+                    <button type="button" class="btn-cal btn-default btn-sm move-day" data-action="move-next">
                         <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
                     </button>
                 </span>

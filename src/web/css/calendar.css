@@ -76,33 +76,33 @@ body {
 }
 
 /**  custom bootstrap - start */
-.btn {
+.btn-cal {
     border-radius: 25px;
     border-color: #ddd;
 }
 
-.btn:hover {
+.btn-cal:hover {
     border: solid 1px #bbb;
     background-color: #fff;
 }
 
-.btn:active {
+.btn-cal:active {
     background-color: #f9f9f9;
     border: solid 1px #bbb;
     outline: none;
 }
 
-.btn:disabled {
+.btn-cal:disabled {
     background-color: #f9f9f9;
     border: solid 1px #ddd;
     color: #bbb;
 }
 
-.btn:focus:active, .btn:focus, .btn:active {
+.btn-cal:focus:active, .btn-cal:focus, .btn-cal:active {
     outline: none;
 }
 
-.open > .dropdown-toggle.btn-default {
+.open > .dropdown-toggle.btn-cal-default {
     background-color: #fff;
 }
 
@@ -143,19 +143,13 @@ body {
 }
 
 #lnb {
-    position: absolute;
     width: 200px;
-    top: 49px;
-    bottom: 0;
     border-right: 1px solid #d5d5d5;
     padding: 12px 10px;
     background: #fafafa;
 }
 
 #right {
-    position: absolute;
-    left: 200px;
-    top: 49px;
     right: 0;
     bottom: 0;
 }
@@ -286,11 +280,6 @@ body {
 }
 
 #calendar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 5px;
-    top: 64px;
 }
 
 /** custom fontawesome */
