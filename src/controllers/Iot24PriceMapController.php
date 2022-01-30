@@ -2,6 +2,9 @@
 
 namespace matejch\iot24meter\controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Response;
@@ -30,7 +33,7 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionExport(): Response
     {
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet = new Spreadsheet();
         $months = range(1, 12);
         $year = date('Y');
         $calendar = [];
@@ -56,7 +59,11 @@ class Iot24PriceMapController extends \yii\web\Controller
 
         foreach ($calendar as $monthName => $days) {
 
-            $worksheet = $spreadsheet->addSheet(new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, $monthName));
+            $worksheet = $spreadsheet->addSheet(new Worksheet($spreadsheet, $monthName));
+
+            foreach ($days as $dayIndex => $day) {
+                $worksheet->setCellValueByColumnAndRow($dayIndex + 2, 1, $dayIndex);
+            }
 
             $temp = 2;
             foreach ($days[1]['intervals'] as $i => $interval) {
@@ -73,7 +80,7 @@ class Iot24PriceMapController extends \yii\web\Controller
         }
         $spreadsheet->removeSheetByIndex(0);
 
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer = new Xlsx($spreadsheet);
         $writer->save("calendar.xlsx");
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
