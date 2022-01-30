@@ -78,7 +78,20 @@ body {
 /**  custom bootstrap - start */
 .btn-cal {
     border-radius: 25px;
-    border-color: #ddd;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
 }
 
 .btn-cal:hover {
@@ -102,7 +115,7 @@ body {
     outline: none;
 }
 
-.open > .dropdown-toggle.btn-cal-default {
+.open > .dropdown-toggle.btn-default {
     background-color: #fff;
 }
 
