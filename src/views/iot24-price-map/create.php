@@ -15,14 +15,14 @@ CalendarAsset::register($this);
 <div class="js-year w-full">
 
     <div class="flex">
-        <p class="py-2 px-2">
+        <p class="py px">
             <?= Html::a('Export', ['iot24-price-map/export'], ['class' => 'btn btn-primary']) ?>
         </p>
 
         <?php ActiveForm::begin([
             'id' => 'xls-invoice-form',
             'action' => ['iot24-price-map/import'],
-            'options' => ['class' => 'w-full container-flex-new px', 'style' => 'align-items:end', 'enctype' => 'multipart/form-data'],
+            'options' => ['class' => 'container-flex-new py px', 'style' => 'align-items:end', 'enctype' => 'multipart/form-data'],
         ]); ?>
 
         <label for="xls_file" style="margin-bottom: 0">Excel Súbor
@@ -37,7 +37,7 @@ CalendarAsset::register($this);
     </div>
 
 
-    <div class="py-2 px-2" style="display: flex; flex-direction: row">
+    <div class="py px" style="display: flex; flex-direction: row">
 
         <div id="lnb">
             <div class="lnb-new-schedule">
