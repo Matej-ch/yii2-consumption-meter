@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
         }
 
-        (async function () {
+        (function () {
             let calendar;
             let id = 1;
 
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 {color: '#ffffff', bgColor: '#ff5583', dragBgColor: '#ff5583'}
             ];
 
-            await fetch('/iot/device/index')
+            fetch('/iot/device/index')
                 .then(res => res.json())
                 .then(data => {
                     Object.values(data.devices).forEach(device => {
