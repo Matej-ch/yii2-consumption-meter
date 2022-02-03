@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
             await fetch('/iot/device/index')
                 .then(res => res.json())
                 .then(data => {
-                    data.devices.forEach(device => {
+                    Object.values(data.devices).forEach(device => {
                         calendar = new CalendarInfo();
                         calendar.id = String(id);
                         calendar.name = device;
@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function changeNewScheduleCalendar(calendarId) {
             var calendarNameElement = document.getElementById('calendarName');
             var calendar = findCalendar(calendarId);
-            var html = [];
+            let html = [];
 
             html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
             html.push('<span class="calendar-name">' + calendar.name + '</span>');
