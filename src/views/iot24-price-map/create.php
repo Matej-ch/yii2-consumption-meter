@@ -14,25 +14,28 @@ CalendarAsset::register($this);
 
 <div class="js-year w-full">
 
-    <p class="py-2 px-2">
-        <?= Html::a('Export', ['iot24-price-map/export'], ['class' => 'btn btn-primary']) ?>
-    </p>
+    <div class="flex">
+        <p class="py-2 px-2">
+            <?= Html::a('Export', ['iot24-price-map/export'], ['class' => 'btn btn-primary']) ?>
+        </p>
 
-    <?php ActiveForm::begin([
-        'id' => 'xls-invoice-form',
-        'action' => ['iot24-price-map/import'],
-        'options' => ['class' => 'w-full container-flex-new', 'style' => 'align-items:end', 'enctype' => 'multipart/form-data'],
-    ]); ?>
+        <?php ActiveForm::begin([
+            'id' => 'xls-invoice-form',
+            'action' => ['iot24-price-map/import'],
+            'options' => ['class' => 'w-full container-flex-new px', 'style' => 'align-items:end', 'enctype' => 'multipart/form-data'],
+        ]); ?>
 
-    <label for="xls_file" style="margin-bottom: 0">Excel Súbor
-        <?= Html::fileInput('xls_file', null, ['class' => 'form-control', 'accept' => 'application/vnd.ms-excel', 'id' => 'xls_file']) ?>
-        <?= Html::hiddenInput('MAX_FILE_SIZE', '10000000') ?>
-    </label>
+        <label for="xls_file" style="margin-bottom: 0">Excel Súbor
+            <?= Html::fileInput('xls_file', null, ['class' => 'form-control', 'accept' => 'application/vnd.ms-excel', 'id' => 'xls_file']) ?>
+            <?= Html::hiddenInput('MAX_FILE_SIZE', '10000000') ?>
+        </label>
 
-    <?= Html::submitButton('Import',
-        ['class' => 'btn btn-success', 'id' => 'load-xls-file']) ?>
+        <?= Html::submitButton('Import',
+            ['class' => 'btn btn-success', 'id' => 'load-xls-file']) ?>
 
-    <?php ActiveForm::end() ?>
+        <?php ActiveForm::end() ?>
+    </div>
+
 
     <div class="py-2 px-2" style="display: flex; flex-direction: row">
 
