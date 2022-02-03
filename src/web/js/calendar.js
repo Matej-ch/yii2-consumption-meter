@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function generateTime(schedule, renderStart, renderEnd) {
-            var startDate = moment(renderStart.getTime())
-            var endDate = moment(renderEnd.getTime());
-            var diffDate = endDate.diff(startDate, 'days');
+            let startDate = moment(renderStart.getTime())
+            let endDate = moment(renderEnd.getTime());
+            let diffDate = endDate.diff(startDate, 'days');
             let category;
             if (Math.floor(Math.random() * 10) > 5) {
                 schedule.isAllday = true;
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function generateRandomSchedule(calendar, renderStart, renderEnd) {
-            var schedule = new ScheduleInfo();
+            let schedule = new ScheduleInfo();
 
             schedule.id = 1;
             schedule.calendarId = calendar.id;
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function generateSchedule(viewName, renderStart, renderEnd) {
             ScheduleList = [];
             CalendarList.forEach(function (calendar) {
-                var i = 0, length = 10;
+                let i = 0, length = 10;
                 if (viewName === 'month') {
                     length = 3;
                 } else if (viewName === 'day') {
@@ -245,8 +245,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 saveNewSchedule(e);
             },
             'beforeUpdateSchedule': function (e) {
-                var schedule = e.schedule;
-                var changes = e.changes;
+                let schedule = e.schedule;
+                let changes = e.changes;
 
                 console.log('beforeUpdateSchedule', e);
 
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
             },
             'afterRenderSchedule': function (e) {
-                var schedule = e.schedule;
+                let schedule = e.schedule;
                 // var element = cal.getElement(schedule.id, schedule.calendarId);
                 // console.log('afterRenderSchedule', element);
             },
@@ -292,8 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
          * @returns {string}
          */
         function getTimeTemplate(schedule, isAllDay) {
-            var html = [];
-            var start = moment(schedule.start.toUTCString());
+            let html = [];
+            let start = moment(schedule.start.toUTCString());
             if (!isAllDay) {
                 html.push('<strong>' + start.format('HH:mm') + '</strong> ');
             }
@@ -321,10 +321,10 @@ document.addEventListener("DOMContentLoaded", function () {
          * @param {Event} e - click event
          */
         function onClickMenu(e) {
-            var target = e.target.closest('a[role="menuitem"]')[0];
-            var action = getDataAction(target);
-            var options = cal.getOptions();
-            var viewName = '';
+            let target = e.target.closest('a[role="menuitem"]')[0];
+            let action = getDataAction(target);
+            let options = cal.getOptions();
+            let viewName = '';
 
             console.log(target);
             console.log(action);
@@ -403,12 +403,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function onNewSchedule() {
 
-            var title = document.getElementById('new-schedule-title').value;
-            var location = document.getElementById('new-schedule-location').value;
-            var isAllDay = document.getElementById('new-schedule-allday').checked;
-            var start = datePicker.getStartDate();
-            var end = datePicker.getEndDate();
-            var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
+            let title = document.getElementById('new-schedule-title').value;
+            let location = document.getElementById('new-schedule-location').value;
+            let isAllDay = document.getElementById('new-schedule-allday').checked;
+            let start = datePicker.getStartDate();
+            let end = datePicker.getEndDate();
+            let calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
 
             if (!title) {
                 return;
@@ -435,14 +435,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function onChangeNewScheduleCalendar(e) {
-            var target = e.target.closest('a[role="menuitem"]')[0];
-            var calendarId = getDataAction(target);
+            let target = e.target.closest('a[role="menuitem"]')[0];
+            let calendarId = getDataAction(target);
             changeNewScheduleCalendar(calendarId);
         }
 
         function changeNewScheduleCalendar(calendarId) {
-            var calendarNameElement = document.getElementById('calendarName');
-            var calendar = findCalendar(calendarId);
+            let calendarNameElement = document.getElementById('calendarName');
+            let calendar = findCalendar(calendarId);
             let html = [];
 
             html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
@@ -454,8 +454,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function createNewSchedule(event) {
-            var start = event.start ? new Date(event.start.getTime()) : new Date();
-            var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
+            let start = event.start ? new Date(event.start.getTime()) : new Date();
+            let end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
 
             if (useCreationPopup) {
                 cal.openCreationPopup({
@@ -466,8 +466,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function saveNewSchedule(scheduleData) {
-            var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
-            var schedule = {
+            let calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
+            let schedule = {
                 id: String(Math.floor(Math.random() * 1000000)),
                 title: scheduleData.title,
                 isAllDay: scheduleData.isAllDay,
@@ -496,11 +496,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function onChangeCalendars(e) {
-            var calendarId = e.target.value;
-            var checked = e.target.checked;
-            var viewAll = document.querySelector('.lnb-calendars-item input');
-            var calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
-            var allCheckedCalendars = true;
+            let calendarId = e.target.value;
+            let checked = e.target.checked;
+            let viewAll = document.querySelector('.lnb-calendars-item input');
+            let calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
+            let allCheckedCalendars = true;
 
             if (calendarId === 'all') {
                 allCheckedCalendars = checked;
@@ -532,7 +532,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function refreshScheduleVisibility() {
-            var calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
+            let calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
 
             CalendarList.forEach(function (calendar) {
                 cal.toggleSchedules(calendar.id, !calendar.checked, false);
@@ -541,17 +541,17 @@ document.addEventListener("DOMContentLoaded", function () {
             cal.render(true);
 
             calendarElements.forEach(function (input) {
-                var span = input.nextElementSibling;
+                let span = input.nextElementSibling;
                 span.style.backgroundColor = input.checked ? span.style.borderColor : 'transparent';
             });
         }
 
         function setDropdownCalendarType() {
-            var calendarTypeName = document.getElementById('calendarTypeName');
-            var calendarTypeIcon = document.getElementById('calendarTypeIcon');
-            var options = cal.getOptions();
-            var type = cal.getViewName();
-            var iconClassName;
+            let calendarTypeName = document.getElementById('calendarTypeName');
+            let calendarTypeIcon = document.getElementById('calendarTypeIcon');
+            let options = cal.getOptions();
+            let type = cal.getViewName();
+            let iconClassName;
 
             if (type === 'day') {
                 type = 'Daily';
@@ -575,17 +575,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function currentCalendarDate(format) {
-            var currentDate = moment([cal.getDate().getFullYear(), cal.getDate().getMonth(), cal.getDate().getDate()]);
+            let currentDate = moment([cal.getDate().getFullYear(), cal.getDate().getMonth(), cal.getDate().getDate()]);
 
             return currentDate.format(format);
         }
 
         function setRenderRangeText() {
-            var renderRange = document.getElementById('renderRange');
-            var options = cal.getOptions();
-            var viewName = cal.getViewName();
+            let renderRange = document.getElementById('renderRange');
+            let options = cal.getOptions();
+            let viewName = cal.getViewName();
 
-            var html = [];
+            let html = [];
             if (viewName === 'day') {
                 html.push(currentCalendarDate('YYYY.MM.DD'));
             } else if (viewName === 'month' &&
@@ -608,14 +608,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function setEventListener() {
-            $('#menu-navi').on('click', onClickNavi);
-            $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
-            $('#lnb-calendars').on('change', onChangeCalendars);
 
-            $('#btn-save-schedule').on('click', onNewSchedule);
-            $('#btn-new-schedule').on('click', createNewSchedule);
+            document.querySelector('body').addEventListener('click', e => {
+                if (e.target.id === 'menu-navi') {
+                    onClickNavi(e);
+                }
 
-            $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
+                if (e.target.id === 'btn-save-schedule') {
+                    onNewSchedule();
+                }
+                if (e.target.id === 'btn-new-schedule') {
+                    createNewSchedule(e);
+                }
+                if (e.target.id === 'dropdownMenu-calendars-list') {
+                    onChangeNewScheduleCalendar(e);
+                }
+
+                if (e.target.classList.contains('dropdown-menu-title') && e.target.hasAttribute('role') && e.target.getAttribute('role') === 'menuitem') {
+                    onClickMenu(e);
+                }
+            });
+
+            document.querySelector('body').addEventListener('change', e => {
+                if (e.target.id === 'lnb-calendars') {
+                    onChangeCalendars(e);
+                }
+            })
 
             window.addEventListener('resize', resizeThrottled);
         }

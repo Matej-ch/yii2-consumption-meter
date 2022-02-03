@@ -100,21 +100,21 @@ CalendarAsset::register($this);
                         </li>
                         <li role="presentation" class="dropdown-divider"></li>
                         <li role="presentation">
-                            <a role="menuitem" data-action="toggle-workweek">
+                            <a class="dropdown-menu-title" role="menuitem" data-action="toggle-workweek">
                                 <input type="checkbox" class="tui-full-calendar-checkbox-square" value="toggle-workweek"
                                        checked>
                                 <span class="checkbox-title"></span>Zobraziť víkendy
                             </a>
                         </li>
                         <li role="presentation">
-                            <a role="menuitem" data-action="toggle-start-day-1">
+                            <a class="dropdown-menu-title" role="menuitem" data-action="toggle-start-day-1">
                                 <input type="checkbox" class="tui-full-calendar-checkbox-square"
                                        value="toggle-start-day-1">
                                 <span class="checkbox-title"></span>Začať týždeň v pondelok
                             </a>
                         </li>
                         <li role="presentation">
-                            <a role="menuitem" data-action="toggle-narrow-weekend">
+                            <a class="dropdown-menu-title" role="menuitem" data-action="toggle-narrow-weekend">
                                 <input type="checkbox" class="tui-full-calendar-checkbox-square"
                                        value="toggle-narrow-weekend">
                                 <span class="checkbox-title"></span>Užšie víkendy
