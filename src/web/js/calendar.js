@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 {color: '#ffffff', bgColor: '#ff5583', dragBgColor: '#ff5583'}
             ];
 
-            await fetch('/device/index')
+            await fetch('/iot/device/index')
                 .then(res => res.json())
                 .then(data => {
                     data.devices.forEach(device => {
