@@ -106,18 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        function generateNames() {
-            var names = [];
-            var i = 0;
-            var length = 1;
-
-            for (; i < length; i += 1) {
-                names.push('Hello name');
-            }
-
-            return names;
-        }
-
         function generateRandomSchedule(calendar, renderStart, renderEnd) {
             var schedule = new ScheduleInfo();
 
@@ -181,10 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.dragBgColor = null;
         }
 
-        function addCalendar(calendar) {
-            CalendarList.push(calendar);
-        }
-
         function findCalendar(id) {
             let found;
 
@@ -197,26 +181,17 @@ document.addEventListener("DOMContentLoaded", function () {
             return found || CalendarList[0];
         }
 
-        function hexToRGBA(hex) {
-            var radix = 16;
-            var r = parseInt(hex.slice(1, 3), radix),
-                g = parseInt(hex.slice(3, 5), radix),
-                b = parseInt(hex.slice(5, 7), radix),
-                a = parseInt(hex.slice(7, 9), radix) / 255 || 1;
-            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
-        }
-
-        (function () {
+        async function initCalendars() {
             let calendar;
             let id = 1;
-
+            let calendarList = [];
             const colors = [
                 {color: '#ffffff', bgColor: '#9e5fff', dragBgColor: '#9e5fff'},
                 {color: '#ffffff', bgColor: '#00a9ff', dragBgColor: '#00a9ff'},
                 {color: '#ffffff', bgColor: '#ff5583', dragBgColor: '#ff5583'}
             ];
 
-            fetch('/iot/device/index')
+            await fetch('/iot/device/index')
                 .then(res => res.json())
                 .then(data => {
                     Object.values(data.devices).forEach(device => {
@@ -228,11 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         calendar.bgColor = colors[id - 1].bgColor;
                         calendar.dragBgColor = colors[id - 1].dragBgColor;
                         calendar.borderColor = colors[id - 1].dragBgColor;
-                        addCalendar(calendar);
+                        calendarList.push(calendar);
                         id += 1;
                     })
                 })
-        })();
+
+            return calendarList;
+        }
 
         cal = new Calendar('#calendar', {
             defaultView: 'week',
@@ -659,7 +636,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setEventListener();
 
         // set calendars
-        (function () {
+        /*(function () {
             const calendarListEl = document.getElementById('calendarList');
             let html = [];
             CalendarList.forEach(function (calendar) {
@@ -671,7 +648,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             });
             calendarListEl.innerHTML = html.join('\n');
-        })(CalendarList);
+        })(CalendarList);*/
+
+        async function renderCalendarList() {
+            const calendarListEl = document.getElementById('calendarList');
+            let html = [];
+
+            let calendarList = await initCalendars();
+
+            calendarList.forEach(function (calendar) {
+                html.push('<div class="lnb-calendars-item"><label>' +
+                    '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
+                    '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
+                    '<span>' + calendar.name + '</span>' +
+                    '</label></div>'
+                );
+            });
+            calendarListEl.innerHTML = html.join('\n');
+        }
+
+        renderCalendarList();
 
     })(window, tui.Calendar);
 });
