@@ -635,27 +635,12 @@ document.addEventListener("DOMContentLoaded", function () {
         setSchedules();
         setEventListener();
 
-        // set calendars
-        /*(function () {
-            const calendarListEl = document.getElementById('calendarList');
-            let html = [];
-            CalendarList.forEach(function (calendar) {
-                html.push('<div class="lnb-calendars-item"><label>' +
-                    '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
-                    '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
-                    '<span>' + calendar.name + '</span>' +
-                    '</label></div>'
-                );
-            });
-            calendarListEl.innerHTML = html.join('\n');
-        })(CalendarList);*/
-
         async function renderCalendarList() {
             const calendarListEl = document.getElementById('calendarList');
             let html = [];
 
             let calendarList = await initCalendars();
-
+            CalendarList = calendarList;
             calendarList.forEach(function (calendar) {
                 html.push('<div class="lnb-calendars-item"><label>' +
                     '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
