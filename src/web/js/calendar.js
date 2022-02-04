@@ -609,29 +609,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function setEventListener() {
 
-            document.querySelector('body').addEventListener('click', e => {
-                if (e.target.id === 'menu-navi') {
-                    onClickNavi(e);
-                }
+            $('#menu-navi').on('click', onClickNavi);
+            $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
+            $('#lnb-calendars').on('change', onChangeCalendars);
 
-                if (e.target.id === 'btn-save-schedule') {
-                    onNewSchedule();
-                }
-                if (e.target.id === 'btn-new-schedule') {
-                    createNewSchedule(e);
-                }
-                if (e.target.id === 'dropdownMenu-calendars-list') {
-                    onChangeNewScheduleCalendar(e);
-                }
+            $('#btn-save-schedule').on('click', onNewSchedule);
+            $('#btn-new-schedule').on('click', createNewSchedule);
 
-                if (e.target.classList.contains('dropdown-menu-title') && e.target.hasAttribute('role') && e.target.getAttribute('role') === 'menuitem') {
-                    onClickMenu(e);
-                }
-
-                if (e.target.id === 'lnb-calendars') {
-                    onChangeCalendars(e);
-                }
-            });
+            $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
             window.addEventListener('resize', resizeThrottled);
         }
