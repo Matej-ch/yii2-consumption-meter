@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             this.title = null;
             this.body = null;
-            this.location = null;
             this.isAllday = false;
             this.start = null;
             this.end = null;
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 memo: '',
                 hasToOrCc: false,
                 hasRecurrenceRule: false,
-                location: null,
                 creator: {
                     name: '',
                     avatar: '',
@@ -118,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
             generateTime(schedule, renderStart, renderEnd);
 
             schedule.isPrivate = false;
-            schedule.location = '';
             schedule.attendees = [];
             schedule.recurrenceRule = '';
             schedule.state = 'Free';
@@ -307,8 +304,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
                 } else if (schedule.attendees.length) {
                     html.push('<span class="calendar-font-icon ic-user-b"></span>');
-                } else if (schedule.location) {
-                    html.push('<span class="calendar-font-icon ic-location-b"></span>');
                 }
                 html.push(' ' + schedule.title);
             }
@@ -404,7 +399,6 @@ document.addEventListener("DOMContentLoaded", function () {
         function onNewSchedule() {
 
             let title = document.getElementById('new-schedule-title').value;
-            let location = document.getElementById('new-schedule-location').value;
             let isAllDay = document.getElementById('new-schedule-allday').checked;
             let start = datePicker.getStartDate();
             let end = datePicker.getEndDate();
@@ -419,7 +413,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 calendarId: calendar.id,
                 title: title,
                 isAllDay: isAllDay,
-                location: location,
                 start: start,
                 end: end,
                 category: isAllDay ? 'allday' : 'time',
@@ -479,7 +472,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 bgColor: calendar.bgColor,
                 dragBgColor: calendar.bgColor,
                 borderColor: calendar.borderColor,
-                location: scheduleData.location,
                 isPrivate: scheduleData.isPrivate,
                 state: scheduleData.state
             };
@@ -630,17 +622,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 50);
 
         window.cal = cal;
-
-        setDropdownCalendarType();
-        setRenderRangeText();
-        setSchedules();
-        setEventListener();
-
+        
         async function renderCalendarList() {
             const calendarListEl = document.getElementById('calendarList');
             let html = [];
 
             let calendarList = await initCalendars();
+
+            setSchedules();
+            setDropdownCalendarType();
+            setRenderRangeText();
+            setEventListener();
+
             CalendarList = calendarList;
             calendarList.forEach(function (calendar) {
                 html.push('<div class="lnb-calendars-item"><label>' +
