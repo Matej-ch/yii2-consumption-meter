@@ -627,13 +627,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (e.target.classList.contains('dropdown-menu-title') && e.target.hasAttribute('role') && e.target.getAttribute('role') === 'menuitem') {
                     onClickMenu(e);
                 }
-            });
 
-            document.querySelector('body').addEventListener('change', e => {
                 if (e.target.id === 'lnb-calendars') {
                     onChangeCalendars(e);
                 }
-            })
+            });
 
             window.addEventListener('resize', resizeThrottled);
         }
