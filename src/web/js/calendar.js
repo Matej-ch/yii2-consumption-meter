@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 50);
 
         window.cal = cal;
-        
+
         async function renderCalendarList() {
             const calendarListEl = document.getElementById('calendarList');
             let html = [];
