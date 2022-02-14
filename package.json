@@ -4,16 +4,12 @@
   "description": "Extension to view info about meters and energy consumption",
   "main": "",
   "scripts": {
-    "postcss:watch": "postcss src/web/css/main.css -o src/web/css/main.min.css --watch",
-    "postcss:compile:main": "postcss src/web/css/main.css -o src/web/css/main.min.css",
-    "postcss:compile:calendar": "postcss src/web/css/calendar.css -o src/web/css/calendar.min.css",
-    "postcss:compile": "postcss:compile:main && postcss:compile:calendar",
-    "babel:compile": "babel src/web/js/main.js -o src/web/js/main.min.js",
-    "babel:compile:calendar": "babel src/web/js/calendar.js -o src/web/js/calendar.min.js",
-    "start": "webpack serve",
-    "watch": "webpack --watch",
-    "build": "NODE_ENV=production webpack",
-    "build-dev": "webpack"
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "mix --production"
   },
   "repository": {
     "type": "git",
@@ -34,6 +30,7 @@
     "css-loader": "^6.6.0",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "cssnano": "^5.0.10",
+    "laravel-mix": "^6.0.42",
     "mini-css-extract-plugin": "^2.5.3",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.2",
