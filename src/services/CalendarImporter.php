@@ -2,8 +2,7 @@
 
 namespace matejch\iot24meter\services;
 
-use PhpOffice\PhpSpreadsheet\Reader\Xls;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Reader\{Xls, Xlsx};
 
 class CalendarImporter
 {
@@ -27,8 +26,8 @@ class CalendarImporter
         $this->parser->setReadDataOnly(true);
         $spreadsheet = $this->parser->load($fileName);
         $rows = [];
-        $r = -1;
-        foreach ($spreadsheet->getAllSheets() as $sheet) {
+        foreach ($spreadsheet->getAllSheets() as $monthID => $sheet) {
+            $r = -1;
             $highestRow = $sheet->getHighestRow();
             $highestColumn = $sheet->getHighestColumn();
             $headingsArray = $sheet->rangeToArray('A1:' . $highestColumn . '1', null, true, true, true);
@@ -43,11 +42,10 @@ class CalendarImporter
                 if ((isset($dataRow[$row]['A'])) && ($dataRow[$row]['A'] > '')) {
                     ++$r;
                     foreach ($headingsArray as $columnKey => $columnHeading) {
-                        $rows[$r][$columnHeading] = $dataRow[$row][$columnKey];
+                        $rows[$monthID + 1][$r][$columnHeading] = $dataRow[$row][$columnKey];
                     }
                 }
             }
-
         }
 
         return $rows;

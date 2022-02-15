@@ -59,8 +59,8 @@ class CalendarExporter
             $temp = 2;
             foreach ($days[1]['intervals'] as $i => $interval) {
                 if ($i === 0) {
-                    $worksheet->setCellValue("A1", $year);
-                    $worksheet->setCellValue("B1", $year);
+                    $worksheet->setCellValue("A1", "$year.A1");
+                    $worksheet->setCellValue("B1", "$year.B1");
                     $worksheet->setCellValue("A{$temp}", $days[1]['intervals'][count($days[1]['intervals']) - 1]);
                     $worksheet->setCellValue("B{$temp}", $interval);
                     continue;
