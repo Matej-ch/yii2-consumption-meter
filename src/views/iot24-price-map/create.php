@@ -26,7 +26,7 @@ CalendarAsset::register($this);
         ]); ?>
 
         <label for="xls_file" style="margin-bottom: 0">Excel Súbor
-            <?= Html::fileInput('xls_file', null, ['class' => 'form-control', 'accept' => 'application/vnd.ms-excel', 'id' => 'xls_file']) ?>
+            <?= Html::fileInput('xls_file', null, ['class' => 'form-control', 'accept' => 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'id' => 'xls_file']) ?>
             <?= Html::hiddenInput('MAX_FILE_SIZE', '10000000') ?>
         </label>
 
