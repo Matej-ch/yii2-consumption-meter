@@ -67,7 +67,7 @@ class Iot24PriceMapController extends \yii\web\Controller
             }
         }
 
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect(['create']);
     }
 
     public function showFileErrorMsg($errorCode): string

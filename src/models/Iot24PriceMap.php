@@ -15,8 +15,49 @@ class Iot24PriceMap extends ActiveRecord
     public static function saveMultiple(array $rows)
     {
         foreach ($rows as $monthID => $interval) {
+            foreach ($interval as $days) {
 
+                $from = $to = '';
+                foreach ($days as $i => $price) {
+
+                    if (empty($i)) {
+                        continue;
+                    }
+
+                    if (strrpos($i, '.A1') !== false) {
+                        $year = explode('.', $i)[0];
+                        if ($monthID < 10) {
+                            $monthID = "0$monthID";
+                        }
+                        $from = "$year-$monthID-{day} $price";
+                    }
+
+                    if (strrpos($i, '.B1') !== false) {
+                        $year = explode('.', $i)[0];
+                        if ($monthID < 10) {
+                            $monthID = "0$monthID";
+                        }
+                        $to = "$year-$monthID-{day} $price";
+                    }
+
+                    $day = $i;
+                    if ($i < 10) {
+                        $day = "0$i";
+                    }
+                    $fromDate = str_replace('{day}', $day, $from);
+                    $toDate = str_replace('{day}', $day, $to);
+                    (new self([
+                        'device_id' => '0',
+                        'channel' => '0',
+                        'price' => $price,
+                        'from' => $fromDate,
+                        'to' => $toDate,
+                    ]))->save();
+                }
+            }
         }
+
+        return true;
     }
 
     public function rules(): array
