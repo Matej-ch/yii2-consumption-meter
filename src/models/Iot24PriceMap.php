@@ -11,7 +11,12 @@ class Iot24PriceMap extends ActiveRecord
     {
         return 'iot24_price_map';
     }
-    
+
+    public static function saveMultiple(array $rows)
+    {
+
+    }
+
     public function rules(): array
     {
         return [

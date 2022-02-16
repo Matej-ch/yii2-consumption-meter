@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\controllers;
 
 use app\components\helpers\FileHelper;
+use matejch\iot24meter\models\Iot24PriceMap;
 use matejch\iot24meter\services\CalendarExporter;
 use matejch\iot24meter\services\CalendarImporter;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
@@ -61,6 +62,8 @@ class Iot24PriceMapController extends \yii\web\Controller
 
                 $nameParts = explode('.', $file->name);
                 $rows = (new CalendarImporter($nameParts[count($nameParts) - 1]))->load($file->tempName);
+
+                $result = Iot24PriceMap::saveMultiple($rows);
             }
         }
 
@@ -70,14 +73,14 @@ class Iot24PriceMapController extends \yii\web\Controller
     public function showFileErrorMsg($errorCode): string
     {
         $messagesArray = [
-            UPLOAD_ERR_OK => 'Žiadny error.',
-            UPLOAD_ERR_INI_SIZE => 'Načítaný súbor presahuje upload_max_filesize directive in php.ini',
-            UPLOAD_ERR_FORM_SIZE => 'Načítaný súbor presahuje MAX_FILE_SIZE directive ktorá bola špecifikovaná v HTML formulári',
-            UPLOAD_ERR_PARTIAL => 'Súbor bol iba čiastočne načítaný',
-            UPLOAD_ERR_NO_FILE => 'Žiadny súbor načítaný',
-            UPLOAD_ERR_NO_TMP_DIR => 'Chýba dočasný adresár',
-            UPLOAD_ERR_CANT_WRITE => 'Zlyhalo zapisovanie súboru na disk',
-            UPLOAD_ERR_EXTENSION => 'Načítanie súboru zastavilo by extension',
+            UPLOAD_ERR_OK => Yii::t('iot24meter/msg', 'UPLOAD_ERR_OK'),
+            UPLOAD_ERR_INI_SIZE => Yii::t('iot24meter/msg', 'UPLOAD_ERR_INI_SIZE'),
+            UPLOAD_ERR_FORM_SIZE => Yii::t('iot24meter/msg', 'UPLOAD_ERR_FORM_SIZE'),
+            UPLOAD_ERR_PARTIAL => Yii::t('iot24meter/msg', 'UPLOAD_ERR_PARTIAL'),
+            UPLOAD_ERR_NO_FILE => Yii::t('iot24meter/msg', 'UPLOAD_ERR_NO_FILE'),
+            UPLOAD_ERR_NO_TMP_DIR => Yii::t('iot24meter/msg', 'UPLOAD_ERR_NO_TMP_DIR'),
+            UPLOAD_ERR_CANT_WRITE => Yii::t('iot24meter/msg', 'UPLOAD_ERR_CANT_WRITE'),
+            UPLOAD_ERR_EXTENSION => Yii::t('iot24meter/msg', 'UPLOAD_ERR_EXTENSION'),
         ];
         return $messagesArray[$errorCode];
     }
