@@ -14,7 +14,9 @@ class Iot24PriceMap extends ActiveRecord
 
     public static function saveMultiple(array $rows)
     {
+        foreach ($rows as $monthID => $interval) {
 
+        }
     }
 
     public function rules(): array
