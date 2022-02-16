@@ -23,11 +23,11 @@ class m211110_203816_iot24_price_map_table extends Migration
             'channel' => $this->string(256),
             'from' => $this->string(256),
             'to' => $this->string(256),
-            'price' => $this->decimal(),
+            'price' => $this->decimal(10, 4),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
 
-        ],$tableOptions);
+        ], $tableOptions);
 
         $this->createIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map}}', 'device_id');
     }
