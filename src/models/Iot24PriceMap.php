@@ -5,6 +5,18 @@ namespace matejch\iot24meter\models;
 use Yii;
 use yii\db\ActiveRecord;
 
+/**
+ * This is the model class for table "iot24_price_map".
+ *
+ * @property int $id
+ * @property float $price
+ * @property string $channel
+ * @property string $device_id
+ * @property string $updated_at
+ * @property string $created_at
+ * @property string $from
+ * @property string $to
+ */
 class Iot24PriceMap extends ActiveRecord
 {
     public static function tableName(): string
@@ -53,15 +65,24 @@ class Iot24PriceMap extends ActiveRecord
                     if ($i < 10) {
                         $day = "0$i";
                     }
+
                     $fromDate = str_replace('{day}', $day, $from);
                     $toDate = str_replace('{day}', $day, $to);
-                    (new self([
-                        'device_id' => '0',
-                        'channel' => '0',
-                        'price' => $price,
-                        'from' => $fromDate,
-                        'to' => $toDate,
-                    ]))->save();
+
+                    if ($oneMap = self::findOne(['from' => $fromDate, 'to' => $toDate])) {
+                        $oneMap->price = $price;
+                        $oneMap->update();
+                    } else {
+                        (new self([
+                            'device_id' => '0',
+                            'channel' => '0',
+                            'price' => $price,
+                            'from' => $fromDate,
+                            'to' => $toDate,
+                        ]))->save();
+                    }
+
+
                 }
             }
         }
