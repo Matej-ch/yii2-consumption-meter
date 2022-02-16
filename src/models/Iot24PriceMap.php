@@ -12,7 +12,7 @@ class Iot24PriceMap extends ActiveRecord
         return 'iot24_price_map';
     }
 
-    public static function saveMultiple(array $rows)
+    public static function saveMultiple(array $rows): bool
     {
         foreach ($rows as $monthID => $interval) {
             foreach ($interval as $days) {
@@ -30,6 +30,7 @@ class Iot24PriceMap extends ActiveRecord
                             $monthID = "0$monthID";
                         }
                         $from = "$year-$monthID-{day} $price";
+                        continue;
                     }
 
                     if (strrpos($i, '.B1') !== false) {
@@ -38,7 +39,13 @@ class Iot24PriceMap extends ActiveRecord
                             $monthID = "0$monthID";
                         }
                         $to = "$year-$monthID-{day} $price";
+                        continue;
                     }
+
+                    if (empty($price)) {
+                        continue;
+                    }
+                    $price = str_replace(',', '.', $price);
 
                     $day = $i;
                     if ($i < 10) {
