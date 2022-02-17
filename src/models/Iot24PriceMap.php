@@ -81,8 +81,6 @@ class Iot24PriceMap extends ActiveRecord
                             'to' => $toDate,
                         ]))->save();
                     }
-
-
                 }
             }
         }
