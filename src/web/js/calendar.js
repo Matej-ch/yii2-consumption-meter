@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return found || CalendarList[0];
     }
 
-    async function initCalendars() {
+    function initCalendars() {
         let calendar;
         let id = 1;
         let calendarList = [];
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {color: '#ffffff', bgColor: '#ff5583', dragBgColor: '#ff5583'}
         ];
 
-        await fetch('/iot/device/index')
+        fetch('/iot/device/index')
             .then(res => res.json())
             .then(data => {
                 Object.values(data.devices).forEach(device => {
@@ -618,18 +618,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.cal = cal;
 
-    async function renderCalendarList() {
+    function renderCalendarList() {
         const calendarListEl = document.getElementById('calendarList');
         let html = [];
 
-        let calendarList = await initCalendars();
+        let calendarList = initCalendars();
+        CalendarList = calendarList;
 
         setSchedules();
         setDropdownCalendarType();
         setRenderRangeText();
         setEventListener();
 
-        CalendarList = calendarList;
         calendarList.forEach(function (calendar) {
             html.push('<div class="lnb-calendars-item"><label>' +
                 '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
