@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return found || CalendarList[0];
     }
 
-    function initCalendars() {
+    async function initCalendars() {
         let calendar;
         let id = 1;
         let calendarList = [];
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {color: '#ffffff', bgColor: '#ff5583', dragBgColor: '#ff5583'}
         ];
 
-        fetch('/iot/device/index')
+        await fetch('/iot/device/index')
             .then(res => res.json())
             .then(data => {
                 Object.values(data.devices).forEach(device => {
@@ -618,16 +618,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.cal = cal;
 
-    function renderCalendarList() {
+    async function renderCalendarList() {
         const calendarListEl = document.getElementById('calendarList');
         let html = [];
 
-        let calendarList = initCalendars();
+        let calendarList = await initCalendars();
         CalendarList = calendarList;
 
+        setRenderRangeText();
         setSchedules();
         setDropdownCalendarType();
-        setRenderRangeText();
         setEventListener();
 
         calendarList.forEach(function (calendar) {
