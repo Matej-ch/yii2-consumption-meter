@@ -23,7 +23,7 @@ class CalendarAsset extends AssetBundle
         'js/tui-date-picker.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js',
         'js/tui-calendar.min.js',
-        'js/calendar.js',
+        'js/calendar.min.js',
     ];
 
     public $jsOptions = [
