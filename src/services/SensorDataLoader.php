@@ -33,7 +33,7 @@ class SensorDataLoader
         if (empty($data) || empty($data['data'])) {
             return;
         }
-
+        
         foreach ($data['data'] as $item) {
             $increments = [];
             $values = [];
