@@ -31,7 +31,7 @@ class Iot24Controller extends \yii\console\Controller
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
-                $result = $model->upsert($item,$device);
+                $result = $model->upsert($item);
 
                 if($result) {
                     echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg')."\n", BaseConsole::FG_GREEN);

@@ -14,7 +14,6 @@ use yii\db\Expression;
  * @property int $id
  * @property integer $system_id
  * @property string|null $device_id
- * @property string|null $device_type
  * @property string|null $increments
  * @property string|null $values
  * @property string|null $aliases
@@ -38,14 +37,11 @@ class Iot24 extends \yii\db\ActiveRecord
             [['created_by', 'updated_by', 'system_id'], 'integer'],
             [['increments', 'values', 'aliases'], 'string'],
             [['device_id'], 'string', 'max' => 512],
-            [['device_type'], 'string', 'max' => 256],
-            [['device_type'], 'in', 'range' => array_keys(Device::getList())],
-            [['device_type'], 'default', 'value' => Device::ELEKTROMETER],
             [['created_at', 'updated_at'], 'string', 'max' => 20],
             [['status'], 'string', 'max' => 10],
             [['status'], 'default', 'value' => '1'],
-            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at', 'aliases'], 'trim'],
-            [['status', 'increments', 'values', 'device_id', 'device_type', 'created_at', 'updated_at', 'aliases'],
+            [['status', 'increments', 'values', 'device_id', 'created_at', 'updated_at', 'aliases'], 'trim'],
+            [['status', 'increments', 'values', 'device_id', 'created_at', 'updated_at', 'aliases'],
                 'filter', 'filter' => 'strip_tags', 'skipOnArray' => true],
         ];
     }
@@ -56,7 +52,6 @@ class Iot24 extends \yii\db\ActiveRecord
             'id' => Yii::t('iot24meter/msg', 'id'),
             'system_id' => Yii::t('iot24meter/msg', 'system_id'),
             'device_id' => Yii::t('iot24meter/msg', 'device_id'),
-            'device_type' => Yii::t('iot24meter/msg', 'device_type'),
             'increments' => Yii::t('iot24meter/msg', 'increments'),
             'values' => Yii::t('iot24meter/msg', 'values'),
             'status' => Yii::t('iot24meter/msg', 'status'),
@@ -98,7 +93,7 @@ class Iot24 extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upsert($data, $device): bool
+    public function upsert($data): bool
     {
         if (self::find()->where(['system_id' => $data['id'], 'device_id' => $data['device_id']])->exists()) {
             return true;
@@ -112,7 +107,6 @@ class Iot24 extends \yii\db\ActiveRecord
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
         $this->aliases = $data['aliases'];
-        $this->device_type = $device;
 
         if ($this->save()) {
             return true;
@@ -126,7 +120,7 @@ class Iot24 extends \yii\db\ActiveRecord
         $device = $params['device'] ?? Device::ELEKTROMETER;
         $interval = $params['interval'] ?? 'last_24';
 
-        $query = self::find()->select(['device_id', 'device_type', 'increments', 'values', 'created_at'])->where(['device_type' => $device]);
+        $query = self::find()->select(['device_id', 'increments', 'values', 'created_at']);
 
         if ($interval === 'last_hour') {
             $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 HOUR"));
