@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\Iot24;
+use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24Search;
 use matejch\iot24meter\services\ConsumptionStatistics;
 use matejch\iot24meter\services\SensorDataLoader;
@@ -55,14 +56,17 @@ class Iot24Controller extends \yii\web\Controller
     {
         $module = Iot24::getInstance();
 
-        if (empty($module->endpoints)) {
+        $devices = Iot24Device::find()->select('endpoint')->all();
+
+        if (!$devices) {
             Yii::$app->session->setFlash('warning', 'No endpoints set');
             return $this->redirect(Yii::$app->request->referrer);
         }
 
         $message = '';
-        foreach ($module->endpoints as $endpoint => $device) {
-            $service = new SensorDataLoader($endpoint);
+        /** @var Iot24Device $device */
+        foreach ($devices as $device) {
+            $service = new SensorDataLoader($device->endpoint);
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();

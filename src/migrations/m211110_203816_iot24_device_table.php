@@ -17,6 +17,7 @@ class m211110_203816_iot24_device_table extends Migration
 
         $this->createTable('{{%iot24_device}}', [
             'id' => $this->primaryKey(),
+            'endpoint' => $this->string(1024),
             'device_id' => $this->string(1024),
             'device_name' => $this->string(512),
             'device_type_id' => $this->integer(),

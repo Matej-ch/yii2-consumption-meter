@@ -2,7 +2,7 @@
 
 namespace matejch\iot24meter\commands;
 
-use matejch\iot24meter\Iot24;
+use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\services\SensorDataLoader;
 use Yii;
 use yii\console\ExitCode;
@@ -13,30 +13,31 @@ class Iot24Controller extends \yii\console\Controller
     /**
      * Load data from meters from iot24 api
      *
-     * all endpoints available are checked, based on array endpoints in module
+     * Endpoints are set in iot24_device table
      *
      * @return int
      */
     public function actionLoad(): int
     {
-        $module = Iot24::getInstance();
+        $devices = Iot24Device::find()->select('endpoint')->all();
 
-        if(empty($module->endpoints)) {
+        if (!$devices) {
             echo $this->ansiFormat("No endpoints set\n", BaseConsole::FG_YELLOW);
             return ExitCode::OK;
         }
 
-        foreach ($module->endpoints as $endpoint => $device) {
-            $service = new SensorDataLoader($endpoint);
+        /** @var Iot24Device $device */
+        foreach ($devices as $device) {
+            $service = new SensorDataLoader($device->endpoint);
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
                 $result = $model->upsert($item);
 
-                if($result) {
-                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg')."\n", BaseConsole::FG_GREEN);
+                if ($result) {
+                    echo $this->ansiFormat(Yii::t('iot24meter/msg', 'save_success_msg') . "\n", BaseConsole::FG_GREEN);
                 } else {
-                    echo $this->ansiFormat(Yii::t('iot24meter/msg','save_success_msg')."\n", BaseConsole::FG_RED);
+                    echo $this->ansiFormat(Yii::t('iot24meter/msg', 'save_success_msg') . "\n", BaseConsole::FG_RED);
                 }
             }
         }
