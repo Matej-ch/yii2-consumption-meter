@@ -53,7 +53,6 @@ class Iot24Device extends ActiveRecord
             [['device_id', 'endpoint'], 'string', 'max' => 1024],
             [['device_name', 'device_type_name'], 'string', 'max' => 512],
             [['refresh_interval_minutes'], 'string', 'max' => 16],
-            [['pulse_frequency', 'aliases'], 'string'],
             [['created_at', 'updated_at', 'pulse_frequency', 'aliases'], 'safe'],
             [['device_id', 'device_name', 'device_type_name', 'refresh_interval_minutes', 'endpoint'],
                 'trim'],
