@@ -78,5 +78,12 @@ return [
     'show_weekends' => "Zobraziť víkendy",
     'start_week_on_monday' => "Začať týždeň v pondelok",
     'narrower_weekends' => 'Užšie víkendy',
-    'today' => 'Dnes'
+    'today' => 'Dnes',
+    'endpoint' => 'Api url',
+    'device_name' => 'Názov zariadenia',
+    'device_type_id' => 'ID typu zariadenia',
+    'device_type_name' => 'Nazov typu zariadenia',
+    'refresh_interval_minutes' => 'Obnovovací email',
+    'pulse_frequency' => 'Pulse frekvencia',
+    'devices' => 'Zariadenia',
 ];

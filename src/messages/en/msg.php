@@ -78,5 +78,12 @@ return [
     'show_weekends' => "Show weekends",
     'start_week_on_monday' => "Start weekend on monday",
     'narrower_weekends' => 'Narrower weekends',
-    'today' => 'Today'
+    'today' => 'Today',
+    'endpoint' => 'Api url',
+    'device_name' => 'Device name',
+    'device_type_id' => 'Device type ID',
+    'device_type_name' => 'Device type name',
+    'refresh_interval_minutes' => 'Refresh interval in minutes',
+    'pulse_frequency' => 'Pulse requency',
+    'devices' => 'Devices',
 ];
