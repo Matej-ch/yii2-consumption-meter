@@ -83,7 +83,7 @@ return [
     'device_name' => 'Názov zariadenia',
     'device_type_id' => 'ID typu zariadenia',
     'device_type_name' => 'Nazov typu zariadenia',
-    'refresh_interval_minutes' => 'Obnovovací email',
+    'refresh_interval_minutes' => 'Obnovovací interval (min)',
     'pulse_frequency' => 'Pulse frekvencia',
     'devices' => 'Zariadenia',
 ];
