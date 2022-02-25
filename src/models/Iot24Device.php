@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 /**
  * @property int $id
@@ -53,10 +54,10 @@ class Iot24Device extends ActiveRecord
             [['device_name', 'device_type_name'], 'string', 'max' => 512],
             [['refresh_interval_minutes'], 'string', 'max' => 16],
             [['pulse_frequency', 'aliases'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['device_id', 'device_name', 'device_type_name', 'refresh_interval_minutes', 'pulse_frequency', 'aliases', 'endpoint'],
+            [['created_at', 'updated_at', 'pulse_frequency', 'aliases'], 'safe'],
+            [['device_id', 'device_name', 'device_type_name', 'refresh_interval_minutes', 'endpoint'],
                 'trim'],
-            [['device_id', 'device_name', 'device_type_name', 'refresh_interval_minutes', 'pulse_frequency', 'aliases', 'endpoint'],
+            [['device_id', 'device_name', 'device_type_name', 'refresh_interval_minutes', 'endpoint'],
                 'filter', 'filter' => 'strip_tags', 'skipOnArray' => true],
         ];
     }
@@ -73,5 +74,22 @@ class Iot24Device extends ActiveRecord
                 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    public function beforeSave($insert): bool
+    {
+        if (is_array($this->aliases)) {
+            $this->aliases = Json::encode($this->aliases);
+        }
+
+        if (is_array($this->pulse_frequency)) {
+            $this->pulse_frequency = Json::encode($this->pulse_frequency);
+        }
+
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        return true;
     }
 }

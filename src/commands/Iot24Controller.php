@@ -16,19 +16,13 @@ class Iot24Controller extends \yii\console\Controller
      * Endpoints are set in iot24_device table
      *
      * @return int
+     * @throws \yii\db\StaleObjectException
      */
     public function actionLoad(): int
     {
-        $devices = Iot24Device::find()->select('endpoint')->all();
-
-        if (!$devices) {
-            echo $this->ansiFormat("No endpoints set\n", BaseConsole::FG_YELLOW);
-            return ExitCode::OK;
-        }
-
         /** @var Iot24Device $device */
-        foreach ($devices as $device) {
-            $service = new SensorDataLoader($device->endpoint);
+        foreach (Iot24Device::find()->each(10) as $device) {
+            $service = new SensorDataLoader($device);
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
@@ -40,6 +34,8 @@ class Iot24Controller extends \yii\console\Controller
                     echo $this->ansiFormat(Yii::t('iot24meter/msg', 'save_success_msg') . "\n", BaseConsole::FG_RED);
                 }
             }
+
+            $device->update();
         }
 
         return ExitCode::OK;

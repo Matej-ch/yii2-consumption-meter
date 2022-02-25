@@ -6,11 +6,14 @@ use yii\helpers\Json;
 
 class SensorDataLoader
 {
+    private $device;
+
     private $url;
 
-    public function __construct($url)
+    public function __construct($device)
     {
-        $this->url = $url;
+        $this->url = $device->endpoint;
+        $this->device = $device;
     }
 
     private function load()
@@ -33,7 +36,9 @@ class SensorDataLoader
         if (empty($data) || empty($data['data'])) {
             return;
         }
-        
+
+        $this->device->load($data, '');
+
         foreach ($data['data'] as $item) {
             $increments = [];
             $values = [];
@@ -48,7 +53,6 @@ class SensorDataLoader
             }
             $item['increments'] = Json::encode($increments);
             $item['values'] = Json::encode($values);
-            $item['aliases'] = Json::encode($data['aliases']);
 
             yield $item;
         }

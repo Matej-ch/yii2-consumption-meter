@@ -54,19 +54,10 @@ class Iot24Controller extends \yii\web\Controller
 
     public function actionLoad(): Response
     {
-        $module = Iot24::getInstance();
-
-        $devices = Iot24Device::find()->select('endpoint')->all();
-
-        if (!$devices) {
-            Yii::$app->session->setFlash('warning', 'No endpoints set');
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-
         $message = '';
         /** @var Iot24Device $device */
-        foreach ($devices as $device) {
-            $service = new SensorDataLoader($device->endpoint);
+        foreach (Iot24Device::find()->each(10) as $device) {
+            $service = new SensorDataLoader($device);
 
             foreach ($service->get() as $item) {
                 $model = new \matejch\iot24meter\models\Iot24();
@@ -78,6 +69,8 @@ class Iot24Controller extends \yii\web\Controller
                     $message = Yii::t('iot24meter/msg', 'save_fail_msg') . "<br>";
                 }
             }
+
+            $device->update();
         }
 
         Yii::$app->session->setFlash('info', $message);
