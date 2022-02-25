@@ -106,7 +106,6 @@ class Iot24 extends \yii\db\ActiveRecord
         $this->status = $data['status'];
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
-        $this->aliases = $data['aliases'];
 
         if ($this->save()) {
             return true;
