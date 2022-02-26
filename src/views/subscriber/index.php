@@ -26,7 +26,13 @@ $this->title = 'Subscribers';
             ],
             'id',
             'email',
-            'devices',
+            'devices' => [
+                'attribute' => 'devices',
+                'format' => 'raw',
+                'value' => static function ($model) {
+                    return \yii\helpers\Json::encode($model->devices);
+                }
+            ],
             'created_at' => [
                 'attribute' => 'created_at',
                 'format' => 'raw',
