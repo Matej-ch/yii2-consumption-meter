@@ -19,14 +19,16 @@ use yii\widgets\ActiveForm;
     <div style="display: flex;flex-direction: row;flex-wrap: wrap">
         <?php foreach ($devices as $device) { ?>
             <div>
-                <h2><?= Html::checkbox("Iot24Subscriber[devices][$device->device_id][id]", 0, ['uncheck' => 0]) ?>
-                    &nbsp;<?= $device->device_name ?></h2>
+                <h2><?= Html::checkbox("Iot24Subscriber[devices][$device->device_id][id]", 0, ['uncheck' => 0, 'id' => "device_$device->device_id"]) ?>
+                    &nbsp;<label for="device_<?= $device->device_id ?>"><?= $device->device_name ?></label></h2>
                 <?php $channels = Json::decode($device->aliases) ?>
 
                 <?php foreach ($channels as $id => $alias) { ?>
                     <div>
-                        <?= Html::checkbox("Iot24Subscriber[devices][$device->device_id][$id]", 0, ['uncheck' => 0]) ?>
-                        <?= $alias ?>
+                        <label for="">
+                            <?= Html::checkbox("Iot24Subscriber[devices][$device->device_id][$id]", 0, ['uncheck' => 0]) ?>
+                            <?= $alias ?>
+                        </label>
                     </div>
                 <?php } ?>
 
