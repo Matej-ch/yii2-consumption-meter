@@ -86,4 +86,5 @@ return [
     'refresh_interval_minutes' => 'Refresh interval in minutes',
     'pulse_frequency' => 'Pulse requency',
     'devices' => 'Devices',
+    'email' => 'Email'
 ];

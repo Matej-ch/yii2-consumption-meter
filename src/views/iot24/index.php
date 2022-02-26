@@ -20,6 +20,7 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
 
     <p>
         <?= Html::a('Pridavanie zariadeni', ['device/index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Notifikácie', ['subscriber/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/create'], ['class' => 'btn btn-default']) ?>
     </p>

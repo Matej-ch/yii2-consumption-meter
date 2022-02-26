@@ -2,17 +2,17 @@
 
 namespace matejch\iot24meter\controllers;
 
-use matejch\iot24meter\models\Iot24Device;
+use matejch\iot24meter\models\Iot24Subscriber;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
-class DeviceController extends Controller
+class SubscriberController extends Controller
 {
+
     public function behaviors()
     {
         return [
@@ -20,7 +20,7 @@ class DeviceController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index', 'delete', 'create', 'update', 'get'],
+                        'actions' => ['index', 'delete', 'create', 'update'],
                         'allow' => true, 'roles' => ['@'],
                     ],
                 ],
@@ -31,7 +31,7 @@ class DeviceController extends Controller
     public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Iot24Device::find(),
+            'query' => Iot24Subscriber::find(),
         ]);
 
         return $this->render('index', [
@@ -51,18 +51,9 @@ class DeviceController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    protected function findModel($id)
-    {
-        if (($model = Iot24Device::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('site/errmsg', 'no_page'));
-    }
-
     public function actionCreate()
     {
-        $model = new Iot24Device();
+        $model = new Iot24Subscriber();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -86,13 +77,12 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function actionGet(): array
+    protected function findModel($id)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (($model = Iot24Subscriber::findOne($id)) !== null) {
+            return $model;
+        }
 
-        $devices = Iot24Device::find()->asArray()->all();
-
-        return ['devices' => ArrayHelper::map($devices, 'id', 'device_name')];
+        throw new NotFoundHttpException(Yii::t('site/errmsg', 'no_page'));
     }
-
 }

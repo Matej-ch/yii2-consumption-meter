@@ -86,4 +86,5 @@ return [
     'refresh_interval_minutes' => 'Obnovovací interval (min)',
     'pulse_frequency' => 'Pulse frekvencia',
     'devices' => 'Zariadenia',
+    'email' => 'Email'
 ];

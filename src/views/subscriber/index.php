@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('iot24meter/msg', 'devices');
+$this->title = 'Subscribers';
 ?>
 <div class="iot-index mt-20 w-full px-4">
 
@@ -25,14 +25,8 @@ $this->title = Yii::t('iot24meter/msg', 'devices');
                 'template' => '{update} {delete}',
             ],
             'id',
-            'endpoint',
-            'device_id',
-            'device_name',
-            'device_type_id',
-            'device_type_name',
-            'refresh_interval_minutes',
-            'pulse_frequency',
-            'aliases',
+            'email',
+            'devices',
             'created_at' => [
                 'attribute' => 'created_at',
                 'format' => 'raw',
