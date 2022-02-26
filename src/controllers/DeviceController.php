@@ -57,7 +57,7 @@ class DeviceController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('site/errmsg', 'no_page'));
+        throw new NotFoundHttpException(Yii::t('iot24meter/msg', 'Not found'));
     }
 
     public function actionCreate()

@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\controllers;
 
+use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24Subscriber;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -61,6 +62,7 @@ class SubscriberController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'devices' => Iot24Device::find()->all(),
         ]);
     }
 
@@ -74,6 +76,7 @@ class SubscriberController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'devices' => Iot24Device::find()->all(),
         ]);
     }
 
@@ -83,6 +86,6 @@ class SubscriberController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('site/errmsg', 'no_page'));
+        throw new NotFoundHttpException(Yii::t('iot24meter/msg', 'Not found'));
     }
 }

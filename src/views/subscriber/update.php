@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $model \matejch\iot24meter\models\Iot24Subscriber */
+/* @var $devices \matejch\iot24meter\models\Iot24Device[] */
 
 $this->title = 'Update';
 $this->params['breadcrumbs'][] = ['label' => 'Subscribers', 'url' => ['index']];
@@ -13,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'devices' => $devices
     ]) ?>
 
 </div>
