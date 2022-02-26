@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\commands;
 
 use matejch\iot24meter\Iot24;
+use matejch\iot24meter\models\Iot24Subscriber;
 use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -23,7 +24,7 @@ class NotificationController extends Controller
     {
         $module = Iot24::getInstance();
 
-        if(empty($module->subscribers) || empty($module->sender)) {
+        if (empty($module->sender)) {
             echo $this->ansiFormat("No subscribers or sender set\n", BaseConsole::FG_YELLOW);
             return ExitCode::OK;
         }
@@ -31,39 +32,41 @@ class NotificationController extends Controller
         $date = date("d.m.Y");
 
         $devices = [];
-        foreach ($module->subscribers as $subscriber) {
+        foreach (Iot24Subscriber::find()->each(10) as $subscriber) {
             $devices[] = array_keys($subscriber);
         }
 
-        $devices = array_merge([],...$devices);
+        $devices = array_merge([], ...$devices);
 
-        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type','increments','created_at'])->where(['device_type' => $devices]);
+        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type', 'increments', 'created_at'])->where(['device_type' => $devices]);
         $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
 
         $measurements = $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
-        if(empty($measurements)) {
+        if (empty($measurements)) {
             echo $this->ansiFormat("Data not found\n", BaseConsole::FG_YELLOW);
             return ExitCode::OK;
         }
 
-        $measurements = ArrayHelper::index($measurements,null,'device_type');
+        $measurements = ArrayHelper::index($measurements, null, 'device_type');
 
         /** check all subscribers */
-        foreach ($module->subscribers as $email => $devices) {
+        foreach (Iot24Subscriber::find()->each(10) as $email => $devices) {
 
             $incrementsCounts = [];
             /** check all devices for subscriber */
             foreach ($devices as $deviceKey => $device) {
-                if(!isset($measurements)) { continue; }
+                if (!isset($measurements)) {
+                    continue;
+                }
 
                 /** get measurements fro device type */
                 foreach ($measurements[$deviceKey] as $measurement) {
                     $increments = Json::decode($measurement['increments']);
 
-                    if(empty($device)) {
+                    if (empty($device)) {
                         foreach ($increments as $channel => $increment) {
 
-                            if(!isset($incrementsCounts[$channel])) {
+                            if (!isset($incrementsCounts[$channel])) {
                                 $incrementsCounts[$channel] = 0;
                             }
 
@@ -71,9 +74,11 @@ class NotificationController extends Controller
                         }
                     } else {
                         foreach ($increments as $channel => $increment) {
-                            if(!in_array($channel, $device, true)) { continue; }
+                            if (!in_array($channel, $device, true)) {
+                                continue;
+                            }
 
-                            if(!isset($incrementsCounts[$channel])) {
+                            if (!isset($incrementsCounts[$channel])) {
                                 $incrementsCounts[$channel] = 0;
                             }
 
@@ -84,7 +89,7 @@ class NotificationController extends Controller
             }
 
             Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
-            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify',['channelValues' => $incrementsCounts,'date' => $date])
+            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date])
                 ->setFrom($module->sender)
                 ->setTo($email)
                 ->setSubject("Meranie odberu $date - Notifikacia");

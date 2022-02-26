@@ -17,10 +17,6 @@ class Iot24 extends Module
 
     public $apiFile = '';
 
-    public $endpoints = [];
-
-    public $subscribers = [];
-
     public $sender = '';
 
     public function init()
@@ -33,22 +29,22 @@ class Iot24 extends Module
             $this->controllerNamespace = 'matejch\iot24meter\commands';
         }
 
-        if(!empty($this->apiFile)) {
+        if (!empty($this->apiFile)) {
             $properties = Json::decode(file_get_contents($this->apiFile));
-            \Yii::configure($this,$properties);
+            \Yii::configure($this, $properties);
         }
 
         $this->registerTranslations();
     }
 
-    public function registerTranslations()
+    public function registerTranslations(): void
     {
         if (Yii::$app->has('i18n')) {
             Yii::$app->i18n->translations['iot24meter/*'] = [
-                'class'          => 'yii\i18n\PhpMessageSource',
+                'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
                 'forceTranslation' => true,
-                'basePath'       => '@matejch/iot24meter/messages',
+                'basePath' => '@matejch/iot24meter/messages',
                 'fileMap' => [
                     'iot24meter/msg' => 'msg.php',
                 ],
@@ -56,7 +52,7 @@ class Iot24 extends Module
         }
     }
 
-    public static function t($category, $message, $params = [], $language = null)
+    public static function t($category, $message, $params = [], $language = null): string
     {
         return Yii::t('iot24meter/' . $category, $message, $params, $language);
     }
