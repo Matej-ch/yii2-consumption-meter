@@ -33,12 +33,15 @@ class NotificationController extends Controller
 
         $devices = [];
         foreach (Iot24Subscriber::find()->each(10) as $subscriber) {
-            $devices[] = array_keys($subscriber);
+            foreach ($subscriber->devices as $id => $device) {
+
+                if (in_array(1, $device, false)) {
+                    $devices[$id] = 1;
+                }
+            }
         }
 
-        $devices = array_merge([], ...$devices);
-
-        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type', 'increments', 'created_at'])->where(['device_type' => $devices]);
+        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_type', 'increments', 'created_at'])->where(['device_id' => array_keys($devices)]);
         $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
 
         $measurements = $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
