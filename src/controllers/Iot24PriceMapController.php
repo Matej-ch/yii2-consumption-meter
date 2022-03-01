@@ -41,8 +41,44 @@ class Iot24PriceMapController extends \yii\web\Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
 
-            echo '<pre>' . print_r($post, true) . '</pre>';
-            die();
+            $months = range(1, 12);
+            $year = $post['DynamicModel']['year'];
+            $price = $post['DynamicModel']['price'];
+            foreach ($months as $month) {
+                for ($d = 1; $d <= 31; $d++) {
+                    $time = mktime(12, 0, 0, $month, $d, $year);
+                    if ((int)date('m', $time) === $month) {
+
+                        $startTime = new \DateTime(date('Y-m-d 00:00:00', $time));
+                        $endTime = new \DateTime(date('Y-m-d 24:00:00', $time));
+
+                        if (!Iot24PriceMap::find()->where(['from' => date('Y-m-d', $time) . " 00:00:00", 'to' => date('Y-m-d', $time) . " 00:15:00"])->exists()) {
+                            $priceMapForInterval = new Iot24PriceMap([
+                                'from' => date('Y-m-d', $time) . " 00:00:00",
+                                'to' => date('Y-m-d', $time) . " 00:15:00",
+                                'price' => $price
+                            ]);
+                            $priceMapForInterval->save();
+                        }
+
+                        while ($startTime < $endTime) {
+                            $from = date('Y-m-d', $time) . " " . $startTime->modify('+15 minutes')->format('H:i:s');
+                            $to = date('Y-m-d', $time) . " " . $startTime->modify('+15 minutes')->format('H:i:s');
+                            if (!Iot24PriceMap::find()->where(['from' => $from, 'to' => $to])->exists()) {
+                                $priceMapForInterval = new Iot24PriceMap([
+                                    'from' => $from,
+                                    'to' => $to,
+                                    'price' => $price
+                                ]);
+                                $priceMapForInterval->save();
+                            }
+                        }
+                    }
+                }
+            }
+
+            Yii::$app->session->setFlash('info', 'Načítanie ukončené');
+            return $this->redirect(['index']);
         }
 
         $calendarModel = new DynamicModel(["year", 'price']);
