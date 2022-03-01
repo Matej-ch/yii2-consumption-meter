@@ -8,6 +8,7 @@ use matejch\iot24meter\services\CalendarExporter;
 use matejch\iot24meter\services\CalendarImporter;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use Yii;
+use yii\base\DynamicModel;
 use yii\filters\AccessControl;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -21,7 +22,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['create', 'export', 'import'],
+                        'actions' => ['create', 'export', 'import', 'index'],
                         'allow' => true, 'roles' => ['@'],
                     ],
                 ],
@@ -29,9 +30,30 @@ class Iot24PriceMapController extends \yii\web\Controller
         ];
     }
 
-    public function actionCreate(): string
+    public function actionIndex(): string
     {
-        return $this->render('create', []);
+        return $this->render('index', []);
+    }
+
+    public function actionCreate()
+    {
+
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+
+            echo '<pre>' . print_r($post, true) . '</pre>';
+            die();
+        }
+
+        $calendarModel = new DynamicModel(["year", 'price']);
+        $calendarModel->addRule(['year'], 'integer');
+        $calendarModel->addRule(['year', 'price'], 'required');
+        $calendarModel->addRule(['price'], 'number');
+        $calendarModel->setAttributes(['year' => date('Y')]);
+
+        return $this->render('create', [
+            'model' => $calendarModel,
+        ]);
     }
 
     public function actionExport(): Response
