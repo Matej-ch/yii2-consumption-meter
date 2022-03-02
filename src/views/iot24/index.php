@@ -1,13 +1,13 @@
 <?php
 
 use yii\grid\ActionColumn;
-use matejch\iot24meter\enums\Device;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Json;
 
 /* @var $series array */
 /* @var $dates array */
+/* @var $devices array */
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel \matejch\iot24meter\models\Iot24Search */
@@ -31,19 +31,15 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            [
-                'class' => ActionColumn::class,
-                'template' => '{update}',
-            ],
             'system_id',
             'device_id',
             'device_type' => [
                 'attribute' => 'device_type',
                 'format' => 'raw',
                 'value' => static function ($model) {
-                    return Device::getList()[$model->device_type] ?? '';
+                    return $model->device->device_name;
                 },
-                'filter' => Html::activeDropDownList($searchModel, 'device_type', Device::getList(), ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
+                'filter' => Html::activeDropDownList($searchModel, 'device_type', $devices, ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
             ],
             'increments' => [
                 'attribute' => 'increments',

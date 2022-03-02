@@ -9,6 +9,7 @@ use matejch\iot24meter\services\ConsumptionStatistics;
 use matejch\iot24meter\services\SensorDataLoader;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -43,13 +44,9 @@ class Iot24Controller extends \yii\web\Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'series' => $statisticsService->parse($get),
-            'dates' => $statisticsService->getDates()
+            'dates' => $statisticsService->getDates(),
+            'devices' => ArrayHelper::map(Iot24Device::find()->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name'),
         ]);
-    }
-
-    public function actionUpdate()
-    {
-        return $this->redirect(['index']);
     }
 
     public function actionLoad(): Response

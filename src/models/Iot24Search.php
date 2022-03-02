@@ -45,7 +45,6 @@ class Iot24Search extends Iot24
             'updated_by' => $this->updated_by,
             'system_id' => $this->system_id,
             'created_by' => $this->created_by,
-            'device_type' => $this->device_type
         ]);
 
         $query
@@ -57,6 +56,8 @@ class Iot24Search extends Iot24
             ->andFilterWhere(['like', 'created_at', $this->created_at])
             ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'downloaded_at', $this->downloaded_at]);
+
+        $query->andFilterWhere(['like', 'device_id', $this->device_type]);
 
         return $dataProvider;
     }
