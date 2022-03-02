@@ -23,6 +23,8 @@ use yii\db\Expression;
  * @property string $downloaded_at
  * @property integer $created_by
  * @property integer $updated_by
+ *
+ * @property Iot24Device $device
  */
 class Iot24 extends \yii\db\ActiveRecord
 {
@@ -116,7 +118,6 @@ class Iot24 extends \yii\db\ActiveRecord
 
     public static function getRawData($params): array
     {
-        $device = $params['device'] ?? Device::ELEKTROMETER;
         $interval = $params['interval'] ?? 'last_24';
 
         $query = self::find()->select(['device_id', 'increments', 'values', 'created_at']);
@@ -154,5 +155,10 @@ class Iot24 extends \yii\db\ActiveRecord
             'this_month' => Yii::t('iot24meter/msg', 'this_month'),
             'this_year' => Yii::t('iot24meter/msg', 'this_year')
         ];
+    }
+
+    public function getDevice(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(Iot24Device::class, ['device_id' => 'device_id']);
     }
 }

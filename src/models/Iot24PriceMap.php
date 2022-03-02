@@ -17,7 +17,6 @@ use yii\db\ActiveRecord;
  * @property string $from
  * @property string $to
  *
- * @property Iot24Device $device
  */
 class Iot24PriceMap extends ActiveRecord
 {
@@ -112,10 +111,5 @@ class Iot24PriceMap extends ActiveRecord
             'created_at' => Yii::t('iot24meter/msg', 'created_at'),
             'updated_at' => Yii::t('iot24meter/msg', 'updated_at'),
         ];
-    }
-
-    public function getDevice(): \yii\db\ActiveQuery
-    {
-        return $this->hasOne(Iot24Device::class, ['device_id' => 'device_id']);
     }
 }
