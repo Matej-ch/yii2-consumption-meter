@@ -50,12 +50,18 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
                 'format' => 'raw',
                 'value' => static function ($model) {
                     $increments = Json::decode($model->increments);
+
+                    $aliases = $model->device->aliases;
+                    if (!empty($aliases)) {
+                        $aliases = Json::decode($aliases);
+                    }
                     $values = Json::decode($model->values);
 
                     $html = '<div class="flex-container">';
+
                     foreach ($increments as $key => $increment) {
                         $letter = str_replace('kanal', '', $key);
-                        $html .= "<div class='pb'><span class='font-bold'>" . ucfirst($key) . ":</span> " . $values["value$letter"] . "<span class='font-bold'>(+$increment) [watt]</span></div>";
+                        $html .= "<div class='pb'><span class='font-bold'>" . ($aliases[$key] ?? $key) . ":</span> " . $values["value$letter"] . "<span class='font-bold'>(+$increment) [watt]</span></div>";
                     }
                     $html .= '</div>';
 
