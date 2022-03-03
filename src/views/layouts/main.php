@@ -26,8 +26,8 @@ Iot24Asset::register($this);
     <?php $this->beginBody() ?>
     <div class="wrap">
         <div class="flex flex-col">
-            <div class="flex flex-col">
-                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs'] ?? []]) ?>
+            <div class="flex flex-col w-full">
+                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs'] ?? [], 'options' => ['class' => 'w-full breadcrumb']]) ?>
             </div>
 
             <?= Alert::widget() ?>
