@@ -25,7 +25,7 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
         <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/index'], ['class' => 'btn btn-default']) ?>
     </p>
 
-    <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates]) ?>
+    <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates, 'devices' => $devices]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
