@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\controllers;
 
+use matejch\iot24meter\enums\Device;
 use matejch\iot24meter\Iot24;
 use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24Search;
@@ -10,6 +11,7 @@ use matejch\iot24meter\services\SensorDataLoader;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -40,11 +42,19 @@ class Iot24Controller extends \yii\web\Controller
 
         $statisticsService = new ConsumptionStatistics($rawData);
 
+        $defaultSearchDevice = Iot24Device::findOne(['id' => 1]);
+        $defaultSearchChannels = [];
+        if ($defaultSearchDevice) {
+            $defaultSearchChannels = Json::decode($defaultSearchDevice->aliases);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'series' => $statisticsService->parse($get),
             'dates' => $statisticsService->getDates(),
+            'device' => $defaultSearchDevice,
+            'channels' => $defaultSearchChannels,
             'devices' => ArrayHelper::map(Iot24Device::find()->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name'),
         ]);
     }

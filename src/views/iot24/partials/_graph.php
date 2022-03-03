@@ -1,6 +1,5 @@
 <?php
 
-use matejch\iot24meter\enums\Device;
 use matejch\iot24meter\models\Iot24;
 use matejch\iot24meter\widgets\Consumption;
 use miloschuman\highcharts\Highcharts;
@@ -9,7 +8,9 @@ use yii\widgets\ActiveForm;
 
 /* @var $series array */
 /* @var $dates array */
+/* @var $defaultSearchChannels array */
 /* @var $devices array */
+/* @var $device \matejch\iot24meter\models\Iot24Device */
 ?>
 
 <?php
@@ -21,9 +22,9 @@ ActiveForm::begin([
 
 <label for="input-device" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_device') ?>
-    <?= Html::dropDownList('device', Yii::$app->request->get('device', Device::ELEKTROMETER),
+    <?= Html::dropDownList('device', Yii::$app->request->get('device', $device->device_id ?? 0),
         $devices,
-        ['class' => 'form-control']) ?>
+        ['class' => 'form-control', 'prompt' => 'Výber...']) ?>
 </label>
 
 <label for="input-interval" class="w-full max300">
@@ -33,8 +34,7 @@ ActiveForm::begin([
 
 <label for="input-channel" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_channel') ?>
-    <?php $channels = array_merge(['all' => Yii::t('iot24meter/msg', 'all')], array_combine(range('A', 'Z'), range('A', 'Z'))) ?>
-    <?= Html::dropDownList('channel', Yii::$app->request->get('channel', 'all'), $channels, ['class' => 'form-control']) ?>
+    <?= Html::dropDownList('channel', Yii::$app->request->get('channel'), $defaultSearchChannels, ['class' => 'form-control']) ?>
 </label>
 
 <div class="w-full max300">&nbsp;
