@@ -2,7 +2,6 @@
 
 namespace matejch\iot24meter\models;
 
-use matejch\iot24meter\enums\Device;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;

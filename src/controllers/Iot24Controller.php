@@ -2,8 +2,6 @@
 
 namespace matejch\iot24meter\controllers;
 
-use matejch\iot24meter\enums\Device;
-use matejch\iot24meter\Iot24;
 use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24Search;
 use matejch\iot24meter\services\ConsumptionStatistics;
