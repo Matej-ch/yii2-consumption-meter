@@ -8,9 +8,10 @@ use yii\widgets\ActiveForm;
 
 /* @var $series array */
 /* @var $dates array */
-/* @var $defaultSearchChannels array */
+/* @var $channels array */
 /* @var $devices array */
 /* @var $device \matejch\iot24meter\models\Iot24Device */
+
 ?>
 
 <?php
@@ -34,7 +35,7 @@ ActiveForm::begin([
 
 <label for="input-channel" class="w-full max300">
     <?= Yii::t('iot24meter/msg', 'pick_channel') ?>
-    <?= Html::dropDownList('channel', Yii::$app->request->get('channel'), $defaultSearchChannels, ['class' => 'form-control']) ?>
+    <?= Html::dropDownList('channel', Yii::$app->request->get('channel'), $channels, ['class' => 'form-control']) ?>
 </label>
 
 <div class="w-full max300">&nbsp;

@@ -40,7 +40,12 @@ class Iot24Controller extends \yii\web\Controller
 
         $statisticsService = new ConsumptionStatistics($rawData);
 
-        $defaultSearchDevice = Iot24Device::findOne(['id' => 1]);
+        if(isset($get['device']) && !empty($get['device'])) {
+            $defaultSearchDevice = Iot24Device::findOne(['device_id' => $get['device']]);
+        } else {
+            $defaultSearchDevice = Iot24Device::findOne(['id' => 1]);
+        }
+
         $defaultSearchChannels = [];
         if ($defaultSearchDevice) {
             $defaultSearchChannels = Json::decode($defaultSearchDevice->aliases);

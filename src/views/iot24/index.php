@@ -7,7 +7,7 @@ use yii\helpers\Json;
 /* @var $series array */
 /* @var $dates array */
 /* @var $devices array */
-/* @var $defaultSearchChannels array */
+/* @var $channels array */
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel \matejch\iot24meter\models\Iot24Search */
@@ -26,7 +26,7 @@ $this->title = Yii::t('iot24meter/msg', 'iot');
         <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/index'], ['class' => 'btn btn-default']) ?>
     </p>
 
-    <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates, 'devices' => $devices, 'device' => $device, 'defaultSearchChannels' => $defaultSearchChannels]) ?>
+    <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates, 'devices' => $devices, 'device' => $device, 'channels' => $channels]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
