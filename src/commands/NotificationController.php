@@ -57,16 +57,45 @@ class NotificationController extends Controller
             $measurements = ArrayHelper::index($measurements, null, 'device_id');
 
             $incrementsCounts = [];
+
+            //echo '<pre>'.print_r(count($measurements),true).'</pre>';die();
+            //echo '<pre>'.print_r($devices,true).'</pre>';
             foreach ($devices as $deviceID => $device) {
-                if (!isset($measurements[$deviceID])) {
+                //echo '<pre>$device before condition: '.print_r($device,true)."\n";
+                if (!in_array('id',$device) || !isset($measurements[$deviceID])) {
                     continue;
                 }
 
 
-                foreach ($measurements[$deviceID] as $measurementsForDevice) {
+                //echo '<pre>'.print_r($measurements[$deviceID],true).'</pre>';
+                echo '<pre>$deviceID: '.print_r($deviceID,true)."\n";
+                echo '<pre>$device: '.print_r($device,true)."\n";
+                /*echo '<pre>$measurements: '.print_r($measurements,true).'</pre>';
+                echo '<pre>$deviceID: '.print_r($deviceID,true).'</pre>';die();*/
+                /*foreach ($measurements[$deviceID] as $measurementsForDevice) {
                     $increments = Json::decode($measurementsForDevice['increments']);
-                }
+
+                    foreach ($device as $deviceChannel) {
+
+                        if($deviceChannel === 'id' && count($device) === 1) {
+
+                        } else {
+
+                            if($deviceChannel === 'id') { continue; }
+
+                            if(isset($incrementsCounts[$deviceID][$deviceChannel])) {
+                                $incrementsCounts[$deviceID][$deviceChannel] += ($increments[$deviceChannel] ?? 0);
+                            } else {
+                                $incrementsCounts[$deviceID][$deviceChannel] = ($increments[$deviceChannel] ?? 0);
+                            }
+                        }
+                    }
+                }*/
             }
+            die();
+
+            echo '<pre>'.print_r($incrementsCounts,true).'</pre>';die();
+            die();
 
             Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
             $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date])
