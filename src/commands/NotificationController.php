@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\commands;
 
 use matejch\iot24meter\Iot24;
+use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24Subscriber;
 use Yii;
 use yii\console\Controller;
@@ -31,6 +32,10 @@ class NotificationController extends Controller
 
         $date = date("d.m.Y");
 
+        $deviceAliases = ArrayHelper::map(Iot24Device::find()->select('device_id,aliases')->all(),'device_id',static function($model) {
+            return Json::decode($model['aliases']);
+        });
+
         /** iterate over subscribers */
         foreach (Iot24Subscriber::find()->each(10) as $subscriber) {
 
@@ -58,27 +63,24 @@ class NotificationController extends Controller
 
             $incrementsCounts = [];
 
-            //echo '<pre>'.print_r(count($measurements),true).'</pre>';die();
-            //echo '<pre>'.print_r($devices,true).'</pre>';
             foreach ($devices as $deviceID => $device) {
-                //echo '<pre>$device before condition: '.print_r($device,true)."\n";
                 if (!in_array('id',$device) || !isset($measurements[$deviceID])) {
                     continue;
                 }
 
-
-                //echo '<pre>'.print_r($measurements[$deviceID],true).'</pre>';
-                echo '<pre>$deviceID: '.print_r($deviceID,true)."\n";
-                echo '<pre>$device: '.print_r($device,true)."\n";
-                /*echo '<pre>$measurements: '.print_r($measurements,true).'</pre>';
-                echo '<pre>$deviceID: '.print_r($deviceID,true).'</pre>';die();*/
-                /*foreach ($measurements[$deviceID] as $measurementsForDevice) {
+                foreach ($measurements[$deviceID] as $measurementsForDevice) {
                     $increments = Json::decode($measurementsForDevice['increments']);
 
                     foreach ($device as $deviceChannel) {
 
                         if($deviceChannel === 'id' && count($device) === 1) {
-
+                            foreach ($increments as $incrementChannel => $incrementValue) {
+                                if(isset($incrementsCounts[$deviceID][$incrementChannel])) {
+                                    $incrementsCounts[$deviceID][$incrementChannel] += ($incrementValue ?? 0);
+                                } else {
+                                    $incrementsCounts[$deviceID][$incrementChannel] = ($incrementValue ?? 0);
+                                }
+                            }
                         } else {
 
                             if($deviceChannel === 'id') { continue; }
@@ -90,15 +92,11 @@ class NotificationController extends Controller
                             }
                         }
                     }
-                }*/
+                }
             }
-            die();
-
-            echo '<pre>'.print_r($incrementsCounts,true).'</pre>';die();
-            die();
 
             Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
-            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date])
+            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date,'aliases' => $deviceAliases])
                 ->setFrom($module->sender)
                 ->setTo($subscriber->email)
                 ->setSubject("Meranie odberu $date - Notifikacia");
