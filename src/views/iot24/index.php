@@ -14,14 +14,16 @@ use yii\helpers\Json;
 /* @var $device \matejch\iot24meter\models\Iot24Device */
 
 $this->title = Yii::t('iot24meter/msg', 'iot');
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="iot-index mt-20 w-full px-4">
 
     <h1 class="mt-1 mb-2 text-xl"><?= $this->title ?></h1>
 
     <p>
-        <?= Html::a('Pridavanie zariadeni', ['device/index'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Notifikácie', ['subscriber/index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a(Yii::t('iot24meter/msg', 'add_device'), ['device/index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('iot24meter/msg', 'notifications'), ['subscriber/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/index'], ['class' => 'btn btn-default']) ?>
     </p>

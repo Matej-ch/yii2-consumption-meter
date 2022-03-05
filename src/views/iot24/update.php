@@ -3,9 +3,9 @@
 /* @var $this yii\web\View */
 /* @var $model \matejch\iot24meter\Iot24 */
 
-$this->title = Yii::t('iot24meter/msg','update',['id' => $model->id]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg','iot'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('iot24meter/msg', 'update') . " " . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('iot24meter/msg', 'update');
 ?>
 <div class="guide-update mt-20 w-full px-4">
 

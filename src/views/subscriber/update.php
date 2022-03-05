@@ -4,8 +4,9 @@
 /* @var $model \matejch\iot24meter\models\Iot24Subscriber */
 /* @var $devices \matejch\iot24meter\models\Iot24Device[] */
 
-$this->title = 'Update';
-$this->params['breadcrumbs'][] = ['label' => 'Subscribers', 'url' => ['index']];
+$this->title = Yii::t('iot24meter/msg', 'update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'subscribers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="iot24-subscriber-create mt-20 w-full px-4">

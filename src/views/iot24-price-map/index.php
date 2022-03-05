@@ -6,7 +6,9 @@ use matejch\iot24meter\assets\CalendarAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Kalendár';
+$this->title = Yii::t('iot24meter/msg', 'calendar');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
+$this->params['breadcrumbs'][] = $this->title;
 
 CalendarAsset::register($this);
 

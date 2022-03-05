@@ -25,7 +25,7 @@ ActiveForm::begin([
     <?= Yii::t('iot24meter/msg', 'pick_device') ?>
     <?= Html::dropDownList('device', Yii::$app->request->get('device', $device->device_id ?? 0),
         $devices,
-        ['class' => 'form-control', 'prompt' => 'Výber...']) ?>
+        ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'prompt')]) ?>
 </label>
 
 <label for="input-interval" class="w-full max300">
@@ -39,7 +39,7 @@ ActiveForm::begin([
 </label>
 
 <div class="w-full max300">&nbsp;
-    <?= Html::submitButton('Zobraziť', ['class' => 'btn btn-success', 'style' => 'display:block']) ?>
+    <?= Html::submitButton(Yii::t('iot24meter/msg', 'show'), ['class' => 'btn btn-success', 'style' => 'display:block']) ?>
 </div>
 <?php ActiveForm::end() ?>
 

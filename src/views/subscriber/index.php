@@ -7,7 +7,9 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subscribers';
+$this->title = Yii::t('iot24meter/msg', 'subscribers');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="iot-index mt-20 w-full px-4">
 

@@ -14,7 +14,7 @@ return [
     'created_by' => 'Created by',
     'updated_by' => 'Updated by',
     'Not found' => 'Record not found',
-    'iot' => 'Meters',
+    'iot' => 'Measurements',
     'update' => 'Update',
     'save' => 'Save',
     'load' => 'Load data',
@@ -86,5 +86,12 @@ return [
     'refresh_interval_minutes' => 'Refresh interval in minutes',
     'pulse_frequency' => 'Pulse requency',
     'devices' => 'Devices',
-    'email' => 'Email'
+    'email' => 'Email',
+    'add_device' => 'Add devices',
+    'notifications' => 'Notifications',
+    'prompt' => 'Choose',
+    'show' => 'Show',
+    'create' => 'Create',
+    'subscribers' => 'Subscribers',
+    'calendar' => 'Calendar'
 ];

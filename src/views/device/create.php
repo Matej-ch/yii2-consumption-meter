@@ -3,7 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model \matejch\iot24meter\models\Iot24Device */
 
-$this->title = 'Create';
+$this->title = Yii::t('iot24meter/msg', 'create');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'devices'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

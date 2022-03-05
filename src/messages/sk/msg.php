@@ -14,7 +14,7 @@ return [
     'created_by' => 'Vytvoril',
     'updated_by' => 'Upravil',
     'Not found' => 'Záznam sa nenašiel',
-    'iot' => 'Merače',
+    'iot' => 'Merania',
     'update' => 'Upraviť',
     'save' => 'Uložiť',
     'load' => 'Načítať dáta',
@@ -86,5 +86,11 @@ return [
     'refresh_interval_minutes' => 'Obnovovací interval (min)',
     'pulse_frequency' => 'Pulse frekvencia',
     'devices' => 'Zariadenia',
-    'email' => 'Email'
+    'email' => 'Email',
+    'add_device' => 'Pridať zariadenia',
+    'notifications' => 'Notifikácie',
+    'prompt' => 'Vyber...',
+    'show' => 'Zobraziť',
+    'create' => 'Vytvoriť',
+    'calendar' => 'Kalendár'
 ];
