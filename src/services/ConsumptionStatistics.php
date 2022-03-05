@@ -17,9 +17,6 @@ class ConsumptionStatistics
     public function parse($params): array
     {
         $requestChannel = $params['channel'] ?? 'all';
-        if($requestChannel !== 'all') {
-            $requestChannel = "kanal$requestChannel";
-        }
 
         $result = $incrementsValues = [];
         foreach ($this->data as $sensorValue) {
