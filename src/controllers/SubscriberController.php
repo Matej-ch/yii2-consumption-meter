@@ -46,7 +46,7 @@ class SubscriberController extends Controller
             $model = $this->findModel($id);
             $model->delete();
         } catch (\Exception $e) {
-            Yii::$app->session->setFlash('danger', 'Not deleted');
+            Yii::$app->session->setFlash('danger', Yii::t('iot24meter/msg', 'Not deleted'));
         }
 
         return $this->redirect(Yii::$app->request->referrer);

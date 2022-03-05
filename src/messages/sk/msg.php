@@ -14,6 +14,7 @@ return [
     'created_by' => 'Vytvoril',
     'updated_by' => 'Upravil',
     'Not found' => 'Záznam sa nenašiel',
+    'Not deleted' => 'Záznam vymazaný',
     'iot' => 'Merania',
     'update' => 'Upraviť',
     'save' => 'Uložiť',
@@ -92,5 +93,6 @@ return [
     'prompt' => 'Vyber...',
     'show' => 'Zobraziť',
     'create' => 'Vytvoriť',
-    'calendar' => 'Kalendár'
+    'calendar' => 'Kalendár',
+    'loading_finished' => 'Loading finished'
 ];

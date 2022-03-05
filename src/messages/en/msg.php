@@ -14,6 +14,7 @@ return [
     'created_by' => 'Created by',
     'updated_by' => 'Updated by',
     'Not found' => 'Record not found',
+    'Not deleted' => 'Record deleted',
     'iot' => 'Measurements',
     'update' => 'Update',
     'save' => 'Save',
@@ -93,5 +94,6 @@ return [
     'show' => 'Show',
     'create' => 'Create',
     'subscribers' => 'Subscribers',
-    'calendar' => 'Calendar'
+    'calendar' => 'Calendar',
+    'loading_finished' => 'Načítanie ukončené'
 ];

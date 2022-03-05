@@ -2,7 +2,6 @@
 
 namespace matejch\iot24meter\controllers;
 
-use app\components\helpers\FileHelper;
 use matejch\iot24meter\models\Iot24PriceMap;
 use matejch\iot24meter\services\CalendarExporter;
 use matejch\iot24meter\services\CalendarImporter;
@@ -77,7 +76,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                 }
             }
 
-            Yii::$app->session->setFlash('info', 'Načítanie ukončené');
+            Yii::$app->session->setFlash('info', Yii::t('iot24meter/msg', 'loading_finished'));
             return $this->redirect(['index']);
         }
 
