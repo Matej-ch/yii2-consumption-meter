@@ -62,7 +62,7 @@ class SubscriberController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'devices' => Iot24Device::find()->all(),
+            'devices' => Iot24Device::find()->where(['is_active' => 1])->all(),
         ]);
     }
 
@@ -76,7 +76,7 @@ class SubscriberController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'devices' => Iot24Device::find()->all(),
+            'devices' => Iot24Device::find()->where(['is_active' => 1])->all(),
         ]);
     }
 

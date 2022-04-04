@@ -32,7 +32,7 @@ class NotificationController extends Controller
 
         $date = date("d.m.Y");
 
-        $deviceAliases = ArrayHelper::map(Iot24Device::find()->select('device_id,aliases')->all(),'device_id',static function($model) {
+        $deviceAliases = ArrayHelper::map(Iot24Device::find()->where(['is_active' => 1])->select('device_id,aliases')->all(), 'device_id', static function ($model) {
             return Json::decode($model['aliases']);
         });
 
@@ -64,7 +64,7 @@ class NotificationController extends Controller
             $incrementsCounts = [];
 
             foreach ($devices as $deviceID => $device) {
-                if (!in_array('id',$device) || !isset($measurements[$deviceID])) {
+                if (!in_array('id', $device) || !isset($measurements[$deviceID])) {
                     continue;
                 }
 
@@ -73,9 +73,9 @@ class NotificationController extends Controller
 
                     foreach ($device as $deviceChannel) {
 
-                        if($deviceChannel === 'id' && count($device) === 1) {
+                        if ($deviceChannel === 'id' && count($device) === 1) {
                             foreach ($increments as $incrementChannel => $incrementValue) {
-                                if(isset($incrementsCounts[$deviceID][$incrementChannel])) {
+                                if (isset($incrementsCounts[$deviceID][$incrementChannel])) {
                                     $incrementsCounts[$deviceID][$incrementChannel] += ($incrementValue ?? 0);
                                 } else {
                                     $incrementsCounts[$deviceID][$incrementChannel] = ($incrementValue ?? 0);
@@ -83,9 +83,11 @@ class NotificationController extends Controller
                             }
                         } else {
 
-                            if($deviceChannel === 'id') { continue; }
+                            if ($deviceChannel === 'id') {
+                                continue;
+                            }
 
-                            if(isset($incrementsCounts[$deviceID][$deviceChannel])) {
+                            if (isset($incrementsCounts[$deviceID][$deviceChannel])) {
                                 $incrementsCounts[$deviceID][$deviceChannel] += ($increments[$deviceChannel] ?? 0);
                             } else {
                                 $incrementsCounts[$deviceID][$deviceChannel] = ($increments[$deviceChannel] ?? 0);
@@ -96,7 +98,7 @@ class NotificationController extends Controller
             }
 
             Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
-            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date,'aliases' => $deviceAliases])
+            $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify', ['channelValues' => $incrementsCounts, 'date' => $date, 'aliases' => $deviceAliases])
                 ->setFrom($module->sender)
                 ->setTo($subscriber->email)
                 ->setSubject("Meranie odberu $date - Notifikacia");

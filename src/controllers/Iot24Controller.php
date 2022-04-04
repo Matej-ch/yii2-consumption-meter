@@ -40,10 +40,10 @@ class Iot24Controller extends \yii\web\Controller
 
         $statisticsService = new ConsumptionStatistics($rawData);
 
-        if(isset($get['device']) && !empty($get['device'])) {
-            $defaultSearchDevice = Iot24Device::findOne(['device_id' => $get['device']]);
+        if (isset($get['device']) && !empty($get['device'])) {
+            $defaultSearchDevice = Iot24Device::findOne(['device_id' => $get['device'], 'is_active' => 1]);
         } else {
-            $defaultSearchDevice = Iot24Device::findOne(['id' => 1]);
+            $defaultSearchDevice = Iot24Device::findOne(['id' => 1, 'is_active' => 1]);
         }
 
         $defaultSearchChannels = [];
@@ -58,7 +58,7 @@ class Iot24Controller extends \yii\web\Controller
             'dates' => $statisticsService->getDates(),
             'device' => $defaultSearchDevice,
             'channels' => $defaultSearchChannels,
-            'devices' => ArrayHelper::map(Iot24Device::find()->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name'),
+            'devices' => ArrayHelper::map(Iot24Device::find()->where(['is_active' => 1])->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name'),
         ]);
     }
 
@@ -66,7 +66,7 @@ class Iot24Controller extends \yii\web\Controller
     {
         $message = '';
         /** @var Iot24Device $device */
-        foreach (Iot24Device::find()->each(10) as $device) {
+        foreach (Iot24Device::find()->where(['is_active' => 1])->each(10) as $device) {
             $service = new SensorDataLoader($device);
 
             foreach ($service->get() as $item) {
