@@ -25,6 +25,7 @@ class m211110_203816_iot24_device_table extends Migration
             'refresh_interval_minutes' => $this->string(16),
             'pulse_frequency' => $this->text(),
             'aliases' => $this->text(),
+            'is_active' => $this->integer()->defaultValue(1),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
 

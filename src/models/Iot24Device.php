@@ -20,6 +20,7 @@ use yii\helpers\Json;
  * @property string $aliases
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property integer $is_active
  */
 class Iot24Device extends ActiveRecord
 {
@@ -42,6 +43,7 @@ class Iot24Device extends ActiveRecord
             "aliases" => Yii::t('iot24meter/msg', 'aliases'),
             'created_at' => Yii::t('iot24meter/msg', 'created_at'),
             'updated_at' => Yii::t('iot24meter/msg', 'updated_at'),
+            'is_active' => Yii::t('iot24meter/msg', 'is_active')
         ];
     }
 
@@ -49,7 +51,8 @@ class Iot24Device extends ActiveRecord
     {
         return [
             [['endpoint'], 'required'],
-            [['device_type_id'], 'integer'],
+            [['device_type_id', 'is_active'], 'integer'],
+            [['is_active'], 'default', 'value' => 1],
             [['device_id', 'endpoint'], 'string', 'max' => 1024],
             [['device_name', 'device_type_name'], 'string', 'max' => 512],
             [['refresh_interval_minutes'], 'string', 'max' => 16],

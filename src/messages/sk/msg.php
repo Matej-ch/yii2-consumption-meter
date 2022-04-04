@@ -94,5 +94,6 @@ return [
     'show' => 'Zobraziť',
     'create' => 'Vytvoriť',
     'calendar' => 'Kalendár',
-    'loading_finished' => 'Loading finished'
+    'loading_finished' => 'Loading finished',
+    'is_active' => ' Je aktívne'
 ];

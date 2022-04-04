@@ -21,7 +21,7 @@ class Iot24Controller extends \yii\console\Controller
     public function actionLoad(): int
     {
         /** @var Iot24Device $device */
-        foreach (Iot24Device::find()->each(10) as $device) {
+        foreach (Iot24Device::find()->where(['is_active' => 1])->each(10) as $device) {
             $service = new SensorDataLoader($device);
 
             foreach ($service->get() as $item) {
