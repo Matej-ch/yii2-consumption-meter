@@ -28,7 +28,7 @@ class Iot24PriceMapSearch extends Iot24PriceMap
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'system_id' => SORT_DESC,
+                    'id' => SORT_DESC,
                 ],
             ],
         ]);
