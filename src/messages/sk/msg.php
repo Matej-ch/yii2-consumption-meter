@@ -95,5 +95,7 @@ return [
     'create' => 'Vytvoriť',
     'calendar' => 'Kalendár',
     'loading_finished' => 'Loading finished',
-    'is_active' => ' Je aktívne'
+    'is_active' => ' Je aktívne',
+    'create_for_year' => 'Vytvoriť pre rok',
+    'create_for_intervals' => 'Vytvoriť pre interval'
 ];

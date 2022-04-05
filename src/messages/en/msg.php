@@ -95,6 +95,8 @@ return [
     'create' => 'Create',
     'subscribers' => 'Subscribers',
     'calendar' => 'Calendar',
-    'loading_finished' => 'Načítanie ukončené',
-    'is_active' => ' Je aktívne'
+    'loading_finished' => 'Loading finished',
+    'is_active' => 'Is active',
+    'create_for_year' => 'Create for year',
+    'create_for_intervals' => 'Create for intervals'
 ];

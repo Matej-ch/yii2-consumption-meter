@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\models\Iot24PriceMap;
+use matejch\iot24meter\models\Iot24PriceMapSearch;
 use matejch\iot24meter\services\CalendarExporter;
 use matejch\iot24meter\services\CalendarImporter;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
@@ -21,7 +22,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['create', 'export', 'import', 'index'],
+                        'actions' => ['create', 'export', 'import', 'index', 'create-for-interval'],
                         'allow' => true, 'roles' => ['@'],
                     ],
                 ],
@@ -31,12 +32,17 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionIndex(): string
     {
-        return $this->render('index', []);
+        $searchModel = new Iot24PriceMapSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionCreate()
     {
-
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
 
@@ -88,11 +94,27 @@ class Iot24PriceMapController extends \yii\web\Controller
 
         return $this->render('create', [
             'model' => $calendarModel,
+            'forInterval' => false
+        ]);
+    }
+
+    public function actionCreateForInterval(): string
+    {
+        $model = new Iot24PriceMap();
+
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'forInterval' => true
         ]);
     }
 
     public function actionExport(): Response
     {
+        ini_set('max_execution_time', 2600);
 
         $calendarExportService = new CalendarExporter();
 
@@ -110,6 +132,8 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionImport(): Response
     {
+        ini_set('max_execution_time', 2600);
+
         if (Yii::$app->request->isPost) {
             if ($file = UploadedFile::getInstanceByName('xls_file')) {
                 if ($file->error > 0) {

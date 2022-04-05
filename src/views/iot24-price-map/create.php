@@ -20,10 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'year')->textInput(['type' => 'number', 'step' => 1, 'min' => 2020]) ?>
+        <?php if (isset($forInterval) && !empty($forInterval)) { ?>
 
-        <?= $form->field($model, 'price')->textInput(['type' => 'number', 'step' => 0.001]) ?>
+        <?php } else { ?>
+            <?= $form->field($model, 'year')->textInput(['type' => 'number', 'step' => 1, 'min' => 2020]) ?>
 
+            <?= $form->field($model, 'price')->textInput(['type' => 'number', 'step' => 0.001]) ?>
+        <?php } ?>
 
         <div>
             <?= Html::submitButton(Yii::t('iot24meter/msg', 'save'), ['class' => 'btn btn-success']) ?>
