@@ -57,8 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?php
 $scriptIndex = <<< JS
-$('#from_time').timepicker({ 'step': 15,'timeFormat': 'G:i' }); 
-$('#to_time').timepicker({ 'step': 15,'timeFormat': 'G:i' });
+$('#from_time').timepicker({ 'step': 15,'timeFormat': 'G:i', 'show2400': true }); 
+$('#to_time').timepicker({ 'step': 15,'timeFormat': 'G:i', 'show2400': true });
 
 JS;
 $this->registerJs($scriptIndex, View::POS_READY, 'scriptIndex'); ?>
