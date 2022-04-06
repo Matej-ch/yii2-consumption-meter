@@ -21,7 +21,8 @@
     "miloschuman/yii2-highcharts-widget": "^5.0",
     "yiisoft/yii2-bootstrap": "~2.0.6",
     "phpoffice/phpspreadsheet": "^1.16",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "yiisoft/yii2-jui": "^2.0"
   },
   "repositories": [
     {

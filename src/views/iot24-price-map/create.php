@@ -4,8 +4,12 @@
 
 /* @var $model \matejch\iot24meter\models\Iot24PriceMap */
 
+use matejch\iot24meter\assets\TimePickerAsset;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\ActiveForm;
+
+TimePickerAsset::register($this);
 
 $this->title = Yii::t('iot24meter/msg', 'create');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
@@ -22,6 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php if (isset($forInterval) && !empty($forInterval)) { ?>
 
+            <div>
+                <label for="">OD</label>
+                <?= yii\jui\DatePicker::widget(['name' => 'from']) ?>
+                <input type="text" id="from_time" name="from_time">
+            </div>
+
+
+            <div>
+                <label for="">DO</label>
+                <?= yii\jui\DatePicker::widget(['name' => 'to']) ?>
+                <input type="text" id="to_time" name="to_time">
+            </div>
+
+
         <?php } else { ?>
             <?= $form->field($model, 'year')->textInput(['type' => 'number', 'step' => 1, 'min' => 2020]) ?>
 
@@ -37,3 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+<?php
+$scriptIndex = <<< JS
+$('#from_time').timepicker({ 'step': 15 });
+$('#to_time').timepicker({ 'step': 15 });
+
+JS;
+$this->registerJs($scriptIndex, View::POS_READY, 'scriptIndex'); ?>
