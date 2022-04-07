@@ -103,4 +103,5 @@ return [
     'date_to' => 'Date to',
     'time_from' => 'Time from',
     'time_to' => 'Time to',
+    'interval_price_saved' => 'Cena pre intervaly uložená. Počet intervalov {saved}',
 ];

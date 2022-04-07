@@ -26,26 +26,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php if (isset($forInterval) && !empty($forInterval)) { ?>
 
+            <?= $form->field($model, 'price')->textInput(['type' => 'number', 'step' => 0.001, 'min' => 0]) ?>
+
             <div class="px-12" style="display: flex; flex-direction: row; gap: 2rem">
                 <div>
-                    <label for=""><?= Yii::t('iot24meter/msg', 'date_from') ?>Dátum OD</label>
+                    <label for=""><?= Yii::t('iot24meter/msg', 'date_from') ?></label>
                     <?= yii\jui\DatePicker::widget(['name' => 'from', 'inline' => true]) ?>
                 </div>
 
                 <div>
-                    <label for="from_time"><?= Yii::t('iot24meter/msg', 'time_from') ?>Čas DO</label>
+                    <label for="from_time"><?= Yii::t('iot24meter/msg', 'time_from') ?></label>
                     <input type="text" id="from_time" name="from_time">
                 </div>
             </div>
 
             <div class="px-12" style="display: flex; flex-direction: row; gap: 2rem">
                 <div>
-                    <label for=""><?= Yii::t('iot24meter/msg', 'date_to') ?>Dátum DO</label>
+                    <label for=""><?= Yii::t('iot24meter/msg', 'date_to') ?></label>
                     <?= yii\jui\DatePicker::widget(['name' => 'to', 'inline' => true]) ?>
                 </div>
 
                 <div>
-                    <label for="to_time"><?= Yii::t('iot24meter/msg', 'time_to') ?>Čas DO</label>
+                    <label for="to_time"><?= Yii::t('iot24meter/msg', 'time_to') ?></label>
                     <input type="text" id="to_time" name="to_time">
                 </div>
 

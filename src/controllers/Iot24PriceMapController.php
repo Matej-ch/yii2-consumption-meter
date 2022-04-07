@@ -98,12 +98,42 @@ class Iot24PriceMapController extends \yii\web\Controller
         ]);
     }
 
-    public function actionCreateForInterval(): string
+    public function actionCreateForInterval()
     {
         $model = new Iot24PriceMap();
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
+
+            if (empty($post['from_time']) || empty($post['to_time'])) {
+                Yii::$app->session->setFlash('danger', Yii::t('iot24meter/msg', 'interval_not_set'));
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+
+            $startTime = \DateTime::createFromFormat('d.m.Y H:i:s', $post['from'] . ' ' . $post['from_time'] . ':00');
+            $endTime = \DateTime::createFromFormat('d.m.Y H:i:s', $post['to'] . ' ' . $post['to_time'] . ':00');
+
+            $saved = 0;
+            while ($startTime < $endTime) {
+
+                $from = $startTime->modify('+15 minutes')->format('Y-m-d H:i:s');
+                $to = $startTime->modify('+15 minutes')->format('Y-m-d H:i:s');
+
+                if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to])->one())) {
+                    $priceMap = new Iot24PriceMap();
+                    $priceMap->from = $from;
+                    $priceMap->to = $to;
+                }
+
+                $priceMap->price = $post['price'];
+
+                if ($priceMap->save()) {
+                    $saved++;
+                }
+            }
+
+            Yii::$app->session->setFlash('success', Yii::t('iot24meter/msg', 'interval_price_saved', ['saved' => $saved]));
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         return $this->render('create', [
