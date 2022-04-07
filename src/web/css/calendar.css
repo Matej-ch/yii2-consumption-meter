@@ -315,3 +315,13 @@ body {
     text-align: center;
     color: #000;
 }
+
+.px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}

@@ -19,7 +19,7 @@ return [
     'update' => 'Update',
     'save' => 'Save',
     'load' => 'Load data',
-    'choose' => 'Výber...',
+    'choose' => 'Choose...',
     'save_success_msg' => 'Sensor data saved',
     'save_fail_msg' => 'Sensor data failed to save',
     'pick_interval' => 'Pick interval',
@@ -98,5 +98,9 @@ return [
     'loading_finished' => 'Loading finished',
     'is_active' => 'Is active',
     'create_for_year' => 'Create for year',
-    'create_for_intervals' => 'Create for intervals'
+    'create_for_intervals' => 'Create for intervals',
+    'date_from' => 'Date from',
+    'date_to' => 'Date to',
+    'time_from' => 'Time from',
+    'time_to' => 'Time to',
 ];

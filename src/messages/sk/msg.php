@@ -97,5 +97,9 @@ return [
     'loading_finished' => 'Loading finished',
     'is_active' => ' Je aktívne',
     'create_for_year' => 'Vytvoriť pre rok',
-    'create_for_intervals' => 'Vytvoriť pre interval'
+    'create_for_intervals' => 'Vytvoriť pre interval',
+    'date_from' => 'Dátum OD',
+    'date_to' => 'Dátum DO',
+    'time_from' => 'Čas OD',
+    'time_to' => 'Čas DO',
 ];
