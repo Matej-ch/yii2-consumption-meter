@@ -92,6 +92,7 @@ class Iot24PriceMap extends ActiveRecord
     public function rules(): array
     {
         return [
+            [['price'], 'required'],
             [['created_at', 'updated_at'], 'string'],
             [['device_id'], 'string', 'max' => 512],
             [['channel', 'from', 'to'], 'string', 'max' => 256],

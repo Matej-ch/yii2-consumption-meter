@@ -127,8 +127,6 @@ class Iot24PriceMapController extends \yii\web\Controller
 
                 $priceMap->price = $post['Iot24PriceMap']['price'];
 
-                //$startTime->modify('+15 minutes');
-
                 if ($priceMap->save()) {
                     $saved++;
                 }
