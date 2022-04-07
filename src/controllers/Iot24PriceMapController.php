@@ -116,7 +116,7 @@ class Iot24PriceMapController extends \yii\web\Controller
             $saved = 0;
             while ($startTime < $endTime) {
 
-                $from = $startTime->modify('+15 minutes')->format('Y-m-d H:i:s');
+                $from = $startTime->format('Y-m-d H:i:s');
                 $to = $startTime->modify('+15 minutes')->format('Y-m-d H:i:s');
 
                 if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to])->one())) {
@@ -127,13 +127,15 @@ class Iot24PriceMapController extends \yii\web\Controller
 
                 $priceMap->price = $post['Iot24PriceMap']['price'];
 
+                //$startTime->modify('+15 minutes');
+
                 if ($priceMap->save()) {
                     $saved++;
                 }
             }
 
             Yii::$app->session->setFlash('success', Yii::t('iot24meter/msg', 'interval_price_saved', ['saved' => $saved]));
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
