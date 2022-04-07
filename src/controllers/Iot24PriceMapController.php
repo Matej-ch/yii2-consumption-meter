@@ -125,7 +125,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                     $priceMap->to = $to;
                 }
 
-                $priceMap->price = $post['price'];
+                $priceMap->price = $post['Iot24PriceMap']['price'];
 
                 if ($priceMap->save()) {
                     $saved++;
