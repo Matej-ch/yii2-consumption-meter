@@ -90,7 +90,7 @@ class DeviceController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $devices = Iot24Device::find()->where(['is_active' => 1])->asArray()->all();
+        $devices = Iot24Device::find()->active()->asArray()->all();
 
         return ['devices' => ArrayHelper::map($devices, 'id', 'device_name')];
     }

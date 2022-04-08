@@ -1,11 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $devices array */
 
 /* @var $model \matejch\iot24meter\models\Iot24PriceMap */
 
 use matejch\iot24meter\assets\TimePickerAsset;
 use yii\helpers\Html;
+use yii\helpers\Json;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
@@ -50,7 +52,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     <label for="to_time"><?= Yii::t('iot24meter/msg', 'time_to') ?></label>
                     <input type="text" id="to_time" name="to_time">
                 </div>
+            </div>
 
+            <div style="display: flex;flex-direction: row;flex-wrap: wrap">
+                <?php foreach ($devices as $device) { ?>
+                    <div style="padding-left: 1em;padding-right: 1em">
+                        <h2><?= Html::checkbox("Iot24PriceMap[devices][$device->device_id][id]", $model->devices[$device->device_id]['id'] ?? 0, ['uncheck' => 0, 'id' => "device_$device->device_id"]) ?>
+                            &nbsp;<label for="device_<?= $device->device_id ?>"><?= $device->device_name ?></label></h2>
+                        <?php $channels = Json::decode($device->aliases) ?>
+
+                        <?php foreach ($channels as $id => $alias) { ?>
+                            <div>
+                                <label>
+                                    <?= Html::checkbox("Iot24PriceMap[devices][$device->device_id][$id]", $model->devices[$device->device_id][$id] ?? 0, ['uncheck' => 0]) ?>
+                                    <?= $alias ?>
+                                </label>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                <?php } ?>
             </div>
 
 

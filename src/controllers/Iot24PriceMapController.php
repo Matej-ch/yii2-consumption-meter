@@ -40,7 +40,7 @@ class Iot24PriceMapController extends \yii\web\Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'devices' => ArrayHelper::map(Iot24Device::find()->where(['is_active' => 1])->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name')
+            'devices' => ArrayHelper::map(Iot24Device::find()->active()->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name')
         ]);
     }
 
@@ -97,7 +97,8 @@ class Iot24PriceMapController extends \yii\web\Controller
 
         return $this->render('create', [
             'model' => $calendarModel,
-            'forInterval' => false
+            'forInterval' => false,
+            'devices' => Iot24Device::find()->active()->all()
         ]);
     }
 

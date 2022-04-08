@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\models;
 
+use matejch\iot24meter\queries\Iot24DeviceQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -93,5 +94,10 @@ class Iot24Device extends ActiveRecord
         }
 
         return true;
+    }
+
+    public static function find(): Iot24DeviceQuery
+    {
+        return new Iot24DeviceQuery(static::class);
     }
 }

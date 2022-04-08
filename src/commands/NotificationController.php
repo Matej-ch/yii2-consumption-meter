@@ -32,7 +32,7 @@ class NotificationController extends Controller
 
         $date = date("d.m.Y");
 
-        $deviceAliases = ArrayHelper::map(Iot24Device::find()->where(['is_active' => 1])->select('device_id,aliases')->all(), 'device_id', static function ($model) {
+        $deviceAliases = ArrayHelper::map(Iot24Device::find()->active()->select('device_id,aliases')->all(), 'device_id', static function ($model) {
             return Json::decode($model['aliases']);
         });
 
