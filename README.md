@@ -44,22 +44,6 @@ Example of the required file , example iot.json
 ```JSON
 
 {
-  "endpoints": {
-    "https:endpoint": "device type from enum file (see below for available values)",
-    ...multiple endpoinst can be added
-  },
-  "subscribers": {
-    "email@gmail.com":  {
-      "device_name": [] // if it is empty, all channels will be send
-    },
-    "email2@gmail.com":  {
-      "device_name2": [
-          "channel1",
-          "channel2"
-      ]
-    },
-    ...multiple subscribers can be added, must have device for receiving notification
-  },
   "sender": "sender email here"
 }
 

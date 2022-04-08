@@ -98,7 +98,6 @@ class Iot24PriceMapController extends \yii\web\Controller
         return $this->render('create', [
             'model' => $calendarModel,
             'forInterval' => false,
-            'devices' => Iot24Device::find()->active()->all()
         ]);
     }
 
@@ -142,7 +141,8 @@ class Iot24PriceMapController extends \yii\web\Controller
 
         return $this->render('create', [
             'model' => $model,
-            'forInterval' => true
+            'forInterval' => true,
+            'devices' => Iot24Device::find()->active()->all()
         ]);
     }
 
