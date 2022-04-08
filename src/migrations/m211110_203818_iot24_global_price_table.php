@@ -7,7 +7,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%iot24_global_price}}`.
  */
-class m211110_203817_iot24_global_price_table extends Migration
+class m211110_203818_iot24_global_price_table extends Migration
 {
     public function safeUp()
     {
@@ -28,6 +28,6 @@ class m211110_203817_iot24_global_price_table extends Migration
 
     public function safeDown()
     {
-        $this->dropTable('{{%iot24_subscriber}}');
+        $this->dropTable('{{%iot24_global_price}}');
     }
 }
