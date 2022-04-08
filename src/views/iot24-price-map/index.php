@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $devices array */
 
 /* @var $searchModel \matejch\iot24meter\models\Iot24PriceMap */
 
@@ -55,7 +56,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'device_id',
+            'device_id' => [
+                'attribute' => 'device_id',
+                'format' => 'raw',
+                'value' => static function ($model) {
+                    return $model->device->device_name ?? '';
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'device_id', $devices, ['class' => 'form-control', 'prompt' => Yii::t('iot24meter/msg', 'choose')]),
+
+            ],
             'channel',
             'price' => [
                 'attribute' => 'price',

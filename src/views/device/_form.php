@@ -14,6 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'endpoint')->textInput() ?>
 
+    <?php if (!$model->isNewRecord) { ?>
+        <?= $form->field($model, 'is_active')->checkbox(['uncheck' => 0]) ?>
+    <?php } ?>
+
     <div>
         <?= Html::submitButton('Uložiť', ['class' => 'btn btn-success']) ?>
     </div>

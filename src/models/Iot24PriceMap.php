@@ -113,4 +113,9 @@ class Iot24PriceMap extends ActiveRecord
             'updated_at' => Yii::t('iot24meter/msg', 'updated_at'),
         ];
     }
+
+    public function getDevice(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(Iot24Device::class, ['device_id' => 'device_id']);
+    }
 }

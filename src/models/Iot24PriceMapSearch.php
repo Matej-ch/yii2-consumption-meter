@@ -43,9 +43,12 @@ class Iot24PriceMapSearch extends Iot24PriceMap
             'id' => $this->id,
         ]);
 
+        if (!empty($this->channel)) {
+
+        }
+
         $query
             ->andFilterWhere(['like', 'device_id', $this->device_id])
-            ->andFilterWhere(['like', 'channel', $this->channel])
             ->andFilterWhere(['like', 'created_at', $this->created_at])
             ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'from', $this->from])
