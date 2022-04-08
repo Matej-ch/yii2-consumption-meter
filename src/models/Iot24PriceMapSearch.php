@@ -44,7 +44,8 @@ class Iot24PriceMapSearch extends Iot24PriceMap
         ]);
 
         if (!empty($this->channel)) {
-
+            $devicesIDs = Iot24Device::find()->select('device_id')->where(['like', 'aliases', $this->channel])->column();
+            $query->andFilterWhere(['like', 'device_id', $devicesIDs]);
         }
 
         $query

@@ -2,6 +2,7 @@
 
 namespace matejch\iot24meter\controllers;
 
+use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24PriceMap;
 use matejch\iot24meter\models\Iot24PriceMapSearch;
 use matejch\iot24meter\services\CalendarExporter;
@@ -10,6 +11,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use Yii;
 use yii\base\DynamicModel;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
@@ -38,6 +40,7 @@ class Iot24PriceMapController extends \yii\web\Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'devices' => ArrayHelper::map(Iot24Device::find()->where(['is_active' => 1])->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name')
         ]);
     }
 
