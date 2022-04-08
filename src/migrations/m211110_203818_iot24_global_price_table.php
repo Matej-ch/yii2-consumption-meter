@@ -1,7 +1,5 @@
 <?php
 
-namespace matejch\iot24meter\migrations;
-
 use yii\db\Migration;
 
 /**
