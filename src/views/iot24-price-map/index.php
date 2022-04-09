@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $devices array */
+/* @var $globalPrice \matejch\iot24meter\models\Iot24GlobalPrice|null */
 
 /* @var $searchModel \matejch\iot24meter\models\Iot24PriceMap */
 
@@ -50,6 +51,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'btn btn-success', 'id' => 'load-xls-file']) ?>
 
         <?php ActiveForm::end() ?>
+    </div>
+
+    <div>
+        <?php if ($globalPrice) { ?>
+            <span style="font-weight: bold;">
+                Globálna cena pre nezadané intervaly je nastavená na <?= $globalPrice->price ?> pre
+                rok <?= $globalPrice->year ?>
+            </span>
+            <?= Html::a('Upraviť globálnu cenu', ['global-price/index'], ['class' => 'btn btn-primary']) ?>
+        <?php } else { ?>
+            Globálna cena pre nezadané intervaly ešte nebola nastavená. <?= Html::a('Nastaviť globálnu cenu', ['global-price/index'], ['class' => 'btn btn-danger']) ?>
+        <?php } ?>
     </div>
 
     <?= GridView::widget([

@@ -3,6 +3,7 @@
 namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\models\Iot24Device;
+use matejch\iot24meter\models\Iot24GlobalPrice;
 use matejch\iot24meter\models\Iot24PriceMap;
 use matejch\iot24meter\models\Iot24PriceMapSearch;
 use matejch\iot24meter\services\CalendarExporter;
@@ -40,6 +41,7 @@ class Iot24PriceMapController extends \yii\web\Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'globalPrice' => Iot24GlobalPrice::findOne(['year' => date('Y')]),
             'devices' => ArrayHelper::map(Iot24Device::find()->active()->select(['device_id', 'device_name'])->all(), 'device_id', 'device_name')
         ]);
     }
