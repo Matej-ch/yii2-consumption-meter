@@ -7,7 +7,6 @@
 
 /* @var $searchModel \matejch\iot24meter\models\Iot24PriceMap */
 
-use matejch\iot24meter\assets\CalendarAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -23,11 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="js-year w-full">
 
     <div class="flex">
-
-        <p class="py px">
-            <?= Html::a(Yii::t('iot24meter/msg', 'create_for_year'), ['create'], ['class' => 'btn btn-primary']) ?>
-        </p>
-
         <p class="py px">
             <?= Html::a(Yii::t('iot24meter/msg', 'create_for_intervals'), ['create-for-interval'], ['class' => 'btn btn-primary']) ?>
         </p>
@@ -56,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
         <?php if ($globalPrice) { ?>
             <span style="font-weight: bold;">
-                Globálna cena pre nezadané intervaly je nastavená na <?= $globalPrice->price ?> pre
+                Globálna cena pre nezadané intervaly je nastavená na <?= $globalPrice->price ?>&euro; pre
                 rok <?= $globalPrice->year ?>
             </span>
             <?= Html::a('Upraviť globálnu cenu', ['global-price/index'], ['class' => 'btn btn-primary']) ?>

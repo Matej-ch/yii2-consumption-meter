@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'Globálna cena';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'calendar'), 'url' => ['iot24-price-map/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="iot-index mt-20 w-full px-4">

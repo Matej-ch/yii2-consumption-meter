@@ -13,6 +13,7 @@ use Yii;
 use yii\base\DynamicModel;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
@@ -110,6 +111,25 @@ class Iot24PriceMapController extends \yii\web\Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
 
+            $devices = [];
+            foreach ($post['Iot24PriceMap']['devices'] as $deviceID => $device) {
+                foreach ($device as $channelID => $channel) {
+                    if (!empty($channel)) {
+                        if ($channelID === 'id') {
+                            $devices[$deviceID][] = $channelID;
+                            continue 2;
+                        }
+                        $devices[$deviceID][] = $channelID;
+
+                    }
+                }
+            }
+
+            if (empty($devices)) {
+                Yii::$app->session->setFlash('danger', 'Neboli vybrané ziadne zariadenia');
+                return $this->redirect(['index']);
+            }
+
             if (empty($post['from_time']) || empty($post['to_time'])) {
                 Yii::$app->session->setFlash('danger', Yii::t('iot24meter/msg', 'interval_not_set'));
                 return $this->redirect(Yii::$app->request->referrer);
@@ -119,21 +139,52 @@ class Iot24PriceMapController extends \yii\web\Controller
             $endTime = \DateTime::createFromFormat('d.m.Y H:i:s', $post['to'] . ' ' . $post['to_time'] . ':00');
 
             $saved = 0;
+            $devicesDB = ArrayHelper::index(Iot24Device::find()->active()->all(), 'device_id');
+
             while ($startTime < $endTime) {
 
                 $from = $startTime->format('Y-m-d H:i:s');
                 $to = $startTime->modify('+15 minutes')->format('Y-m-d H:i:s');
 
-                if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to])->one())) {
-                    $priceMap = new Iot24PriceMap();
-                    $priceMap->from = $from;
-                    $priceMap->to = $to;
-                }
+                foreach ($devices as $deviceID => $device) {
+                    foreach ($device as $channel) {
 
-                $priceMap->price = $post['Iot24PriceMap']['price'];
+                        if ($channel === 'id') {
+                            /**@var $deviceDB Iot24Device */
+                            $deviceDB = $devicesDB[$deviceID];
+                            $aliases = Json::decode($deviceDB->aliases);
+                            foreach ($aliases as $channelID => $alias) {
+                                if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channelID])->one())) {
+                                    $priceMap = new Iot24PriceMap();
+                                    $priceMap->from = $from;
+                                    $priceMap->to = $to;
+                                    $priceMap->device_id = $deviceID;
+                                    $priceMap->channel = $channelID;
+                                }
 
-                if ($priceMap->save()) {
-                    $saved++;
+                                $priceMap->price = $post['Iot24PriceMap']['price'];
+
+                                if ($priceMap->save()) {
+                                    $saved++;
+                                }
+                            }
+                            continue 2;
+                        } else {
+                            if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channel])->one())) {
+                                $priceMap = new Iot24PriceMap();
+                                $priceMap->from = $from;
+                                $priceMap->to = $to;
+                                $priceMap->device_id = $deviceID;
+                                $priceMap->channel = $channel;
+                            }
+
+                            $priceMap->price = $post['Iot24PriceMap']['price'];
+
+                            if ($priceMap->save()) {
+                                $saved++;
+                            }
+                        }
+                    }
                 }
             }
 
