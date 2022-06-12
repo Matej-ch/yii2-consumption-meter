@@ -104,4 +104,7 @@ return [
     'time_from' => 'Time from',
     'time_to' => 'Time to',
     'interval_price_saved' => 'Cena pre intervaly uložená. Počet intervalov {saved}',
+    'price_map_id' => 'Price map ID',
+    'name' => 'Price map name',
+    'price_maps' => 'Price maps'
 ];

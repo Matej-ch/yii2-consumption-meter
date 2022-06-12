@@ -3,7 +3,10 @@
 namespace matejch\iot24meter\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "iot24_price_map_data".
@@ -22,7 +25,7 @@ class Iot24PriceMapData extends ActiveRecord
 {
     public static function tableName(): string
     {
-        return 'iot24_price_map';
+        return 'iot24_price_map_data';
     }
 
     public static function saveMultiple(array $rows): bool
@@ -97,6 +100,7 @@ class Iot24PriceMapData extends ActiveRecord
             [['device_id'], 'string', 'max' => 512],
             [['channel', 'from', 'to'], 'string', 'max' => 256],
             [['price'], 'number'],
+            [['price_map_id'], 'integer'],
         ];
     }
 
@@ -111,11 +115,31 @@ class Iot24PriceMapData extends ActiveRecord
             'price' => Yii::t('iot24meter/msg', 'price'),
             'created_at' => Yii::t('iot24meter/msg', 'created_at'),
             'updated_at' => Yii::t('iot24meter/msg', 'updated_at'),
+            'price_map_id' => Yii::t('iot24meter/msg', 'price_map_id'),
         ];
     }
 
-    public function getDevice(): \yii\db\ActiveQuery
+    public function getDevice(): ActiveQuery
     {
         return $this->hasOne(Iot24Device::class, ['device_id' => 'device_id']);
+    }
+
+    public function getPriceMap(): ActiveQuery
+    {
+        return $this->hasOne(Iot24PriceMap::class, ['id' => 'price_map_id']);
+    }
+
+    public function behaviors(): array
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 }

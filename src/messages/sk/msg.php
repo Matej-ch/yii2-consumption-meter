@@ -103,4 +103,7 @@ return [
     'time_from' => 'Čas OD',
     'time_to' => 'Čas DO',
     'interval_price_saved' => 'Cena pre intervaly uložená. Počet intervalov {saved}',
+    'price_map_id' => 'ID cenovej mapy',
+    'name' => 'nazov cenovej mapy',
+    'price_maps' => 'Cenové mapy'
 ];
