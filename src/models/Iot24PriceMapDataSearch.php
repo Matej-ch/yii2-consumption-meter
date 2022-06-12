@@ -5,7 +5,7 @@ namespace matejch\iot24meter\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class Iot24PriceMapSearch extends Iot24PriceMap
+class Iot24PriceMapDataSearch extends Iot24PriceMapData
 {
     public function rules(): array
     {
@@ -22,7 +22,7 @@ class Iot24PriceMapSearch extends Iot24PriceMap
 
     public function search($params): ActiveDataProvider
     {
-        $query = Iot24PriceMap::find();
+        $query = Iot24PriceMapData::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

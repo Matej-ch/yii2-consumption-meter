@@ -5,7 +5,7 @@
 /* @var $devices array */
 /* @var $globalPrice \matejch\iot24meter\models\Iot24GlobalPrice|null */
 
-/* @var $searchModel \matejch\iot24meter\models\Iot24PriceMap */
+/* @var $searchModel \matejch\iot24meter\models\Iot24PriceMapData */
 
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <p class="py px">
-            <?= Html::a(Yii::t('iot24meter/msg', 'export'), ['iot24-price-map/export'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('iot24meter/msg', 'export'), ['iot24-price-map-data/export'], ['class' => 'btn btn-primary']) ?>
         </p>
 
         <?php ActiveForm::begin([
             'id' => 'xls-invoice-form',
-            'action' => ['iot24-price-map/import'],
+            'action' => ['iot24-price-map-data/import'],
             'options' => ['class' => 'container-flex-new py px', 'style' => 'align-items:end', 'enctype' => 'multipart/form-data'],
         ]); ?>
 

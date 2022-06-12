@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%iot24_price_map}}`.
+ * Handles the creation of table `{{%iot24_price_map_data}}`.
  */
-class m211110_203816_iot24_price_map_table extends Migration
+class m211110_203816_iot24_price_map_data_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class m211110_203816_iot24_price_map_table extends Migration
             $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%iot24_price_map}}', [
+        $this->createTable('{{%iot24_price_map_data}}', [
             'id' => $this->primaryKey(),
             'device_id' => $this->string(512),
             'channel' => $this->string(256),
@@ -29,7 +29,7 @@ class m211110_203816_iot24_price_map_table extends Migration
 
         ], $tableOptions);
 
-        $this->createIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map}}', 'device_id');
+        $this->createIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map_data}}', 'device_id');
     }
 
     /**
@@ -37,8 +37,8 @@ class m211110_203816_iot24_price_map_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map}}');
+        $this->dropIndex('{{%idx-iot-device_id}}', '{{%iot24_price_map_data}}');
 
-        $this->dropTable('{{%iot24_price_map}}');
+        $this->dropTable('{{%iot24_price_map_data}}');
     }
 }

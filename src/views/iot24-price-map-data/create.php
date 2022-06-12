@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $devices array */
 
-/* @var $model \matejch\iot24meter\models\Iot24PriceMap */
+/* @var $model \matejch\iot24meter\models\Iot24PriceMapData */
 
 use matejch\iot24meter\assets\TimePickerAsset;
 use yii\helpers\Html;
@@ -57,14 +57,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <div style="display: flex;flex-direction: row;flex-wrap: wrap">
                 <?php foreach ($devices as $device) { ?>
                     <div style="padding-left: 1em;padding-right: 1em">
-                        <h2><?= Html::checkbox("Iot24PriceMap[devices][$device->device_id][id]", $model->devices[$device->device_id]['id'] ?? 0, ['uncheck' => 0, 'id' => "device_$device->device_id"]) ?>
+                        <h2><?= Html::checkbox("Iot24PriceMapData[devices][$device->device_id][id]", $model->devices[$device->device_id]['id'] ?? 0, ['uncheck' => 0, 'id' => "device_$device->device_id"]) ?>
                             &nbsp;<label for="device_<?= $device->device_id ?>"><?= $device->device_name ?></label></h2>
                         <?php $channels = Json::decode($device->aliases) ?>
 
                         <?php foreach ($channels as $id => $alias) { ?>
                             <div>
                                 <label>
-                                    <?= Html::checkbox("Iot24PriceMap[devices][$device->device_id][$id]", $model->devices[$device->device_id][$id] ?? 0, ['uncheck' => 0]) ?>
+                                    <?= Html::checkbox("Iot24PriceMapData[devices][$device->device_id][$id]", $model->devices[$device->device_id][$id] ?? 0, ['uncheck' => 0]) ?>
                                     <?= $alias ?>
                                 </label>
                             </div>

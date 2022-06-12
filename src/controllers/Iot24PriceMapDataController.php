@@ -4,8 +4,8 @@ namespace matejch\iot24meter\controllers;
 
 use matejch\iot24meter\models\Iot24Device;
 use matejch\iot24meter\models\Iot24GlobalPrice;
-use matejch\iot24meter\models\Iot24PriceMap;
-use matejch\iot24meter\models\Iot24PriceMapSearch;
+use matejch\iot24meter\models\Iot24PriceMapData;
+use matejch\iot24meter\models\Iot24PriceMapDataSearch;
 use matejch\iot24meter\services\CalendarExporter;
 use matejch\iot24meter\services\CalendarImporter;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
@@ -17,7 +17,7 @@ use yii\helpers\Json;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
-class Iot24PriceMapController extends \yii\web\Controller
+class Iot24PriceMapDataController extends \yii\web\Controller
 {
     public function behaviors()
     {
@@ -36,7 +36,7 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionIndex(): string
     {
-        $searchModel = new Iot24PriceMapSearch();
+        $searchModel = new Iot24PriceMapDataSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -63,8 +63,8 @@ class Iot24PriceMapController extends \yii\web\Controller
                         $startTime = new \DateTime(date('Y-m-d 00:00:00', $time));
                         $endTime = new \DateTime(date('Y-m-d 24:00:00', $time));
 
-                        if (!Iot24PriceMap::find()->where(['from' => date('Y-m-d', $time) . " 00:00:00", 'to' => date('Y-m-d', $time) . " 00:15:00"])->exists()) {
-                            $priceMapForInterval = new Iot24PriceMap([
+                        if (!Iot24PriceMapData::find()->where(['from' => date('Y-m-d', $time) . " 00:00:00", 'to' => date('Y-m-d', $time) . " 00:15:00"])->exists()) {
+                            $priceMapForInterval = new Iot24PriceMapData([
                                 'from' => date('Y-m-d', $time) . " 00:00:00",
                                 'to' => date('Y-m-d', $time) . " 00:15:00",
                                 'price' => $price
@@ -75,8 +75,8 @@ class Iot24PriceMapController extends \yii\web\Controller
                         while ($startTime < $endTime) {
                             $from = date('Y-m-d', $time) . " " . $startTime->modify('+15 minutes')->format('H:i:s');
                             $to = date('Y-m-d', $time) . " " . $startTime->modify('+15 minutes')->format('H:i:s');
-                            if (!Iot24PriceMap::find()->where(['from' => $from, 'to' => $to])->exists()) {
-                                $priceMapForInterval = new Iot24PriceMap([
+                            if (!Iot24PriceMapData::find()->where(['from' => $from, 'to' => $to])->exists()) {
+                                $priceMapForInterval = new Iot24PriceMapData([
                                     'from' => $from,
                                     'to' => $to,
                                     'price' => $price
@@ -106,13 +106,13 @@ class Iot24PriceMapController extends \yii\web\Controller
 
     public function actionCreateForInterval()
     {
-        $model = new Iot24PriceMap();
+        $model = new Iot24PriceMapData();
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
 
             $devices = [];
-            foreach ($post['Iot24PriceMap']['devices'] as $deviceID => $device) {
+            foreach ($post['Iot24PriceMapData']['devices'] as $deviceID => $device) {
                 foreach ($device as $channelID => $channel) {
                     if (!empty($channel)) {
                         if ($channelID === 'id') {
@@ -154,15 +154,15 @@ class Iot24PriceMapController extends \yii\web\Controller
                             $deviceDB = $devicesDB[$deviceID];
                             $aliases = Json::decode($deviceDB->aliases);
                             foreach ($aliases as $channelID => $alias) {
-                                if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channelID])->one())) {
-                                    $priceMap = new Iot24PriceMap();
+                                if (!($priceMap = Iot24PriceMapData::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channelID])->one())) {
+                                    $priceMap = new Iot24PriceMapData();
                                     $priceMap->from = $from;
                                     $priceMap->to = $to;
                                     $priceMap->device_id = $deviceID;
                                     $priceMap->channel = $channelID;
                                 }
 
-                                $priceMap->price = $post['Iot24PriceMap']['price'];
+                                $priceMap->price = $post['Iot24PriceMapData']['price'];
 
                                 if ($priceMap->save()) {
                                     $saved++;
@@ -170,15 +170,15 @@ class Iot24PriceMapController extends \yii\web\Controller
                             }
                             continue 2;
                         } else {
-                            if (!($priceMap = Iot24PriceMap::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channel])->one())) {
-                                $priceMap = new Iot24PriceMap();
+                            if (!($priceMap = Iot24PriceMapData::find()->where(['from' => $from, 'to' => $to, 'device_id' => $deviceID, 'channel' => $channel])->one())) {
+                                $priceMap = new Iot24PriceMapData();
                                 $priceMap->from = $from;
                                 $priceMap->to = $to;
                                 $priceMap->device_id = $deviceID;
                                 $priceMap->channel = $channel;
                             }
 
-                            $priceMap->price = $post['Iot24PriceMap']['price'];
+                            $priceMap->price = $post['Iot24PriceMapData']['price'];
 
                             if ($priceMap->save()) {
                                 $saved++;
@@ -231,7 +231,7 @@ class Iot24PriceMapController extends \yii\web\Controller
                 $nameParts = explode('.', $file->name);
                 $rows = (new CalendarImporter($nameParts[count($nameParts) - 1]))->load($file->tempName);
 
-                $result = Iot24PriceMap::saveMultiple($rows);
+                $result = Iot24PriceMapData::saveMultiple($rows);
             }
         }
 

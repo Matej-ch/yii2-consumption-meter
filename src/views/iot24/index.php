@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('iot24meter/msg', 'add_device'), ['device/index'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'notifications'), ['subscriber/index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('iot24meter/msg', 'load'), ['load'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map/index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a(Yii::t('iot24meter/msg', 'create_price_map'), ['iot24-price-map-data/index'], ['class' => 'btn btn-default']) ?>
     </p>
 
     <?= $this->render('partials/_graph', ['series' => $series, 'dates' => $dates, 'devices' => $devices, 'device' => $device, 'channels' => $channels]) ?>

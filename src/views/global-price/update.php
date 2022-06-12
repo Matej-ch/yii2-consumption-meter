@@ -5,7 +5,7 @@
 
 $this->title = Yii::t('iot24meter/msg', 'update');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'iot'), 'url' => ['iot24/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'calendar'), 'url' => ['iot24-price-map/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('iot24meter/msg', 'calendar'), 'url' => ['iot24-price-map-data/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Globálna cena', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

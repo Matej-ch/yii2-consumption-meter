@@ -6,7 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "iot24_price_map".
+ * This is the model class for table "iot24_price_map_data".
  *
  * @property int $id
  * @property float $price
@@ -18,7 +18,7 @@ use yii\db\ActiveRecord;
  * @property string $to
  *
  */
-class Iot24PriceMap extends ActiveRecord
+class Iot24PriceMapData extends ActiveRecord
 {
     public static function tableName(): string
     {
