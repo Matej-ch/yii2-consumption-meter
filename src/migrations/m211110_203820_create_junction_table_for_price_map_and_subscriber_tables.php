@@ -9,7 +9,7 @@ use yii\db\Migration;
  * - `{{%price_map}}`
  * - `{{%subscriber}}`
  */
-class m211110_203819_create_junction_table_for_price_map_and_subscriber_tables extends Migration
+class m211110_203820_create_junction_table_for_price_map_and_subscriber_tables extends Migration
 {
     /**
      * {@inheritdoc}
