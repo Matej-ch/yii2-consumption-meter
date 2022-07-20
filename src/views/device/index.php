@@ -21,6 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'rowOptions' => static function ($model, $key, $index, $grid) {
+            if (!$model->is_active) {
+                return ['style' => 'background-color:#d6d6d6;text-decoration:line-through'];
+            }
+        },
         'columns' => [
             [
                 'class' => ActionColumn::class,
