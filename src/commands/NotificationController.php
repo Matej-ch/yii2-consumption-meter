@@ -217,7 +217,7 @@ class NotificationController extends Controller
         Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
         $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify-all', ['preparedData' => $preparedData, 'devices' => $deviceNames])
             ->setFrom($module->sender)
-            ->setTo($module->receiver)
+            ->setTo($receiver)
             ->setSubject("Meranie odberu 24 hodín - Notifikácia");
 
         if ($message->send()) {
