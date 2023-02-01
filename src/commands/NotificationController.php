@@ -149,4 +149,63 @@ class NotificationController extends Controller
 
         return ExitCode::OK;
     }
+
+    public function actionSendAll(): int
+    {
+        $module = Iot24::getInstance();
+
+        if (strlen($module->sender) < 0 || strlen($module->receiver) < 0) {
+            echo $this->ansiFormat("No receiver or sender set\n", BaseConsole::FG_YELLOW);
+            return ExitCode::OK;
+        }
+
+        $iotDevices = Iot24Device::find()->active()->select('device_id,device_name,aliases')->all();
+
+        $deviceNames = ArrayHelper::map($iotDevices, 'device_id', 'device_name');
+
+        $deviceAliases = ArrayHelper::map($iotDevices, 'device_id', static function ($model) {
+            return Json::decode($model['aliases']);
+        });
+
+        /** get measurements for devices */
+        $query = \matejch\iot24meter\models\Iot24::find()->select(['device_id', 'increments', 'created_at'])->where(['device_id' => array_keys($deviceAliases)]);
+        $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
+
+        $measurements = $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
+        $measurements = ArrayHelper::index($measurements, null, 'device_id');
+
+        $preparedData = [];
+
+        foreach ($measurements as $deviceID => $deviceMeasurements) {
+            $preparedData[$deviceID] = [];
+
+            $deviceAlias = $deviceAliases[$deviceID];
+
+            foreach ($deviceMeasurements as $deviceMeasurement) {
+                $increments = Json::decode($deviceMeasurement['increments']);
+
+                foreach ($increments as $channelID => $increment) {
+                    if (isset($preparedData[$deviceID][$deviceAlias[$channelID]])) {
+                        $preparedData[$deviceID][$deviceAlias[$channelID]] += $increment;
+                    } else {
+                        $preparedData[$deviceID][$deviceAlias[$channelID]] = $increment;
+                    }
+                }
+            }
+        }
+
+        Yii::$app->mailer->htmlLayout = '@matejch/iot24meter/mail/layouts/html';
+        $message = Yii::$app->mailer->compose('@matejch/iot24meter/mail/notify-all', ['preparedData' => $preparedData, 'devices' => $deviceNames])
+            ->setFrom($module->sender)
+            ->setTo($module->receiver)
+            ->setSubject("Meranie odberu 24 hodín - Notifikácia");
+
+        if ($message->send()) {
+            echo $this->ansiFormat("Email odoslaný\n", BaseConsole::FG_GREEN);
+        } else {
+            echo $this->ansiFormat("Email sa nepodarilo odoslať\n", BaseConsole::FG_RED);
+        }
+
+        return ExitCode::OK;
+    }
 }

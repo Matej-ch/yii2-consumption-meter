@@ -19,6 +19,8 @@ class Iot24 extends Module
 
     public $sender = '';
 
+    public $receiver = '';
+
     public function init()
     {
         parent::init();
