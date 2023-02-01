@@ -16,6 +16,24 @@ use yii\helpers\Json;
 class NotificationController extends Controller
 {
 
+    public $receiver;
+
+    /**
+     * number of days for interval in sql query
+     * @var integer
+     */
+    public $interval = 1;
+
+    public function options($actionID): array
+    {
+        return ['receiver', 'interval'];
+    }
+
+    public function optionAliases(): array
+    {
+        return ['r' => 'receiver', 'i' => 'interval'];
+    }
+
     /**
      * Send notification to emails in config json file
      * Emails are under key subscribers
@@ -154,7 +172,9 @@ class NotificationController extends Controller
     {
         $module = Iot24::getInstance();
 
-        if (strlen($module->sender) < 0 || strlen($module->receiver) < 0) {
+        $receiver = $this->receiver ?? $module->receiver;
+
+        if (strlen($module->sender) < 0 || strlen($receiver) < 0) {
             echo $this->ansiFormat("No receiver or sender set\n", BaseConsole::FG_YELLOW);
             return ExitCode::OK;
         }
@@ -169,7 +189,7 @@ class NotificationController extends Controller
 
         /** get measurements for devices */
         $query = \matejch\iot24meter\models\Iot24::find()->select(['device_id', 'increments', 'created_at'])->where(['device_id' => array_keys($deviceAliases)]);
-        $query->andWhere(new Expression("created_at >= NOW() - INTERVAL 1 DAY"));
+        $query->andWhere(new Expression("created_at >= NOW() - INTERVAL :interval DAY", [':interval' => $this->interval]));
 
         $measurements = $query->asArray()->orderBy(['created_at' => SORT_ASC])->all();
         $measurements = ArrayHelper::index($measurements, null, 'device_id');
